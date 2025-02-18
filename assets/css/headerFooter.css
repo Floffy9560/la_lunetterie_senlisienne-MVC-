@@ -1,0 +1,321 @@
+@font-face {
+  font-family: "boecklins";
+  src: url(assets/boecklins-universe/boecklins-universe.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "lato";
+}
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+}
+body:before {
+  content: "";
+  position: absolute;
+  z-index: -5;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.7;
+  background-image: url(../img/fd-ecran-bois.jpeg);
+  background-size: contain;
+  background-repeat: repeat;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+a {
+  text-decoration: none;
+}
+.navLink {
+  display: flex;
+  justify-content: space-around;
+  color: #c89f36;
+  font-size: clamp(21px, 3vw, 31px);
+  font-family: "Dancing Script";
+  font-weight: bold;
+  text-shadow: 0px 0px 20px black;
+}
+
+/*-----------------------------------------------------------------------------*/
+/* -------------------------container logo-sidenav-search----------------------*/
+/*-----------------------------------------------------------------------------*/
+
+.menuContainer {
+  width: 100%;
+  height: 6rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  background: linear-gradient(
+    90deg,
+    rgba(48, 108, 96, 1) 3%,
+    rgba(31, 65, 61, 1) 12%
+  );
+  box-shadow: 0px 5px 10px #306c60;
+  z-index: 600;
+}
+.smartphone-header {
+  display: none;
+}
+
+#logo {
+  height: 7rem;
+}
+.containerMenu {
+  width: 90%;
+  height: 100%;
+}
+.menu {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.spans {
+  width: 70%;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-around;
+  align-items: center;
+  color: #c89f36;
+  text-shadow: 0px 0px 10px black;
+}
+.searchAccount {
+  width: 40%;
+  padding: 1rem;
+}
+.searchContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  position: relative;
+}
+.searchContainerLogo {
+  display: flex;
+  justify-content: space-around;
+  width: 40%;
+}
+.searchButton {
+  border: none;
+  background: transparent;
+  position: absolute;
+  right: 15px;
+}
+.searchContainerBtn {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+#site-search {
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  border: 3px solid;
+  padding-left: 1rem;
+}
+#site-search:focus {
+  outline: none;
+}
+
+.account {
+  width: 100%;
+  height: 50%;
+  gap: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+}
+.logoNav {
+  height: 40px;
+}
+.lien_interne {
+  background-color: transparent;
+  border: none;
+}
+
+/*-----------------------------------------------------------------------------*/
+/*-----------------------------container-footer--------------------------------*/
+/*-----------------------------------------------------------------------------*/
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  z-index: 55;
+}
+
+.container-footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+  background-color: rgba(31, 65, 61, 1);
+  padding: 1rem;
+  box-shadow: 0px -5px 10px #306c60;
+}
+.contact {
+  display: flex;
+  gap: 20px;
+}
+.contact p {
+  color: #c89f36;
+}
+.bi-envelope-at-fill,
+.bi-telephone-forward-fill {
+  font-size: 35px;
+  color: #c89f36;
+}
+
+.links-footer {
+  gap: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.container-follow {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.follow {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+.logoFollow {
+  height: 40px;
+}
+.copyright {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+}
+.copyrightLogo {
+  height: clamp(21px, 3vw, 31px);
+}
+
+/*------------------------------------
+----------popup contact and mail -----
+------------------------------------*/
+
+.popupTel,
+.popupMail {
+  display: none;
+}
+.popupTel.open,
+.popupMail.open {
+  display: block;
+  z-index: 600;
+}
+
+/*-------------------------------------------------------------------------------------------*/
+/*------------------------------------media queries smartphone / tablette ------------------------------*/
+/*-------------------------------------------------------------------------------------------*/
+
+@media all and (max-width: 769px) {
+  /*-------------------------------------------------*/
+  /*---------retirer le menu pour laptop-------------*/
+  /*-------------------------------------------------*/
+  .menuContainer {
+    display: none;
+  }
+
+  /*-----------------------------------------------------*/
+  /*---------insérer le menu pour smartphone-------------*/
+  /*-----------------------------------------------------*/
+
+  .smartphone-header {
+    width: 100%;
+    display: block;
+  }
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0px 0.5rem 0px 0.5rem;
+    /*background-color: #1f413d;*/
+    background: rgb(48, 108, 96);
+    background: linear-gradient(
+      90deg,
+      rgba(48, 108, 96, 1) 20%,
+      rgba(31, 65, 61, 1) 35%
+    );
+    z-index: 50;
+  }
+
+  .bi-list {
+    font-size: 60px;
+    position: fixed;
+    top: 25px;
+    color: #c89f36;
+    background-color: #1f413d;
+    z-index: 80;
+  }
+  .bi-basket3-fill {
+    font-size: 45px;
+    color: #c89f36;
+  }
+  .headerDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 96px;
+  }
+  .burger-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 150px;
+    gap: 25px;
+    position: fixed;
+    top: 0;
+    transform: translateY(-150%);
+    transition: all 0.6s ease-in-out;
+    width: 100%;
+    height: 100vh;
+    background-color: #1f413d;
+  }
+  .burger-menu.open {
+    transform: translateY(0);
+    z-index: 70;
+  }
+
+  .burger-menu p {
+    font-size: 31px;
+    /*text-decoration: none;*/
+    color: #c89f36;
+    z-index: 45;
+  }
+
+  /*-----------------------------------------------------*/
+  /*------------------footer smartphone------------------*/
+  /*-----------------------------------------------------*/
+
+  .container-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}

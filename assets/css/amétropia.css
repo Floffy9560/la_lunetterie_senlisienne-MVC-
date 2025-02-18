@@ -1,0 +1,142 @@
+* {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgb(15, 76, 129);
+  background: #f0efef;
+}
+
+/* ----------------------------container sidenav  logo contact search --------------------*/
+
+.container_header {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 20vh;
+  background-color: #77a8a8;
+  position: fixed;
+}
+.container_logo {
+  width: 50%;
+  height: 50%;
+}
+.logo {
+  width: 40%;
+  height: 100%;
+}
+.logo_enseigne {
+  width: 100%;
+  height: 100%;
+}
+.petit_icones {
+  max-width: 25px;
+  max-height: auto;
+}
+.container_contact {
+  display: flex;
+  justify-content: flex-end;
+  width: 50%;
+  height: 50%;
+}
+.contact {
+  display: flex;
+  width: 80%;
+}
+.contact a {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #ffc196;
+}
+#calendar {
+  margin-right: 3px;
+}
+.sidenav {
+  display: flex;
+  width: 75%;
+  height: 50%;
+}
+.sidenav :nth-child(1) {
+  width: 35%;
+}
+.sidenav :nth-child(2) {
+  width: 35%;
+}
+.sidenav :nth-child(3) {
+  width: 50%;
+}
+.sidenav :nth-child(4) {
+  width: 50%;
+}
+.sidenav a {
+  display: flex;
+  width: 100%;
+  margin: auto;
+  justify-content: center;
+  text-wrap: nowrap;
+  color: #ffc196;
+  font-size: 2em;
+  font-weight: bold;
+  font-family: "Dancing Script", cursive;
+  text-decoration: none;
+}
+.container_count {
+  display: flex;
+  align-items: center;
+  width: 25%;
+  height: 50%;
+}
+
+.count {
+  width: 20%;
+}
+.basket {
+  width: 20%;
+}
+.count_icon {
+  max-width: 30px;
+}
+.search {
+  width: 100%;
+  margin-right: 5vh;
+}
+.form-example {
+  display: flex;
+}
+#site-search {
+  background-color: #77a8a8;
+  border: 1px solid;
+}
+button {
+  width: 20%;
+  background-color: #77a8a8;
+  border: 0.5px solid;
+}
+.burger {
+  width: 10%;
+}
+
+#iconBurger {
+  display: none;
+  margin-top: 4vh;
+  float: right;
+  background-color: white;
+  border: 1px solid;
+  width: 8vh;
+  height: 7vh;
+  background-color: black;
+}
+#iconBurger span {
+  display: block;
+  height: 1vh;
+  width: 6vh;
+  margin: 1vh;
+  background-color: black;
+}

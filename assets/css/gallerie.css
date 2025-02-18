@@ -1,0 +1,53 @@
+h2 {
+  font-size: clamp(25px, 4vw, 50px);
+  text-align: center;
+  margin: 40px auto;
+}
+/*.gallery-photos {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.gallery-photos img {
+  object-fit: contain;
+  width: 100%;
+  max-width: 400px;
+  min-width: 320px;
+  height: 400px;
+} */
+/* Conteneur général */
+.container-gallery-photos {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Grille d'images */
+.gallery-photos {
+  display: grid;
+  grid-template-columns: repeat(4, 300px);
+  gap: 15px;
+  padding: 10px;
+}
+
+/* Images */
+.gallery-photos img {
+  width: 100%;
+  height: 250px; /* Hauteur par défaut */
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Image spécifique pour "patron.jpg" (plus haute et moins large) */
+.gallery-photos img[alt="patron"] {
+  grid-row: span 2; /* S'étend sur 2 lignes */
+  height: 520px; /* Plus grande hauteur */
+}
+
+/* Effet au survol */
+.gallery-photos img:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+}

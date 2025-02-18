@@ -1,0 +1,34 @@
+\*\*\* rdv uniquement le lundi
+
+\*\*\* marques :
+Minamoto , Demetz , paprika , MALT , clémence & margaux , cazal (mamies) , aponem , bali , andy brook
+
+\*\*\* ne veux pas de carte cadeaux
+
+\*\*\* pas d'achat en ligne car les models de lunettes changes otut le temps ( juste pour le passage du titre)
+
+\*\*\* Créer une page ou il mettre ses "tutos" "" les tutos de Nico ""
+
+\*\*\* Pourquoi utiliser .htaccess avec un routeur ?
+
+<!-- ✅ URLs propres
+
+            Au lieu d’avoir :
+
+            monsite.com/page.php?id=12
+
+            On obtient :
+
+            monsite.com/page/12
+
+      ✅ Redirection de toutes les requêtes vers un routeur
+
+            Toutes les requêtes sont envoyées vers router.php, qui se charge de les analyser et d’afficher la bonne page.
+
+      ✅ Amélioration du référencement (SEO)
+
+            Les URLs courtes et lisibles sont meilleures pour les moteurs de recherche.
+
+      ✅ Sécurisation des fichiers
+
+            Empêche l’accès direct à certains fichiers sensibles (config.php, core/, etc.).==> dans ce cas (assets) -->

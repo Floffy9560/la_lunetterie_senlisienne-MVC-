@@ -1,0 +1,159 @@
+html {
+  --scroll-behavior: smooth;
+  scroll-behavior: smooth;
+}
+
+main {
+  width: 90%;
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: 0 0 20px;
+  background: rgba(48, 108, 96, 1);
+  padding: 10px;
+  margin: 2rem auto;
+}
+h2 {
+  font-size: clamp(35px, 5vw, 50px);
+  margin: 50px auto;
+  color: #1e3a5f;
+}
+h3 {
+  font-size: clamp(30px, 4vw, 40px);
+  margin-bottom: 35px;
+  margin-top: 35px;
+  color: #ab8007;
+}
+h4 {
+  font-size: clamp(20px, 4vw, 30px);
+  margin-bottom: 25px;
+  margin-top: 25px;
+  text-decoration: underline;
+  color: #1e3a5f;
+}
+/* Attention trouver les bonne size du text : 16px 21px 40px pour le p  */
+p {
+  margin: 15px auto;
+  font-size: clamp(16px, 1.5vw, 40px);
+  color: whitesmoke;
+}
+li {
+  margin: 10px auto;
+  list-style: none;
+  padding-left: 25px;
+  background-image: url("../img/icons8-lunettes-de-soleil-16.png");
+  background-position: 0 0;
+  background-size: 23px 23px;
+  background-repeat: no-repeat;
+  /* font-size: clamp(16px, 3vw, 20px); */
+  font-size: clamp(16px, 1.5vw, 40px);
+  color: whitesmoke;
+}
+.DMLA {
+  width: 70%;
+  margin: 20px auto;
+  border-radius: 5px;
+  background: #c89f36;
+}
+.DMLA p {
+  color: #2c2c2c;
+  font-size: 18px;
+}
+ul,
+ol {
+  width: 80%;
+  text-align: left;
+  line-height: 30px;
+  margin: 20px auto;
+}
+
+a {
+  text-decoration: none;
+  color: #c89f36;
+}
+.prescriptionImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.prescriptionImg img {
+  width: 100%;
+  max-width: 800px;
+  min-width: 290px;
+}
+
+/*---------------------------------*/
+/*---------side nav burger---------*/
+/*---------------------------------*/
+
+.sideNav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  position: fixed;
+  padding: 10px;
+  border-radius: 10px;
+  left: 50%;
+  top: 100px;
+  background-color: #c89f36;
+  transform: translateX(-800%);
+  transition: transform 0.5s ease-in-out;
+  z-index: 600;
+  width: 200px;
+}
+.sideNav.open {
+  transform: translateX(-50%);
+}
+.searchOnPage {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+h5 {
+  font-size: 25px;
+  font-weight: bold;
+  color: #1e3a5f;
+}
+h6 {
+  font-size: 16px;
+  color: #2c2c2c;
+}
+
+.navigateIcon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 25px;
+  width: 100%;
+  z-index: 50;
+  padding: 5px;
+}
+
+.bi-arrow-bar-up,
+.bi-book {
+  cursor: pointer;
+  z-index: 500;
+  padding: 10px;
+  border-radius: 10px;
+  color: #c89f36;
+  background-color: rgba(31, 65, 61, 1);
+  font-size: 30px;
+}

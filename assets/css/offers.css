@@ -1,0 +1,78 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+h2 {
+  width: 100%;
+  font-size: 40px;
+  margin: 1rem auto;
+  border-radius: 5px;
+  color: whitesmoke;
+  text-align: center;
+}
+.linkMutuelle,
+.linkSantée {
+  text-decoration: none;
+  text-align: center;
+}
+.offersP {
+  width: 80%;
+  font-size: 25px;
+  text-align: center;
+  border-radius: 5px;
+  padding: 0.8rem;
+  color: whitesmoke;
+
+  margin: auto;
+}
+
+.containerOffers {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin: 1rem auto;
+}
+.offers {
+  width: 90%;
+  min-width: 300px;
+  max-width: 700px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  border: 0.5px solid #c89f36;
+  border-radius: 10px;
+  background-color: rgba(48, 108, 96, 0.9);
+  box-shadow: 10px -10px 5px rgba(0, 0, 0, 0.5);
+}
+.containerOffersImage {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+  width: 100%;
+  min-width: 300px;
+  max-width: 800px;
+  height: 100%;
+  max-height: 350px;
+  min-height: 180px;
+  padding: 1rem;
+}
+.img2 {
+  background-color: whitesmoke;
+}
+.offersImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+@media all and (max-width: 769px) {
+  .offersImag {
+    /* object-fit: scale-down;*/
+  }
+}

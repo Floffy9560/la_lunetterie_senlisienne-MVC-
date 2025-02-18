@@ -1,0 +1,141 @@
+.headerBody {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 350px;
+  box-shadow: 0 0 35px;
+  margin-top: 2rem;
+}
+.headerPict {
+  width: 100%;
+  height: 100%;
+}
+.containerCards {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 2rem;
+}
+
+.cards {
+  display: inline-block;
+  margin: auto;
+  width: 300px;
+  padding: 0.5rem;
+  border: 2px solid;
+  /* background: #e0e0e0; */
+  background-color: #c89f36;
+  box-shadow: 10px 10px 15px;
+  color: #424242;
+  border-radius: 15px;
+}
+
+.buttonPushKart {
+  height: 35px;
+  margin: 10px 0 0 0;
+  border-radius: 10px;
+  padding: 8px;
+  color: whitesmoke;
+  background-color: #3c3c3c;
+  transition: all 0.4s ease-in-out;
+}
+
+.buttonPushKart:hover {
+  background-color: #c89f36;
+  color: black;
+}
+.img {
+  margin: auto;
+  width: 90%;
+  height: 150px;
+  border-radius: 8px;
+}
+h3 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.bi-heart-fill {
+  float: right;
+}
+
+/*---------------------------------------------*/
+/*---------------bouton filtres----------------*/
+/*---------------------------------------------*/
+
+.buttonSearch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
+  gap: 1rem;
+  font-size: 25px;
+  margin: 2rem auto 2rem auto;
+  background-color: #c89f36;
+  padding: 8px;
+  border-radius: 10px;
+}
+.bi-filter-square-fill {
+  font-size: 100%;
+  float: right;
+  color: black;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+}
+.overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+.menuSearch {
+  display: flex;
+  flex-direction: column;
+  max-width: 250px;
+  gap: 1rem;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #306c60;
+  color: #c89f36;
+  transform: translateX(100%);
+  transition: transform 0.5s ease-in-out;
+  border-radius: 15px;
+  padding: 1rem;
+  z-index: 5555;
+}
+
+.menuSearch.open {
+  transform: translateX(0);
+}
+.menuSearch p {
+  font-weight: bold;
+  font-size: 25px;
+}
+.inputSearch {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+}
+span {
+  width: 40%;
+}
+.buttonFilter {
+  width: 150px;
+  height: 50px;
+  margin: auto;
+  background-color: #c89f36;
+}

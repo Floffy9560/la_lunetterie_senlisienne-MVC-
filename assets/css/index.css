@@ -1,0 +1,472 @@
+@font-face {
+  font-family: "boecklins";
+  src: url(../boecklins-universe/boecklins-universe.ttf);
+}
+
+/* //////////////////////////////////////////////////// index.php /////////////////////////////////////////////////////////// */
+
+main {
+  width: 90%;
+  padding: 20px;
+}
+.name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 80%;
+  margin: 50px auto;
+}
+
+h1 {
+  font-size: clamp(60px, 8vw, 110px);
+  font-family: "boecklins";
+  color: #2c2c2c;
+  text-shadow: 2px 2px 2px black;
+  font-weight: normal;
+  line-height: 70px;
+  line-height: 130px;
+}
+
+/*----------------------------------------*/
+/*----------------section-----------------*/
+/*----------------------------------------*/
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 30px;
+  gap: 60px;
+}
+
+/*------------------------------------------------*/
+/*----------------practical guide-----------------*/
+/*------------------------------------------------*/
+
+.container_guide {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 40px auto;
+  gap: 50px;
+}
+
+.post-it {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  min-width: 300px;
+  max-width: 400px;
+  height: 300px;
+  /*background-color: #fff475;*/
+  background-color: #c89f36;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 1);
+  transform: rotate(1deg);
+  border-radius: 10px;
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+}
+.scotch {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 150px;
+  height: 35px;
+  background: linear-gradient(
+    145deg,
+    rgba(237, 210, 121, 0.8),
+    rgba(240, 228, 170, 0.9)
+  );
+  /* Dégradé pour imiter le scotch */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2),
+    inset 0 1px 3px rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+  opacity: 0.9;
+  /* Légère transparence */
+  z-index: 10;
+}
+
+.scotch::before,
+.scotch::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 35px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.4),
+    rgba(0, 0, 0, 0.1)
+  );
+  /* Bande lumineuse subtile */
+  opacity: 0.5;
+  transform: rotate(-2deg);
+}
+
+.scotch::after {
+  top: 0px;
+  bottom: auto;
+  opacity: 0.7;
+}
+
+.guide_img {
+  /*box-shadow: 10px -10px 5px rgba(0, 0, 0, 0.5);*/
+  /*border: 3px solid #c89f36;*/
+  border-radius: 15px;
+  width: 100%;
+  height: 80%;
+}
+
+/*-----------------------------------------------------------------*/
+/*----------------practical guide : text under img-----------------*/
+/*-----------------------------------------------------------------*/
+
+.guide-text {
+  font-weight: bold;
+  text-align: center;
+  flex-grow: 1;
+}
+
+/*-----------------------------------------------*/
+/*----------------offre lunettes-----------------*/
+/*-----------------------------------------------*/
+
+.post-it-offre {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  /*background-color: #fff475;*/
+  background-color: #c89f36;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 1);
+  transform: rotate(1deg);
+  border-radius: 10px;
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+}
+
+.scotch-offre {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.5deg);
+  width: 35%;
+  min-width: 150px;
+  height: 35px;
+  background: linear-gradient(
+    145deg,
+    rgba(237, 210, 121, 0.8),
+    rgba(240, 228, 170, 0.9)
+  );
+  /* Dégradé pour imiter le scotch */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2),
+    inset 0 1px 3px rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+  opacity: 0.9;
+  /* Légère transparence */
+  z-index: 5000;
+}
+
+.scotch-offre::before,
+.scotch-offre::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 35px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.4),
+    rgba(0, 0, 0, 0.1)
+  );
+  /* Bande lumineuse subtile */
+  opacity: 0.5;
+  transform: rotate(-1.5deg);
+}
+
+.scotch-offre::after {
+  top: 0px;
+  bottom: auto;
+  opacity: 0.7;
+}
+
+.photo_offre {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  /*box-shadow: 0 0 155px rgba(0, 0, 0, 1);*/
+}
+
+/*---------------------------------------------------------------------------*/
+/*----------------Mise en place des deux div de la section 2-----------------*/
+/*---------------------------------------------------------------------------*/
+
+.grid_container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  width: 100%;
+}
+
+/*------------------------------------------------------------------------*/
+/*----------------Mise en place de la grid photos marques-----------------*/
+/*------------------------------------------------------------------------*/
+
+.photos-post-it {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  min-width: 300px;
+  max-width: 400px;
+  gap: 20px;
+  /*background-color: #fff475;*/
+  background-color: #c89f36;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 1);
+  transform: rotate(1deg);
+  border-radius: 10px;
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+  margin: auto;
+}
+.photos-post-it2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  min-width: 300px;
+  max-width: 400px;
+  gap: 20px;
+  /*background-color: #fff475;*/
+  background-color: #c89f36;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 1);
+  transform: rotate(-2deg);
+  border-radius: 10px;
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+}
+.scotch {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 150px;
+  height: 35px;
+  background: linear-gradient(
+    145deg,
+    rgba(237, 210, 121, 0.8),
+    rgba(240, 228, 170, 0.9)
+  );
+  /* Dégradé pour imiter le scotch */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2),
+    inset 0 1px 3px rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+  opacity: 0.9;
+  /* Légère transparence */
+  z-index: 10;
+}
+
+.scotch::before,
+.scotch::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 35px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.4),
+    rgba(0, 0, 0, 0.1)
+  );
+  /* Bande lumineuse subtile */
+  opacity: 0.5;
+  transform: rotate(-2deg);
+}
+
+.scotch::after {
+  top: 0px;
+  bottom: auto;
+  opacity: 0.7;
+}
+
+.photos-post-it img,
+.photos-post-it2 img {
+  border-radius: 20px;
+  opacity: 0.8;
+  transform: scale(1);
+  transition: z-index 1s, transform 1s, opacity 8s;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  height: 250px;
+}
+
+/*---------------------------------------------------------------------------*/
+/*----------------Mise en place des deux div de la section 3-----------------*/
+/*---------------------------------------------------------------------------*/
+.post-it-custom_made_img {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 30px;
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  /*background-color: #fff475;*/
+  background-color: #c89f36;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 1);
+  transform: rotate(-0.5deg);
+  border-radius: 10px;
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+}
+
+.scotch-custom-made-img {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.5deg);
+  width: 35%;
+  min-width: 150px;
+  height: 35px;
+  background: linear-gradient(
+    145deg,
+    rgba(237, 210, 121, 0.8),
+    rgba(240, 228, 170, 0.9)
+  );
+  /* Dégradé pour imiter le scotch */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2),
+    inset 0 1px 3px rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+  opacity: 0.9;
+  /* Légère transparence */
+  z-index: 5000;
+}
+
+.scotch-custom-made-img::before,
+.scotch-custom-made-img::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 35px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.4),
+    rgba(0, 0, 0, 0.1)
+  );
+  /* Bande lumineuse subtile */
+  opacity: 0.5;
+  transform: rotate(-1.5deg);
+}
+
+.scotch-custom-made-img::after {
+  top: 0px;
+  bottom: auto;
+  opacity: 0.7;
+}
+.container-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  width: 100%;
+}
+
+.post-it-custom_made_img img {
+  box-shadow: 12px -10px 12px 0px rgba(0, 0, 0, 0.6);
+  border-radius: 30px 15px 30px 15px;
+  width: 100%;
+}
+/*-----------------------------------------------------------*/
+/*----------------decoration for a , h2 , p -----------------*/
+/*-----------------------------------------------------------*/
+
+h2 {
+  position: relative;
+  margin: 30px auto 50px auto;
+  color: #2c2c2c;
+  font-family: "Dancing Script";
+  font-size: clamp(65px, 6vw, 90px);
+  text-align: center;
+}
+
+h2:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 5px;
+  bottom: 0;
+  left: 0;
+  background-color: #2c2c2c;
+  transform-origin: bottom right;
+  transition: transform 0.8s ease-out;
+}
+
+p {
+  font-size: clamp(21px, 3vw, 31px);
+  text-align: center;
+  margin: auto;
+  color: #242424;
+}
+
+.navLink {
+  text-decoration: none;
+  font-family: "Dancing Script";
+  color: #c89f36;
+}
+
+/*--------------------------------------------------*/
+/*----------------effets de styles -----------------*/
+/*--------------------------------------------------*/
+
+h2:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+.brands:hover,
+.custom_made_text:hover {
+  border-radius: 10px;
+  border: dashed;
+  transition: all 0.6 ease-in-out;
+  box-shadow: 12px -10px 12px 0px rgba(0, 0, 0, 0.4);
+  background-color: rgba(172, 176, 175, 1);
+}
+.photos-post-it img:hover,
+.photos-post-it2 img:hover,
+.guide-text:hover {
+  opacity: 1;
+  transform: scale(1.2);
+  transition: 3s;
+  z-index: 100;
+}
