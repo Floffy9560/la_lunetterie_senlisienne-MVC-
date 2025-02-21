@@ -112,7 +112,7 @@ buttonFilter.addEventListener("click", () => {
       } else {
         // Aucun résultat trouvé
         containerCards.innerHTML =
-          "<p>Aucun résultat trouvé pour les filtres sélectionnés.</p>";
+          "<p><b>Aucun résultat trouvé pour les filtres sélectionnés.</b></p>";
       }
     })
     .catch((error) => {
