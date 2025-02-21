@@ -14,4 +14,4 @@ Utilisation de htaccess qui redirige tout les liens vers le routeur ainsi :
 🔹 Si tu veux gérer les erreurs 404 proprement et ne pas exposer les vrais chemins des fichiers.
 ✅ Conclusion : Si ton site est un projet sérieux, .htaccess + un routeur en PHP est la meilleure approche pour avoir un site propre, sécurisé et performant.
 
-Comme le site devrait être mit en ligen j'ai préféré utiliser la méthode avec htaccess
+Comme le site devrait être mit en ligne j'ai préféré utiliser la méthode avec htaccess

@@ -73,7 +73,7 @@ buttonFilter.addEventListener("click", () => {
   );
 
   // Charger les données depuis le fichier JSON
-  fetch("/datas/glasses.json")
+  fetch("/assets/datas/glasses.json")
     .then((response) => response.json())
     .then((glasses) => {
       // Filtrer les lunettes en fonction des valeurs cochées
