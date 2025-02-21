@@ -14,13 +14,13 @@ main {
   justify-content: center;
   margin: 20px auto;
   width: 100%;
-  gap: 60px;
+  gap: 20px;
 }
 /* ----------------------------------------------------------
 ---------------taille de chaque div  ---------------------
 ---------------------------------------------------------- */
 
-.container_cards-post-it {
+/* .container_cards-post-it {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -28,7 +28,7 @@ main {
   min-width: 310px;
   max-width: 600px;
   gap: 25px;
-  /*background-color: #fff475;*/
+  background-color: #fff475;
   background-color: #c89f36;
   padding: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 1);
@@ -48,11 +48,11 @@ main {
     145deg,
     rgba(237, 210, 121, 0.8),
     rgba(240, 228, 170, 0.9)
-  ); /* Dégradé pour imiter le scotch */
+  ); Dégradé pour imiter le scotch
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2),
     inset 0 1px 3px rgba(255, 255, 255, 0.5);
   border-radius: 2px;
-  opacity: 0.9; /* Légère transparence */
+  opacity: 0.9; Légère transparence
   z-index: 10;
 }
 
@@ -69,7 +69,6 @@ main {
     rgba(255, 255, 255, 0.4),
     rgba(0, 0, 0, 0.1)
   );
-  /* Bande lumineuse subtile */
   opacity: 0.5;
   transform: rotate(-2deg);
 }
@@ -78,6 +77,51 @@ main {
   top: 0px;
   bottom: auto;
   opacity: 0.7;
+} */
+
+.container_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  max-width: 680px;
+  min-width: 320px;
+  max-height: 400px; /* Hauteur par défaut (plié) */
+  transition: max-height 1s ease-in-out;
+  padding: 10px;
+  background-color: rgba(48, 108, 96, 1);
+  border: 15px groove #c89f36;
+  border: 15px inset #c89f36;
+  border: 15px outset #c89f36;
+  border: 15px ridge #c89f36;
+  border-radius: 1rem;
+  position: relative;
+}
+.container_card.expanded {
+  max-height: 2000px; /* Se déplie pour montrer tout le contenu */
+}
+
+.toggle-btn {
+  margin-top: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  position: absolute;
+  bottom: 0;
+}
+
+.toggle-btn i {
+  font-size: 35px;
+  transition: transform 0.3s ease;
+  color: #c89f36;
+}
+
+.toggle-btn.active i {
+  transform: rotate(180deg);
 }
 
 /* -------------------------------------------------
@@ -86,13 +130,18 @@ main {
 
 .img {
   width: 100%;
-  height: 300px;
+  min-height: 300px;
 }
 .img img {
   width: 100%;
   height: 100%;
   border-radius: 10px;
+  object-fit: scale-down;
 }
+/* .img img:hover {
+  scale: 1.1;
+  transition: all 1s ease-in-out;
+} */
 
 /* -------------------------------------------------
 -----------mise en place du texte----------------
@@ -105,19 +154,22 @@ main {
   text-align: center;
   gap: 30px;
   padding: 10px;
-  overflow: auto;
+  overflow: hidden;
 }
 p {
-  font-size: clamp(21px, 3vw, 25px);
+  font-size: clamp(16px, 3vw, 20px);
 }
 H3 {
-  font-size: clamp(21px, 3vw, 31px);
+  font-size: clamp(18px, 3vw, 25px);
+  text-align: center;
+  text-wrap: nowrap;
 }
 ol {
   text-align: left;
   list-style: none;
+  margin: 25px 0 20px 0;
 }
 li {
-  font-size: clamp(21px, 3vw, 25px);
+  font-size: clamp(16px, 3vw, 20px);
   margin-bottom: 15px;
 }

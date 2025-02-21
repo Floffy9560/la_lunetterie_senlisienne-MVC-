@@ -2,41 +2,50 @@
 //-----récupération du boutton submit et des inputs-------//
 //-------------------------------------------------------//
 
-const btnSubmitNewCustomer = document.getElementById("submitNewCustomer");
+const btnSubmit = document.getElementById("submit");
 
-const btnSubmitCustomer = document.getElementById("SubmitCustomer");
+const btnSubmitCustomer = document.getElementById("submitCustomer");
 
-const regExCurrentMail = document.querySelector("#currentMail");
+const inputCustomerMail = document.querySelector("#customerMail");
 
-let regExCurrentPassword = document.getElementById("currentPassword");
+let inputPasswordCustomer = document.getElementById("passwordCustomer");
 
-let regExLastname = document.getElementById("lastname");
+let inputLastname = document.getElementById("lastname");
 
-let regExFirstname = document.getElementById("firstname");
+let inputFirstname = document.getElementById("firstname");
 
-let regExEmail = document.getElementById("email");
+let inputEmail = document.getElementById("email");
 
-let regExPassword = document.getElementById("password");
+let inputPassword = document.getElementById("password");
 
-let regExAdress = document.getElementById("adressT");
+let inputAdress = document.getElementById("adressT");
 
-let regExTel = document.getElementById("tel");
+let inputTel = document.getElementById("tel");
 
 //------------------------------------------------------------------------//
 //------------recherche des labels + logo de validation------------------//
 //----------------------------------------------------------------------//
 
-labelCustomerMail;
-const labelMailCustomer = document.getElementById("labelCustomerMail");
+////////////////////   Si déja client   ///////////////////////
+
+const labelCustomerMail = document.getElementById("labelCustomerMail");
+const emailCustomerTcheck = document.getElementById("emailCustomerTcheck");
+
+const labelPasswordCustomer = document.getElementById("labelPasswordCustomer");
+const passwordCustomerTcheck = document.getElementById(
+  "passwordCustomerTcheck"
+);
+
+////////////////////   Si nouveau client   ////////////////////
 
 const labelPassword = document.getElementById("labelPassword");
 const passwordTcheck = document.getElementById("password-tcheck");
 
 const labelFirstname = document.getElementById("labelFirstname");
-const labelFirstnameTcheck = document.getElementById("labelFirstname-tcheck");
+const firstnameTcheck = document.getElementById("firstname-tcheck");
 
 const labelLastname = document.getElementById("labelLastname");
-const labelLastnameTcheck = document.getElementById("labelLastname-tcheck");
+const lastnameTcheck = document.getElementById("lastname-tcheck");
 
 const labelTel = document.getElementById("labelTel");
 const telTcheck = document.getElementById("tel-tcheck");
@@ -47,17 +56,13 @@ const emailTcheck = document.getElementById("email-tcheck");
 const labelAdress = document.getElementById("labelAdress");
 const postalAdressTcheck = document.getElementById("postal-adress-tcheck");
 
-//--------------------------------------------------------------------------------------------------//
-//---------------------------email and password customer controle----------------------------------//
-//------------------------------------------------------------------------------------------------//
-
 //---------------------------------------------------------//
 //------------mise en variable des regex------------------//
 //-------------------------------------------------------//
 
 const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
 
-const currentPasswordRegex =
+const passwordRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
 
 const firstnameRegex = /^[A-Za-z\s-]{2,15}$/i;
@@ -74,39 +79,26 @@ const adressRegex =
 //-------------------------------------------------------------------------------------------------------------//
 
 btnSubmitCustomer.addEventListener("click", (event) => {
-  event.preventDefault();
-  const currentMailValue = regExCurrentMail.value;
-  if (emailRegex.test(currentMailValue)) {
+  const customerMailValue = inputCustomerMail.value;
+  if (emailRegex.test(customerMailValue)) {
     emailCustomerTcheck.classList.add("open");
-    labelEmail.style.visibility = "hidden";
+    labelCustomerMail.style.visibility = "hidden";
   } else {
-    labelMailCustomer.innerText =
-      "L'email est invalide ! veuillez saisir le format : exemple@exemple.fr";
-    labelMailCustomer.style.color = "red";
+    emailCustomerTcheck.classList.remove("open");
+    labelCustomerMail.style.visibility = "visible";
   }
 
-  const emailValue = regExEmail.value;
-  localStorage.setItem("email", emailValue);
-  if (emailRegex.test(emailValue)) {
-    emailTcheck.classList.add("open");
-    labelEmail.style.visibility = "hidden";
+  const customerPasswordValue = inputPasswordCustomer.value;
+  if (passwordRegex.test(customerPasswordValue)) {
+    passwordCustomerTcheck.classList.add("open");
+    labelPasswordCustomer.style.visibility = "hidden";
   } else {
-    labelEmail.style.visibility = "visible";
-    emailTcheck.innerHTML = "";
-  }
-
-  const currentPasswordValue = regExCurrentPassword.value;
-
-  if (currentPasswordRegex.test(currentPasswordValue)) {
-    labelPassworsCustomer.innerHTML = `<i class="bi bi-check-circle-fill"></i>`;
-  } else {
-    labelPassworsCustomer.style.color = "red";
-    labelPassworsCustomer.innerText =
-      "Veuillez saisir un mot de passe qui contient au moins 8 caractères dont : 1 majuscule, un caractére spécial et un chiffre";
+    passwordCustomerTcheck.classList.remove("open");
+    labelPasswordCustomer.style.visibility = "visible";
   }
   if (
-    emailRegex.test(currentMailValue) &&
-    currentPasswordRegex.test(currentPasswordValue)
+    emailRegex.test(customerMailValue) &&
+    passwordRegex.test(customerPasswordValue)
   ) {
     return true;
   }
@@ -117,7 +109,7 @@ btnSubmitCustomer.addEventListener("click", (event) => {
 //------------------------------------------------------------------------------------------------------------//
 
 const eye = document.getElementById("eye");
-const currentPassword = document.getElementById("currentPassword");
+const currentPassword = document.getElementById("password");
 const closeEye = document.getElementById("closeEye");
 console.log(closeEye);
 console.log(eye);
@@ -142,73 +134,66 @@ eye.addEventListener("click", () => {
 //------------------------------------------------------------------------------------------------------------//
 
 // en cliquant sur le boutton si les caractères sont corrects faire apparaitre le logo sinon faire apparaitre le text
-btnSubmitNewCustomer.addEventListener("click", () => {
-  const lastnameValue = regExLastname.value;
-  localStorage.setItem("lastname", lastnameValue);
-
+btnSubmit.addEventListener("click", () => {
+  const lastnameValue = inputLastname.value.trim();
   if (lastnameRegex.test(lastnameValue)) {
-    labelLastnameTcheck.classList.add("open");
+    lastnameTcheck.classList.add("open");
     labelLastname.style.visibility = "hidden";
   } else {
     labelLastname.style.visibility = "visible";
-    labelLastnameTcheck.innerHTML = "";
+    lastnameTcheck.classList.remove("open");
   }
 
-  const firstnameValue = regExFirstname.value;
-  localStorage.setItem("firstname", firstnameValue);
+  const firstnameValue = inputFirstname.value.trim();
   if (firstnameRegex.test(firstnameValue)) {
-    labelFirstnameTcheck.classList.add("open");
+    firstnameTcheck.classList.add("open");
     labelFirstname.style.visibility = "hidden";
   } else {
     labelFirstname.style.visibility = "visible";
-    labelFirstnameTcheck.innerHTML = "";
+    firstnameTcheck.classList.remove("open");
   }
 
-  const telValue = regExTel.value;
-  localStorage.setItem("tel", telValue);
+  const telValue = inputTel.value.trim();
   if (telRegex.test(telValue)) {
     telTcheck.classList.add("open");
     labelTel.style.visibility = "hidden";
   } else {
     labelTel.style.visibility = "visible";
-    telTcheck.innerHTML = "";
+    telTcheck.classList.remove("open");
   }
 
-  const emailValue = regExEmail.value;
-  localStorage.setItem("email", emailValue);
+  const emailValue = inputEmail.value.trim();
   if (emailRegex.test(emailValue)) {
     emailTcheck.classList.add("open");
     labelEmail.style.visibility = "hidden";
   } else {
     labelEmail.style.visibility = "visible";
-    emailTcheck.innerHTML = "";
+    emailTcheck.classList.remove("open");
   }
 
-  const currentPasswordValue = regExCurrentPassword.value;
-  localStorage.setItem("password", currentPasswordValue);
-  if (currentPasswordRegex.test(currentPasswordValue)) {
+  const passwordValue = inputfPassword.value.trim();
+  if (passwordRegex.test(passwordValue)) {
     passwordTcheck.classList.add("open");
     eye.style.visibility = "hidden";
     closeEye.style.visibility = "hidden";
     labelPassword.style.visibility = "hidden";
   } else {
     labelPassword.style.visibility = "visible";
-    passwordTcheck.innerHTML = "";
+    passwordTcheck.classList.remove("open");
   }
 
-  const adressValue = regExAdress.value;
-  localStorage.setItem("adress", adressValue);
+  const adressValue = inputAdress.value;
   if (adressRegex.test(adressValue)) {
     postalAdressTcheck.classList.add("open");
     labelAdress.style.visibility = "hidden";
   } else {
     labelAdress.style.visibility = "visible";
-    postalAdressTcheck.innerHTML = "";
+    postalAdressTcheck.classList.remove("open");
   }
 });
 /*if (
-    emailRegex.test(currentMailValue) &&
-    currentPasswordRegex.test(currentPasswordValue)
+    emailRegex.test(customerMailValue) &&
+    passwordRegex.test(currentPasswordValue)
   ) {
     return true;
   }

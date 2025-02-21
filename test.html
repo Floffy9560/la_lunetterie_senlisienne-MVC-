@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animation de dépliage</title>
+    <link rel="stylesheet" href="/brands.css" />
+    <style>
+      .container {
+        width: 300px;
+      }
+
+      .content {
+        height: 50px; /* Hauteur par défaut (plié) */
+        overflow: hidden;
+        transition: height 0.3s ease-in-out;
+        background-color: lightgray;
+        padding: 10px;
+      }
+
+      .content.expanded {
+        height: auto; /* Se déplie pour montrer tout le contenu */
+      }
+
+      .toggle-btn {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: bold;
+        margin-top: 5px;
+      }
+
+      .toggle-btn img {
+        transition: transform 0.3s ease;
+      }
+
+      .toggle-btn.active img {
+        transform: rotate(180deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container_card">
+      <div class="img">
+        <img src="/assets/img/brett-photo-speech.jpg" alt="Brett" />
+      </div>
+      <div class="speech">
+        <h3>BRETT</h3>
+        <ol>
+          <li>
+            <b>Design Masculin et Audacieux : </b>Des montures aux lignes
+            affirmées, spécialement conçues pour sublimer le style masculin.
+          </li>
+          <li>
+            <b>Matériaux Premium :</b>Utilisation de matériaux nobles comme
+            l'acétate, le métal et le titane, garantissant confort, robustesse
+            et durabilité.
+          </li>
+          <li>
+            <b>Confort et Ergonomie :</b>Des lunettes légères et parfaitement
+            ajustées pour un usage quotidien prolongé.
+          </li>
+          <li>
+            <b>Style Polyvalent :</b>Une collection variée, adaptée aussi bien
+            aux environnements professionnels qu'aux moments décontractés.
+          </li>
+          <li>
+            <b>Qualité Française :</b>Une marque ancrée dans l’élégance
+            française, mêlant savoir-faire artisanal et modernité.s
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div class="toggle-btn">
+      <span>Voir plus</span>
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/32/32195.png"
+        alt="Flèche"
+        width="20"
+      />
+    </div>
+
+    <script>
+      let content = document.querySelector(".container_card");
+      let button = document.querySelector(".toggle-btn");
+
+      button.addEventListener("click", () => {
+        content.classList.toggle("expanded");
+        button.classList.toggle("active");
+      });
+    </script>
+  </body>
+</html>

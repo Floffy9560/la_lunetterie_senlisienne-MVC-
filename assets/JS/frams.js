@@ -180,7 +180,7 @@ buttonReset.addEventListener("click", () => {
   }
 
   // Charger les données depuis le fichier JSON (exemple pour récupérer les lunettes)
-  fetch("glasses.json")
+  fetch("/assets/datas/glasses.json")
     .then((response) => response.json())
     .then((glasses) => {
       const container = document.querySelector(".containerCards"); // Conteneur où les cartes seront affichées

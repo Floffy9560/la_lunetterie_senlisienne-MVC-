@@ -1,15 +1,3 @@
-<?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    echo "Formulaire soumis en POST";
-    var_dump($_POST);
-} else {
-    echo "Méthode de requête : " . $_SERVER['REQUEST_METHOD'];
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -46,36 +34,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <form method="POST" action="account">
                     <div class="form_connection">
-                        <p id="emailCustomerTcheck"><i class="bi bi-check-circle-fill"></i></p>
-                        <label for="currentMail" id="labelCustomerMail">Email invalide ! veuillez saisir le format : exemple@exemple.fr</label>
-                        <input
-                            type="email"
-                            id="currentMail"
-                            name="currentMail"
-                            placeholder="Adresse mail"
-                            class="input"
-                            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                            autocomplete="email"
-                            title="Veuillez renseigner un email valide" required />
 
-                        <p id="currentPasswordCustomerTcheck"><i class="bi bi-check-circle-fill"></i></p>
-                        <label for="currentPasswordCustomer" id="r">(min 8 caractères : 1 maj : 1min : 1 chiffre : 1 caractère special)</label>
-                        <input
-                            type="current-password"
-                            id="currentPasswordCustomer"
-                            name="currentPassword"
-                            placeholder="Mot de passe"
-                            class="input"
-                            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[&-+!*$@%_])([&-+!*$@%_\w]{8,15})$" required />
-                        <i class='bi bi-eye-slash-fill-customer' id="closeEyeCustomer"></i>
-                        <i class="bi bi-eye-fill-customer" id="eyeCustomer"></i>
+                        <div class="mailCustomer">
+                            <p id="emailCustomerTcheck"><i class="bi bi-check-circle-fill"></i></p>
+                            <label for="customerMail" id="labelCustomerMail">Email invalide ! veuillez saisir le format : exemple@exemple.fr</label>
+                            <input
+                                type="email"
+                                id="customerMail"
+                                name="customerMail"
+                                placeholder="Adresse mail"
+                                class="input"
+                                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                                autocomplete="email"
+                                title="Veuillez renseigner un email valide" required />
+                        </div>
 
+                        <div class="passwordCustomer">
+                            <p id="passwordCustomerTcheck"><i class="bi bi-check-circle-fill"></i></p>
+                            <label for="passwordCustomer" id="labelPasswordCustomer">(min 8 caractères : 1 maj : 1min : 1 chiffre : 1 caractère special)</label>
+                            <input
+                                type="password"
+                                id="passwordCustomer"
+                                name="passwordCustomer"
+                                placeholder="Mot de passe"
+                                class="input"
+                                pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[&-+!*$@%_])([&-+!*$@%_\w]{8,15})$" required />
+                            <i class='bi bi-eye-slash-fill-customer' id="closeEyeCustomer"></i>
+                            <i class="bi bi-eye-fill-customer" id="eyeCustomer"></i>
+                        </div>
                     </div>
 
                     <a href="#" id="passwordLost">Mot de passe oublié?</a>
 
                     <div class="button">
-                        <button type="submit" class="btnSubmit" id="SubmitCustomer">Se connecter</button>
+                        <button type="submit" class="btnSubmit" id="submitCustomer">Se connecter</button>
                     </div>
                 </form>
             </div>
@@ -120,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="containerIdentity">
 
                             <div class="lastname">
-                                <p id='labelLastname-tcheck'><i class="bi bi-check-circle-fill"></i></p>
+                                <p id='lastname-tcheck'><i class="bi bi-check-circle-fill"></i></p>
                                 <label for="lastname" id='labelLastname'>Veuillez saisir que des lettres</label>
                                 <input
                                     type="text"
@@ -132,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
 
                             <div class="firstname">
-                                <p id='labelFirstname-tcheck'><i class="bi bi-check-circle-fill"></i></p>
+                                <p id='firstname-tcheck'><i class="bi bi-check-circle-fill"></i></p>
                                 <label for="firstname" id='labelFirstname'>Veuillez saisir que des lettres</label>
                                 <input
                                     type="text"
@@ -172,13 +164,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         <div class="password">
                             <p id="password-tcheck"><i class="bi bi-check-circle-fill"></i></p>
-                            <label for="currentPassword" id="labelPassword">(min 8 caractères : 1 maj : 1min : 1 chiffre : 1 caractère special)</label>
+                            <label for="password" id="labelPassword">(min 8 caractères : 1 maj : 1min : 1 chiffre : 1 caractère special)</label>
                             <input
                                 type="password"
-                                name="currentPassword"
+                                name="password"
                                 placeholder="Mot de passe"
                                 class="input"
-                                id="currentPassword"
+                                id="password"
                                 pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[&-+!*$@%_])([&-+!*$@%_\w]{8,15})$"
                                 autocomplete="current-password"
                                 required />
@@ -298,7 +290,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         politique de confidentialité.
                     </p>
                     <div class="button">
-                        <button type="submit" class="btnSubmit" id="submitNewCustomer">S'inscrire</button>
+                        <button type="submit" class="btnSubmit" id="submit">S'inscrire</button>
                     </div>
                 </form>
             </div>

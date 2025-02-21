@@ -103,7 +103,7 @@
                 </div>
                 <div class="photos-post-it" id="woodys"><a href="brands">
                         <div class="scotch"></div>
-                        <img src="assets/img/marques/woodyz-scooter.jpg" alt="woodys" />
+                        <img src="/assets/img/marques/Woodyz/plv/WOODYS_ANIMA_JUNEE.jpg" alt="woodys" />
                         <p><b>Woodys</b></p>
                     </a>
                 </div>
@@ -170,7 +170,7 @@
                 <div class="photos-post-it" id="bali"><a href="brands">
                         <div class="scotch"></div>
                         <img src="###" alt="bali" />
-                        <p><b>bali</b></p>
+                        <p><b>Bali</b></p>
                     </a>
                 </div>
                 <div class="photos-post-it2" id="Andy-brook"><a href="brands">

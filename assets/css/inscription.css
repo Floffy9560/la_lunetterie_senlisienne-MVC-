@@ -89,17 +89,21 @@ h6 {
 .email,
 .postal-adress,
 .tel,
-.password {
+.password,
+.passwordCustomer,
+.mailCustomer {
   display: block;
   width: 100%;
   position: relative;
 }
-#labelLastname-tcheck,
-#labelFirstname-tcheck,
+#lastname-tcheck,
+#firstname-tcheck,
 #postal-adress-tcheck,
 #email-tcheck,
 #password-tcheck,
-#tel-tcheck {
+#tel-tcheck,
+#emailCustomerTcheck,
+#passwordCustomerTcheck {
   display: none;
   position: absolute;
   color: green;
@@ -107,19 +111,22 @@ h6 {
   right: 10px;
 }
 
-#labelLastname-tcheck.open,
-#labelFirstname-tcheck.open,
+#lastname-tcheck.open,
+#firstname-tcheck.open,
 #tel-tcheck.open,
 #postal-adress-tcheck.open,
 #email-tcheck.open,
-#password-tcheck.open {
+#password-tcheck.open,
+#emailCustomerTcheck.open,
+#passwordCustomerTcheck.open {
   display: block;
 }
 #labelLastname,
 #labelFirstname,
 #labelEmail,
 #labelTel,
-#labelAdress {
+#labelAdress,
+#labelCustomerMail {
   visibility: hidden;
   color: red;
   font-weight: bold;

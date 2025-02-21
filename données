@@ -32,3 +32,13 @@ Minamoto , Demetz , paprika , MALT , clémence & margaux , cazal (mamies) , apon
       ✅ Sécurisation des fichiers
 
             Empêche l’accès direct à certains fichiers sensibles (config.php, core/, etc.).==> dans ce cas (assets) -->
+
+
+*/*/*/*/* étape pour restaurer une table : 
+
+      1️⃣ Vérifie si la table contient déjà des données
+            =>  SELECT * FROM kghdsi_user_infos;
+      : Supprime la table
+            =>  DELETE FROM kghdsi_user_infos;
+      Puis réinitialise l'auto-incrément :
+            => ALTER TABLE kghdsi_user_infos AUTO_INCREMENT = 1;

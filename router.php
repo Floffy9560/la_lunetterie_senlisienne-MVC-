@@ -1,6 +1,7 @@
 <?php
 require 'utils/utils.php';
 
+
 //Récupération de l'adresse de la page 
 $path = $_SERVER['REDIRECT_URL'];
 
