@@ -220,10 +220,9 @@ textarea {
   color: #120d03;
 }
 #passwordLost {
-  text-decoration: none;
-  padding-left: 1rem;
   color: #120d03;
-  opacity: 0.6;
+  background-color: transparent;
+  opacity: 0.7;
 }
 .confirmation_container {
   display: flex;
@@ -239,4 +238,19 @@ textarea {
 .confirmation {
   height: 1rem;
   margin-right: 0.5rem;
+}
+
+.consignes {
+  width: 80%;
+  background-color: whitesmoke;
+  padding: 10px;
+  margin: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 15px black;
+}
+ul {
+  list-style-type: none;
+}
+li {
+  margin-bottom: 10px;
 }

@@ -143,8 +143,14 @@ a {
   justify-content: center;
   align-items: center;
 }
-.logoNav {
+
+.logoNavCart {
   height: 40px;
+}
+.bi-person,
+.bi-person-check {
+  font-size: 40px;
+  color: #c89f36;
 }
 .lien_interne {
   background-color: transparent;

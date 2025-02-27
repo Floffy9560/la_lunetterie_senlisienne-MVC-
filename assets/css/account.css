@@ -58,6 +58,12 @@ textarea {
   padding-left: 8px;
   margin-bottom: 10px;
 }
+.modification_user {
+  width: auto;
+  background-color: transparent;
+  border: none;
+  cursor: grab;
+}
 .nameAccount {
   display: flex;
   justify-content: space-around;
@@ -76,7 +82,7 @@ textarea {
   width: 100%;
 }
 /*------------------------------------------------------*/
-/*---------------------coup de coeur--------------------*/
+/*----------------------- crush ------------------------*/
 /*------------------------------------------------------*/
 h3 {
   font-size: 25px;
@@ -107,6 +113,7 @@ h2 {
   padding: 15px;
   width: 100%;
   min-width: 300px;
+  min-height: 300px;
   border-radius: 10px;
   background-color: rgba(48, 108, 96, 1);
 }
@@ -130,19 +137,6 @@ h2 {
   float: right;
 }
 
-.buttonPushKart {
-  height: 35px;
-  margin: 10px 0 0 0;
-  border-radius: 10px;
-  padding: 8px;
-  color: whitesmoke;
-  background-color: #c89f36;
-  transition: all 0.4s ease-in-out;
-}
-.buttonPushKart:hover {
-  background-color: black;
-  color: whitesmoke;
-}
 /*-----------------------------------------------------------*/
 /*-------------container => Order In Progress ---------------*/
 /*-----------------------------------------------------------*/

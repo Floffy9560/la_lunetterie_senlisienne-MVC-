@@ -434,7 +434,7 @@ h2:after {
 }
 
 p {
-  font-size: clamp(21px, 3vw, 31px);
+  font-size: clamp(18px, 3vw, 25px);
   text-align: center;
   margin: auto;
   color: #242424;

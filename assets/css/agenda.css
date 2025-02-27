@@ -43,6 +43,12 @@ table {
 td {
   border-radius: 5px;
 }
+.monday.active {
+  background-color: green;
+  color: white;
+  position: relative;
+  border-radius: 50%;
+}
 
 .footer {
   display: flex;

@@ -44,9 +44,6 @@
         </div>
       </div> -->
 
-
-
-
       <div class="container_card">
         <div class="img">
           <img src="/assets/img/marques/Woodyz/plv/WOODYS_ANIMA_JUNEE.jpg" alt="WOODYS" />

@@ -9,9 +9,9 @@ Minamoto , Demetz , paprika , MALT , clémence & margaux , cazal (mamies) , apon
 
 \*\*\* Créer une page ou il va mettre ses "tutos" "" les tutos de Nico "" + la gallery photo du mag + vidéos de ses partenaires
 
-\*\*\* Pourquoi utiliser .htaccess avec un routeur ?
+**: Pourquoi utiliser .htaccess avec un routeur ? :
 
-<!-- ✅ URLs propres
+      **: URLs propres
 
             Au lieu d’avoir :
 
@@ -21,24 +21,52 @@ Minamoto , Demetz , paprika , MALT , clémence & margaux , cazal (mamies) , apon
 
             monsite.com/page/12
 
-      ✅ Redirection de toutes les requêtes vers un routeur
+      **: Redirection de toutes les requêtes vers un routeur
 
-            Toutes les requêtes sont envoyées vers router.php, qui se charge de les analyser et d’afficher la bonne page.
+           => Toutes les requêtes sont envoyées vers router.php, qui se charge de les analyser et d’afficher la bonne page.
 
-      ✅ Amélioration du référencement (SEO)
+      **: Amélioration du référencement (SEO)
 
-            Les URLs courtes et lisibles sont meilleures pour les moteurs de recherche.
+           => Les URLs courtes et lisibles sont meilleures pour les moteurs de recherche.
 
-      ✅ Sécurisation des fichiers
+      **: Sécurisation des fichiers
 
-            Empêche l’accès direct à certains fichiers sensibles (config.php, core/, etc.).==> dans ce cas (assets) -->
+           => Empêche l’accès direct à certains fichiers sensibles (config.php, core/, etc.).==> dans ce cas (assets) -->
 
 
-*/*/*/*/* étape pour restaurer une table : 
+**: Etapes pour restaurer une table : 
 
-      1️⃣ Vérifie si la table contient déjà des données
-            =>  SELECT * FROM kghdsi_user_infos;
-      : Supprime la table
-            =>  DELETE FROM kghdsi_user_infos;
-      Puis réinitialise l'auto-incrément :
-            => ALTER TABLE kghdsi_user_infos AUTO_INCREMENT = 1;
+      => Vérifie si la table contient déjà des données :
+            ->  SELECT * FROM kghdsi_user_infos;
+
+      => Supprime la table :
+            ->  DELETE FROM kghdsi_user_infos;
+
+      => Puis réinitialise l'auto-incrément :
+            -> ALTER TABLE kghdsi_user_infos AUTO_INCREMENT = 1;
+
+
+
+**: Si mot de passe oublier : 
+
+            -> Mon utilisateur oublie le mot de passe, je redirige vers un lien pour le reset.
+
+            -> Mon utilisateur entre son adresse email dans le formulaire pour recevoir son nouveau mot de passe.
+
+            -> Je regarde si l'adresse email de l'utilisateur est bien dans la bdd 
+
+            -> Si oui je lui envois un email avec un lien de réinitialisation 
+
+            -> Dans ce lien un nouveau formulaire conteanant un seul input (mdp) et un boutton 
+
+            -> Au click créer une variable qui change son mdp sur la BDD, et le redirige vers la page de connexion.
+
+           !!!! L'utilisation de password_hach est conseillé  !!!!!
+
+          
+**: Pour upload les images en BDD essayer d'utiliser : fonction move_uploaded_file($_FILES[$file]['tmp_name'], $destinationPath)
+      -> en fait tu ne met pas réellement l'image dans la BDD mais son emplacement, il te faut un <input type="file"  accept="image/*"> et ensuite utiliser la fonction: move_uploaded_file($_FILES[$file]['tmp_name'], $destinationPath) pour déplacer le fichier ($file représente ton fichier et $destinationPath l'emplacement où tu veux l'enregistrer sur le serveur)
+          
+     
+
+            

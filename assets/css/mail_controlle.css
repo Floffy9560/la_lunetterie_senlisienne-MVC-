@@ -1,0 +1,95 @@
+.containerCheckMail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+  max-width: 600px;
+  min-width: 320px;
+  min-height: 300px;
+  padding: 20px;
+  box-shadow: 0 0 15px;
+  background: url("/assets/img/wood.jpg");
+  background-size: cover;
+  border: 15px groove #8b5a2b;
+
+  border: 15px inset #8b5a2b;
+
+  border: 15px outset #8b5a2b;
+
+  border: 15px ridge #8b5a2b;
+}
+
+.formMailTcheck {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  /*border-radius: 8px;
+   border: 1px solid #c89f36; */
+}
+.checkMail {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+}
+.inputMailTcheck {
+  margin: 0;
+  width: 100%;
+  max-width: 300px;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+}
+.buttonMailTcheck {
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #c89f36;
+}
+.mailValide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+}
+.valide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+p {
+  text-align: center;
+  color: whitesmoke;
+  font-size: clamp(18px, 3vw, 21px);
+  margin: 20px auto;
+}
+a {
+  text-decoration: none;
+  font-size: clamp(18px, 3vw, 21px);
+}
+.bi-exclamation-triangle-fill {
+  color: red;
+  font-size: 35px;
+}
+.bi-envelope-check-fill {
+  margin: auto;
+  color: rgb(4, 255, 0);
+  font-size: 35px;
+}
+.request {
+  width: 50%;
+  min-width: 300px;
+  background-color: #c89f36;
+  border: none;
+  border-radius: 10px;
+}

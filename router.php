@@ -1,5 +1,14 @@
 <?php
-require 'utils/utils.php';
+
+session_start();
+
+var_dump($_SESSION);
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+require_once 'models/databases.php';
+
 
 
 //Récupération de l'adresse de la page 

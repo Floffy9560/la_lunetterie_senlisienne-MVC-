@@ -75,31 +75,40 @@ function createCalendar(month, year) {
   for (let i = 0; i < 6; i++) {
     let week = document.createElement("tr");
 
-    //créer des case pour chaque jours
+    // Créer des cases pour chaque jour
     for (let j = 0; j < 7; j++) {
       let day = document.createElement("td");
+
       if (i === 0 && j < firstDay) {
-        week.appendChild(day); // Cellule vide
+        week.appendChild(day); // Cellule vide avant le début du mois
       } else if (date > daysInMonth) {
-        week.appendChild(day); // Cellule vide
+        week.appendChild(day); // Cellule vide après la fin du mois
       } else {
-        day.innerText = date; // Insère la date
+        day.innerText = date;
+        if (j == 0) {
+          day.classList.add("monday"); // Ajouter une classe spéciale aux lundis
+        } else {
+          day.style.opacity = 0.6; // Appliquer l'opacité sur les jours non prioritaires
+        }
         week.appendChild(day);
-        day.addEventListener("click", (e) => {
-          console.log(e);
-          if (j == 0) {
-            dayChoice = e.target.innerText;
-            day.style.background = "green";
-          }
-        });
         date++;
-      }
-      if (j > 0) {
-        day.style.opacity = 0.5;
       }
     }
     tbody.appendChild(week);
   }
+  const mondays = document.querySelectorAll(".monday");
+  mondays.forEach((monday) => {
+    monday.addEventListener("click", () => {
+      mondays.forEach((m) => {
+        if (m.classList.contains("active")) {
+          m.classList.remove("active");
+        }
+      });
+      dayChoice = monday.innerText;
+      mondays.innerText = date;
+      monday.classList.add("active");
+    });
+  });
 }
 
 //--------------------------------------------------------//

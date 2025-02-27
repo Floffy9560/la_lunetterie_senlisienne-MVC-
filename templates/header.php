@@ -57,18 +57,17 @@
                <div class="account">
                   <div class="searchContainer">
                      <div class="searchContainerLogo">
-
-                        <a href="inscription"><img
-                              src="/./assets/img/icons8-personne-homme-40.png"
-                              alt="logo"
-                              class="logoNav" /></a>
-                        </a>
-
+                        <?php if (!empty($_SESSION)) {
+                           echo  "<a href='inscription'> <i class='bi bi-person-check'></i></a>";
+                        } else {
+                           echo " <a href='inscription'><i class='bi bi-person'></i></a>";
+                        }
+                        ?>
                         <a href="cart"><img
                               src="/./assets/img/icons8-panier-40.png"
                               alt="cart"
                               id="kart"
-                              class="logoNav" /></a>
+                              class="logoNavCart" /></a>
                         </a>
 
                      </div>

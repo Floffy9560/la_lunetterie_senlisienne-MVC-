@@ -23,7 +23,6 @@ h2 {
   margin: auto;
   padding: 20px;
   text-align: center;
-  background-color: yellow;
 }
 
 /* Grille d'images */
@@ -32,7 +31,6 @@ h2 {
   grid-template-columns: repeat(4, 1fr);
   gap: 15px;
   padding: 10px;
-  background-color: aqua;
 }
 
 /* Images */
@@ -58,10 +56,6 @@ h2 {
 
 @media screen and (max-width: 768px) {
   .gallery-photos {
-    display: grid;
     grid-template-columns: 1fr;
-    gap: 15px;
-    padding: 10px;
-    background-color: aqua;
   }
 }

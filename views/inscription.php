@@ -63,13 +63,19 @@
                             <i class="bi bi-eye-fill-customer" id="eyeCustomer"></i>
                         </div>
                     </div>
-
-                    <a href="#" id="passwordLost">Mot de passe oublié?</a>
-
+                    <a href="mail_controlle" id="passwordLost">Mot de passe oublié</a>
                     <div class="button">
                         <button type="submit" class="btnSubmit" id="submitCustomer">Se connecter</button>
                     </div>
                 </form>
+
+                <div class="consignes">
+                    <ul>
+                        <li><b>Consignes :</b></li>
+                        <li>Le mot de passe doit contenir au moins 1 majuscule 1 minuscule 1 caractère spécial (&-+!*$@%_) et 1 nombre </li>
+                        <li>Le mail doit être comme l'exemple ci contre : exemple@exemple.fr</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="inscription">
@@ -120,7 +126,7 @@
                                     placeholder="Nom"
                                     class="inputCivilityName"
                                     id="lastname"
-                                    pattern="[A-Za-z]{3,}" minlength="2" required />
+                                    pattern="^[A-ZÀÂÄÆÇÉÈÊËÎÏÔÖŒÙÛÜŸa-zàâäæçéèêëîïôöœùûüÿ' -]{2,50}$" minlength="2" required />
                             </div>
 
                             <div class="firstname">
@@ -132,7 +138,7 @@
                                     placeholder="Prénom"
                                     class="inputCivilityName"
                                     id="firstname"
-                                    pattern="[A-Za-z]{3,}" minlength="2" required />
+                                    pattern="^[A-ZÀÂÄÆÇÉÈÊËÎÏÔÖŒÙÛÜŸa-zàâäæçéèêëîïôöœùûüÿ' -]{2,50}$" minlength="2" required />
                             </div>
 
                         </div>
@@ -243,7 +249,7 @@
                             </p>
 
                         </div>
-                        <div class="confirmation_container_div">
+                        <!-- <div class="confirmation_container_div">
                             <input
                                 type="checkbox"
                                 name="confidentiality"
@@ -288,10 +294,10 @@
                         personnalisées. Pour en savoir plus sur la gestion de vos données
                         personnelles et pour exercer vos droits, reportez-vous à notre
                         politique de confidentialité.
-                    </p>
-                    <div class="button">
-                        <button type="submit" class="btnSubmit" id="submit">S'inscrire</button>
-                    </div>
+                    </p> -->
+                        <div class="button">
+                            <button type="submit" class="btnSubmit" id="submit">S'inscrire</button>
+                        </div>
                 </form>
             </div>
         </div>

@@ -1,0 +1,99 @@
+Voici les différentes étapes de ta fonction createUser() commentées avec le raisonnement logique derrière chacune d'elles :
+
+1️⃣ Initialisation de la connexion à la base de données
+
+$pdo = getConnexion();
+
+Raison : 
+      Cette ligne initialise une connexion à la base de données via la fonction getConnexion(). Cette fonction doit retourner un objet PDO permettant d’interagir avec la base de données. Si cette connexion échoue, l'exécution de la fonction sera arrêtée (généralement, getConnexion() devrait gérer les erreurs de connexion).
+
+2️⃣ Définition de la requête SQL
+
+      $sql = "INSERT INTO kghdsi_users (day_of_birth, month_of_birth, year_of_birth, password, id_user_infos, id_role)
+            VALUES (:day_of_birth, :month_of_birth, :year_of_birth, :password, :id_user_infos, :id_role)";
+
+Raison : 
+      La requête SQL est préparée pour insérer un nouvel utilisateur dans la table kghdsi_users. La syntaxe INSERT INTO est utilisée pour ajouter des données dans une table. Les valeurs à insérer sont définies comme des paramètres nommés (par exemple :day_of_birth, :month_of_birth), ce qui permet de sécuriser la requête contre les injections SQL en utilisant des requêtes préparées.
+
+
+3️⃣ Préparation de la requête SQL avec PDO
+
+$stmt = $pdo->prepare($sql);
+
+Raison : 
+      La requête SQL définie précédemment est préparée avec PDO::prepare(). Cela permet d'optimiser l'exécution de la requête et d'assurer une gestion sécurisée des paramètres. La requête est maintenant prête à être exécutée avec les valeurs spécifiques pour chaque paramètre.
+
+4️⃣ Association des variables aux paramètres SQL
+
+      $stmt->bindParam(':day_of_birth', $day_of_birth, PDO::PARAM_INT);
+      $stmt->bindParam(':month_of_birth', $month_of_birth, PDO::PARAM_STR);
+      $stmt->bindParam(':year_of_birth', $year_of_birth, PDO::PARAM_INT);
+      $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+      $stmt->bindParam(':id_user_infos', $id_user_infos, PDO::PARAM_INT);
+      $stmt->bindParam(':id_role', $id_role, PDO::PARAM_INT);
+
+Raison :
+      bindParam() lie chaque variable PHP à un paramètre de la requête SQL. Cela permet de substituer chaque paramètre (par exemple, :day_of_birth) par la valeur fournie.
+
+      Le type de chaque paramètre est défini explicitement avec PDO::PARAM_INT ou PDO::PARAM_STR, ce qui assure que les données sont traitées correctement.
+
+      Logique : Cela empêche les injections SQL et garantit que les types des données sont respectés lors de l'exécution de la requête.
+
+5️⃣ Exécution de la requête SQL
+
+return $stmt->execute();
+
+Raison : 
+      La méthode execute() est appelée pour exécuter la requête préparée avec les paramètres associés. Elle renvoie true si l'insertion s'est déroulée avec succès et false en cas d'échec. Cette ligne permet donc de réellement insérer un nouvel utilisateur dans la base de données.
+
+6️⃣ Gestion des exceptions en cas d'erreur
+
+            catch (PDOException $e) {
+            echo "<p style='color:white'>Erreur lors de la création de l'utilisateur (users) : " . $e->getMessage() . "</p>";
+            return false;
+            }
+
+Raison : 
+      Si une erreur survient lors de l'exécution de la requête (par exemple, problème de connexion, violation de contrainte      d'unicité, ou toute autre erreur liée à la base de données), une exception PDOException est levée.
+      Cette exception est capturée et son message d'erreur est affiché avec une couleur blanche (style='color:white'), probablement pour une interface en fond sombre.
+      La fonction retourne false pour indiquer un échec dans la création de l'utilisateur.
+
+💡 Résumé du raisonnement logique :
+
+Connexion à la base de données : On commence par obtenir une connexion sécurisée à la base de données via PDO.
+
+Définition de la requête SQL : On prépare une requête SQL sécurisée pour insérer un utilisateur avec des paramètres nommés.
+
+Préparation de la requête : La requête est préparée, ce qui est plus sûr et efficace que d'exécuter directement une chaîne SQL brute.
+
+Liaison des paramètres : Les variables PHP sont liées aux paramètres SQL pour garantir que les valeurs sont insérées de manière sécurisée.
+
+Exécution de la requête : La requête est exécutée et la fonction retourne true ou false selon le succès de l'insertion.
+
+Gestion des erreurs : Si une erreur se produit, un message d'erreur est affiché et la fonction retourne false pour signaler l'échec.
+
+La fonction en qst : 
+
+function createUser($day_of_birth, $month_of_birth, $year_of_birth, $password, $id_user_infos, $id_role)
+{
+      $pdo = getConnexion();
+      $sql = "INSERT INTO kghdsi_users (day_of_birth, month_of_birth,year_of_birth, password,id_user_infos,id_role)
+       VALUES (:day_of_birth, :month_of_birth,:year_of_birth, :password, :id_user_infos, :id_role)";
+
+
+      try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':day_of_birth', $day_of_birth, PDO::PARAM_INT);
+            $stmt->bindParam(':month_of_birth', $month_of_birth, PDO::PARAM_STR);
+            $stmt->bindParam(':year_of_birth', $year_of_birth, PDO::PARAM_INT);
+            $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+            $stmt->bindParam(':id_user_infos', $id_user_infos, PDO::PARAM_INT);
+            $stmt->bindParam(':id_role', $id_role, PDO::PARAM_INT);
+
+
+            return $stmt->execute();
+      } catch (PDOException $e) {
+            echo "<p style='color:white'>Erreur lors de la création de l'utilisateur (users) : " . $e->getMessage() . "</p>";
+            return false;
+      }
+}

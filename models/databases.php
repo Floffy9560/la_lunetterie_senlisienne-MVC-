@@ -42,7 +42,7 @@ function getConnexion()
 function getAllUsers()
 {
       $pdo = getConnexion();
-      $sql = "SELECT id, nom FROM users";
+      $sql = "SELECT id, lastname FROM user_infos";
       try {
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
@@ -54,38 +54,79 @@ function getAllUsers()
 }
 
 // Récupérer un utilisateur par son ID
-function getUserById($id)
+function getUser($mail)  // penser a mettre password pour vérifier 
 {
       $pdo = getConnexion();
-      $sql = "SELECT * FROM users WHERE id = :id";
+      // Utilisation de la jointure 
+      $sql = " SELECT 
+      u.id_users,
+      u.day_of_birth,
+      u.month_of_birth,
+      u.year_of_birth,
+      u.password,
+      ui.id_user_infos,
+      ui.mail,
+      ui.phone,
+      ui.lastname,
+      ui.firstname,
+      ui.address,
+      r.id_role,
+      r.name AS role_name
+  FROM kghdsi_users u
+  INNER JOIN kghdsi_user_infos ui ON u.id_user_infos = ui.id_user_infos
+  INNER JOIN kghdsi_role r ON u.id_role = r.id_role
+  WHERE ui.mail = :mail";
+
       try {
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->bindParam(':mail', $mail, PDO::PARAM_STR);
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            $users = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($users) {
+                  // Enregistrer les informations utilisateur dans la session
+                  $_SESSION['user_id'] = $users['id_user_infos'];  // ID de l'utilisateur
+                  $_SESSION['user_role'] = $users['id_role']; // Rôle de l'utilisateur (optionnel)
+                  $_SESSION['user_mail'] = $users['mail'];    // Email de l'utilisateur (optionnel)
+                  $_SESSION['user_phone'] = $users['phone']; // Rôle de l'utilisateur (optionnel)
+                  $_SESSION['user_address'] = $users['address'];    // Email de l'utilisateur (optionnel)
+                  $_SESSION['user_firstname'] = $users['firstname']; // Rôle de l'utilisateur (optionnel)
+                  $_SESSION['user_lastname'] = $users['lastname'];    // Email de l'utilisateur (optionnel)
+
+
+                  return $users;
+            } else {
+                  return false;
+            }
       } catch (PDOException $e) {
             echo "Erreur lors de la récupération de l'utilisateur : " . $e->getMessage();
             return false;
       }
 }
 
-// Créer un nouvel utilisateur
+// Récupérer l'ID  un utilisateur par son mail
+function getUserIdByMail($mail)
+{
+      $pdo = getConnexion();
+      $sql = "SELECT id_user_infos FROM kghdsi_user_infos WHERE mail = :mail";
 
-// function createUser($nom, $email, $password)
-// {
-//       $pdo = getConnexion();
-//       $sql = "INSERT INTO users (nom, email, password) VALUES (:nom, :email, :password)";
-//       try {
-//             $stmt = $pdo->prepare($sql);
-//             $stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
-//             $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-//             $stmt->bindParam(':password', $password, PDO::PARAM_STR);
-//             return $stmt->execute();
-//       } catch (PDOException $e) {
-//             echo "Erreur lors de la création de l'utilisateur : " . $e->getMessage();
-//             return false;
-//       }
-// }
+      try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':mail', $mail, PDO::PARAM_STR); // Correction du type
+            $stmt->execute();
+
+            // Récupération de l'ID utilisateur
+            $userId = $stmt->fetchColumn();
+
+            return $userId ?: false; // Retourne l'ID ou false si aucun utilisateur trouvé
+      } catch (PDOException $e) {
+            echo "Erreur lors de la récupération de l'utilisateur : " . $e->getMessage();
+            return false;
+      }
+}
+
+
+// Créer un nouvel utilisateur
 
 function createUserInfos($mail, $phone, $lastname, $firstname, $address)
 {
@@ -139,10 +180,6 @@ function createUserInfos($mail, $phone, $lastname, $firstname, $address)
       }
 }
 
-// createUserInfo($mail, $phone, $lastname, $firstname, $address)
-// $id_user_infos= SELECT id_user_infos from user_infos WHERE $mail, $phone, $lastname, $firstname, $address;
-// createUser(...)
-
 
 function createUser($day_of_birth, $month_of_birth, $year_of_birth, $password, $id_user_infos, $id_role)
 {
@@ -189,16 +226,226 @@ function updateUser($id, $nom, $email, $password)
 }
 
 // Supprimer un utilisateur
-function deleteUser($id)
+function deleteUser($idUser)
 {
       $pdo = getConnexion();
-      $sql = "DELETE FROM users WHERE id = :id";
+
+      // 1️ Récupérer id_user_infos et id_role liés à cet utilisateur
+      $sql = "SELECT id_user_infos, id_role FROM kghdsi_users WHERE id_users = :idUser";
+      $stmt = $pdo->prepare($sql);
+      $stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+      $stmt->execute();
+      $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+      if (!$userData) {
+            echo "Utilisateur introuvable.";
+            return false;
+      }
+
+      $idUserInfos = $userData['id_user_infos'];
+      $idRole = $userData['id_role'];
+
+      try {
+            $pdo->beginTransaction(); // 🔹 Commencer une transaction pour éviter les erreurs partielles
+
+            // 2️ Supprimer l'utilisateur de `kghdsi_users`
+            $sql = "DELETE FROM kghdsi_users WHERE id_users = :idUser";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+            $stmt->execute();
+
+            // 3️ Supprimer les informations utilisateur de `kghdsi_user_infos`
+            $sql = "DELETE FROM kghdsi_user_infos WHERE id_user_infos = :idUserInfos";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':idUserInfos', $idUserInfos, PDO::PARAM_INT);
+            $stmt->execute();
+
+            // 4️ Vérifier si le rôle est toujours utilisé par d'autres utilisateurs
+            // $sql = "SELECT COUNT(*) FROM kghdsi_users WHERE id_role = :idRole";
+            // $stmt = $pdo->prepare($sql);
+            // $stmt->bindParam(':idRole', $idRole, PDO::PARAM_INT);
+            // $stmt->execute();
+            // $roleCount = $stmt->fetchColumn();
+
+            // // Si aucun utilisateur n'utilise ce rôle, on peut le supprimer
+            // if ($roleCount == 0) {
+            //       $sql = "DELETE FROM kghdsi_role WHERE id_role = :idRole";
+            //       $stmt = $pdo->prepare($sql);
+            //       $stmt->bindParam(':idRole', $idRole, PDO::PARAM_INT);
+            //       $stmt->execute();
+            //}
+
+            $pdo->commit(); // 🔹 Valider toutes les suppressions si tout s'est bien passé
+            return true;
+      } catch (PDOException $e) {
+            $pdo->rollBack(); // 🔹 Annuler tout en cas d'erreur
+            echo "Erreur lors de la suppression : " . $e->getMessage();
+            return false;
+      }
+}
+
+// function verification($mail, $password)
+// {
+//       // Connexion à la base de données
+//       $pdo = getConnexion();
+
+//       // Requête pour récupérer le mot de passe haché associé à l'email
+//       $sql = "SELECT u.password 
+//             FROM kghdsi_users u 
+//             JOIN kghdsi_user_infos ui ON u.id_user_infos = ui.id_user_infos 
+//             WHERE ui.mail = :mail";
+
+//       try {
+//             // Préparation de la requête
+//             $stmt = $pdo->prepare($sql);
+//             $stmt->bindParam(':mail', $mail, PDO::PARAM_STR);
+//             $stmt->execute();
+
+//             // Récupération du mot de passe haché
+//             $hashedPassword = $stmt->fetchColumn();
+
+//             if ($hashedPassword) {
+//                   // Vérifier si le mot de passe correspond au hachage
+//                   if (password_verify($password, $hashedPassword)) {
+//                         return true; // Mot de passe correct
+//                   } else {
+//                         return false; // Mot de passe incorrect
+//                   }
+//             } else {
+//                   return false; // Email introuvable
+//                   die();
+//             }
+//       } catch (PDOException $e) {
+//             echo "Erreur lors de la vérification : " . $e->getMessage();
+//             return false;
+//       }
+// }
+
+function verification($mail, $password)
+{
+      $pdo = getConnexion();
+
+      $sql = "SELECT u.password 
+            FROM kghdsi_users u 
+            JOIN kghdsi_user_infos ui ON u.id_user_infos = ui.id_user_infos 
+            WHERE ui.mail = :mail";
+
       try {
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-            return $stmt->execute();
+            $stmt->bindParam(':mail', $mail, PDO::PARAM_STR);
+            $stmt->execute();
+
+            // Récupération de la ligne complète pour voir ce que MySQL retourne
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $hashedPassword = $user['password'];
+
+
+            if (password_verify($password, $hashedPassword)) {
+                  return true; // ✅ Mot de passe correct
+            } else {
+                  header('location:inscription');
+                  return false;
+            }
       } catch (PDOException $e) {
-            echo "Erreur lors de la suppression de l'utilisateur : " . $e->getMessage();
+            echo "Erreur lors de la vérification : " . $e->getMessage();
+            return false;
+      }
+}
+
+// avec $id=$_SESSION['user_id'] 
+function checkPassword($mail, $password)
+{
+      $pdo = getConnexion();
+
+      $sql = "SELECT password 
+            FROM kghdsi_users
+            WHERE mail = :mail";
+
+      try {
+            // Préparer la requête
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':mail', $mail, PDO::PARAM_INT);
+            $stmt->execute();
+
+            // Récupérer le mot de passe stocké
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Vérifier si l'utilisateur existe
+            if (!$user) {
+                  echo "Utilisateur non trouvé.";
+                  return false; // Retourne false si l'utilisateur n'existe pas
+            }
+
+            $hashedPassword = $user['password'];
+
+            // Vérification du mot de passe
+            if (password_verify($password, $hashedPassword)) {
+                  return true; // ✅ Mot de passe correct
+            } else {
+                  echo "Mot de passe incorrect.";
+                  return false; // Retourne false si le mot de passe est incorrect
+            }
+      } catch (PDOException $e) {
+            // Gestion des erreurs en cas d'échec de la requête
+            echo "Erreur lors de la vérification : " . $e->getMessage();
+            return false;
+      }
+}
+
+function checkMail($mail)
+{
+      $pdo = getConnexion();
+
+      $sql = "SELECT mail 
+            FROM kghdsi_user_infos
+            WHERE mail = :mail";
+
+      try {
+            // Préparer la requête
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':mail', $mail, PDO::PARAM_STR);
+            $stmt->execute();
+
+            // Récupérer le mot de passe stocké
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Vérifier si l'utilisateur existe
+            if (!$user) {
+
+                  return false; // Retourne false si l'utilisateur n'existe pas
+            } else {
+                  return true; // Retourne true si l'utilisateur existe
+            }
+      } catch (PDOException $e) {
+            // Gestion des erreurs en cas d'échec de la requête
+            echo "Erreur lors de la vérification : " . $e->getMessage();
+            return false;
+      }
+}
+
+
+// changer le mdp dans la bdd 
+
+function changePassword($id, $newPassword)
+{ // avec $id=$_SESSION['user_id'] et $newpassword= nouveau pass renseigné par le client 
+
+      $pdo = getConnexion();
+
+      $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+      $sql = "UPDATE kghdsi_users
+      SET password = :newPassword WHERE id_users = :id";
+
+      try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':newPassword', $hashedPassword, PDO::PARAM_STR);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT); // Ajout de la liaison pour l'ID
+
+            $stmt->execute();
+            return true;
+      } catch (PDOException $e) {
+            echo "Erreur lors de la mise à jour du mot de passe : " . $e->getMessage();
             return false;
       }
 }
