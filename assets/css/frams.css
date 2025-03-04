@@ -1,16 +1,3 @@
-.headerBody {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80%;
-  height: 350px;
-  box-shadow: 0 0 35px;
-  margin-top: 2rem;
-}
-.headerPict {
-  width: 100%;
-  height: 100%;
-}
 .containerCards {
   width: 90%;
   margin: auto;
@@ -28,30 +15,17 @@
   border: 2px solid;
   /* background: #e0e0e0; */
   background-color: #c89f36;
-  box-shadow: 10px 10px 15px;
+  box-shadow: 10px 10px 15px black;
   color: #424242;
   border-radius: 15px;
 }
-
-.buttonPushKart {
-  height: 35px;
-  margin: 10px 0 0 0;
-  border-radius: 10px;
-  padding: 8px;
-  color: whitesmoke;
-  background-color: #3c3c3c;
-  transition: all 0.4s ease-in-out;
-}
-
-.buttonPushKart:hover {
-  background-color: #c89f36;
-  color: black;
-}
 .img {
   margin: auto;
+  object-fit: cover;
   width: 90%;
   height: 150px;
   border-radius: 8px;
+  background-color: white;
 }
 h3 {
   margin-bottom: 1rem;
@@ -65,19 +39,17 @@ h3 {
 /*---------------bouton filtres----------------*/
 /*---------------------------------------------*/
 
-.buttonSearch {
+.buttonFilter {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
   border: none;
   font-weight: bold;
   gap: 1rem;
-  font-size: 25px;
-  margin: 2rem auto 2rem auto;
+  margin: 20px auto;
   background-color: #c89f36;
-  padding: 8px;
+  padding: 10px;
   border-radius: 10px;
+  font-size: 30px;
+  box-shadow: 0 0 20px white;
 }
 .bi-filter-square-fill {
   font-size: 100%;
@@ -90,7 +62,7 @@ h3 {
   right: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease-in-out;
@@ -100,42 +72,91 @@ h3 {
   visibility: visible;
 }
 .menuSearch {
-  display: flex;
-  flex-direction: column;
-  max-width: 250px;
-  gap: 1rem;
-  position: fixed;
-  top: 0;
-  right: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0);
+  position: absolute;
+  top: -100px;
+  transform-origin: top center;
+  width: 80%;
+  min-width: 320px;
   background-color: #306c60;
   color: #c89f36;
-  transform: translateX(100%);
-  transition: transform 0.5s ease-in-out;
-  border-radius: 15px;
-  padding: 1rem;
+  transition: opacity 0.9s ease-in-out, transform 0.8s ease-in-out,
+    visibility 0.8s ease-in-out;
+  border-radius: 25px;
+  padding: 10px;
   z-index: 5555;
 }
 
 .menuSearch.open {
-  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
 }
+
 .menuSearch p {
+  text-decoration: underline;
   font-weight: bold;
+  margin-bottom: 20px;
   font-size: 25px;
 }
-.inputSearch {
+
+.buttonSearch,
+.buttonPushKart {
+  border: none;
+  font-weight: bold;
+  margin: 20px auto;
+  background-color: #c89f36;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 18px;
+  box-shadow: 0 0 10px black;
+}
+.containerInputSearch {
+  width: 100%;
+  max-width: 545px;
+  font-size: 20px;
+  padding: 15px;
+}
+form {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
-  font-size: 20px;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 8px 20px 10px 25px;
+  border: 2px solid black;
+  padding: 10px;
 }
 span {
-  width: 40%;
+  display: flex;
+  gap: 5px;
+  width: 130px;
+  padding: 8px;
 }
-.buttonFilter {
-  width: 150px;
-  height: 50px;
-  margin: auto;
+
+.buttonReset {
+  border: none;
+  font-weight: bold;
   background-color: #c89f36;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+.containerCheckbox {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.testinput {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }

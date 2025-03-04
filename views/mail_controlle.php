@@ -1,5 +1,5 @@
-<?php
-var_dump($_POST); ?>
+<?php echo "<p style='color:yellow'>" .
+   var_dump($_POST) . "</p>"; ?>
 
 <head>
    <meta charset="UTF-8" />

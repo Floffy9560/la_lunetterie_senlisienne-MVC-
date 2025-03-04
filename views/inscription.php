@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="assets/css/inscription.css" />
 </head>
 
-<?php include 'templates/header.php'; ?>
+<?php include_once 'templates/header.php'; ?>
 
 <body>
 
@@ -34,7 +34,16 @@
 
                 <form method="POST" action="account">
                     <div class="form_connection">
+                        <div><?php
+                                if (!empty($_SESSION['verificationFalse'])) {
+                                    echo "<p style='color:red; text-align:center'>⚠️<strong>Mot de passe ou adresse mail invalide</strong>⚠️</p>";
+                                }
+                                if (!empty($_SESSION['success'])) {
+                                    echo "<p style='color:green'>" . $_SESSION['success'] . "</p>";
+                                    unset($_SESSION['verificationFalse']);
+                                }
 
+                                ?></div>
                         <div class="mailCustomer">
                             <p id="emailCustomerTcheck"><i class="bi bi-check-circle-fill"></i></p>
                             <label for="customerMail" id="labelCustomerMail">Email invalide ! veuillez saisir le format : exemple@exemple.fr</label>
@@ -59,8 +68,8 @@
                                 placeholder="Mot de passe"
                                 class="input"
                                 pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[&-+!*$@%_])([&-+!*$@%_\w]{8,15})$" required />
-                            <i class='bi bi-eye-slash-fill-customer' id="closeEyeCustomer"></i>
-                            <i class="bi bi-eye-fill-customer" id="eyeCustomer"></i>
+                            <i class='bi bi-eye-slash-fill' id="closeEyeCustomer"></i>
+                            <i class="bi bi-eye-fill" id="eyeCustomer"></i>
                         </div>
                     </div>
                     <a href="mail_controlle" id="passwordLost">Mot de passe oublié</a>
@@ -304,6 +313,6 @@
     </main>
     <script src="/assets/JS/inscription.js" defer></script>
 </body>
-<?php include 'templates/footer.php'; ?>
+<?php include_once 'templates/footer.php'; ?>
 
 </html>

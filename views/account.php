@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,36 +22,36 @@
     <main>
         <section>
             <div class="containerIdentity">
-                <h3>Bonjour : <?= $_SESSION['user_firstname'] ?></h3>
+                <h3>Bonjour : <?= $_SESSION['userInfos']['firstname'] ?></h3>
                 <div class="identity">
                     <div class="nameAccount">
                         <div class="divName">
                             <label for="accountLastname" id="labelLastname">Nom</label>
                             <div class="accountIdentity">
-                                <input type="text" id="accountLastname" value="<?= htmlspecialchars($_SESSION['user_lastname'], ENT_QUOTES) ?>" readonly>
+                                <input type="text" id="accountLastname" value="<?= $_SESSION['userInfos']['lastname'] ?>" readonly>
                             </div>
                         </div>
                         <div class="divName">
                             <label for="accountFirstname" id="labelFirstname">Prénom</label>
                             <div class="accountIdentity">
-                                <input type="text" id="accountFirstname" value="<?= htmlspecialchars($_SESSION['user_firstname'], ENT_QUOTES) ?>" readonly>
+                                <input type="text" id="accountFirstname" value="<?= htmlspecialchars($_SESSION['userInfos']['firstname'], ENT_QUOTES) ?>" readonly>
                             </div>
                         </div>
                     </div>
 
                     <label for="accountAdress">Adresse</label>
                     <div class="accountIdentity">
-                        <input type="text" id="accountAdress" value="<?= htmlspecialchars($_SESSION['user_address'], ENT_QUOTES) ?>" readonly>
+                        <input type="text" id="accountAdress" value="<?= htmlspecialchars($_SESSION['userInfos']['address'], ENT_QUOTES) ?>" readonly>
                     </div>
 
                     <label for="accountEmail">Mail</label>
                     <div class="accountIdentity">
-                        <input type="email" id="accountEmail" value="<?= htmlspecialchars($_SESSION['user_mail'], ENT_QUOTES) ?>" readonly>
+                        <input type="email" id="accountEmail" value="<?= htmlspecialchars($_SESSION['userInfos']['mail'], ENT_QUOTES) ?>" readonly>
                     </div>
 
                     <label for="accountTel">Numéro de téléphone</label>
                     <div class="accountIdentity">
-                        <input type="tel" id="accountTel" value="<?= htmlspecialchars($_SESSION['user_phone'], ENT_QUOTES) ?>" readonly>
+                        <input type="tel" id="accountTel" value="<?= htmlspecialchars($_SESSION['userInfos']['phone'], ENT_QUOTES) ?>" readonly>
                     </div>
                 </div>
                 <div class="modification">

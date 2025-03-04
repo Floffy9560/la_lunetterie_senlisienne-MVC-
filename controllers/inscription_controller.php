@@ -1,18 +1,24 @@
 <?php
 
-include __DIR__ . '/../models/fonctions_inscription.php';
+
+include_once __DIR__ . '/../models/fonctions_formulaire.php';
 
 
-
-if (!empty($_SESSION['user_id'])) {
+if (!empty($_SESSION['userInfos'])) {
       // Si l'utilisateur est connecté, rediriger vers la page de compte
 
-      include __DIR__ . '/../controllers/account_controller.php';
+      include_once __DIR__ . '/../controllers/account_controller.php';
+      exit();
 } else {
       // Si l'utilisateur n'est pas connecté, rediriger vers la page d'inscription
 
-      include __DIR__ . '/../views/inscription.php';
-}
+      include_once __DIR__ . '/../views/inscription.php';
+      // if (!empty($_SESSION['verificationFalse'])) {
+      //       unset($_SESSION['verificationFalse']);
+      // }
+      // if (isset($_SESSION['error'])) {
+      //       unset($_SESSION['error']);
+      // }
 
-$password = $_POST['$password'];
-$motDePasseSecurise = cleanPassword($password);
+      exit();
+}

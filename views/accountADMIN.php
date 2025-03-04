@@ -16,35 +16,57 @@
 </head>
 
 <body>
-    <?php include('header.php') ?>
+    <?php include __DIR__ . '/../templates/header.php' ?>
     <main>
 
         <div class="containerIdentity">
-            <h3>Identitée</h3>
+            <h3>Bonjour Mr le directeur : <?= $_SESSION['userInfos']['firstname'] ?></h3>
             <div class="identity">
                 <div class="nameAccount">
                     <div class="divName">
                         <label for="accountLastname" id="labelLastname">Nom</label>
-                        <div class='accountIdentity' id="accountLastname"></div>
-
+                        <div class="accountIdentity">
+                            <input type="text" id="accountLastname" value="<?= $_SESSION['userInfos']['lastname'] ?>" readonly>
+                        </div>
                     </div>
                     <div class="divName">
                         <label for="accountFirstname" id="labelFirstname">Prénom</label>
-                        <div class='accountIdentity' id="accountFirstname"></div>
-
+                        <div class="accountIdentity">
+                            <input type="text" id="accountFirstname" value="<?= htmlspecialchars($_SESSION['userInfos']['firstname'], ENT_QUOTES) ?>" readonly>
+                        </div>
                     </div>
                 </div>
+
                 <label for="accountAdress">Adresse</label>
-                <div class='accountIdentity' id="accountAdress"></div>
+                <div class="accountIdentity">
+                    <input type="text" id="accountAdress" value="<?= htmlspecialchars($_SESSION['userInfos']['address'], ENT_QUOTES) ?>" readonly>
+                </div>
 
                 <label for="accountEmail">Mail</label>
-                <div class='accountIdentity' id="accountEmail"></div>
+                <div class="accountIdentity">
+                    <input type="email" id="accountEmail" value="<?= htmlspecialchars($_SESSION['userInfos']['mail'], ENT_QUOTES) ?>" readonly>
+                </div>
 
                 <label for="accountTel">Numéro de téléphone</label>
-                <div class='accountIdentity' id="accountTel"></div>
+                <div class="accountIdentity">
+                    <input type="tel" id="accountTel" value="<?= htmlspecialchars($_SESSION['userInfos']['phone'], ENT_QUOTES) ?>" readonly>
+                </div>
+            </div>
+            <div class="modification">
+                <form method="POST">
+                    <label for="modify"></label>
+                    <input type="submit" id="modify" name="modify" value="Modifier vos coordonnées" class='modification_user' />
+                </form>
 
-                <label for="accountPassword">Mot de passe</label>
-                <div class='accountIdentity' id="accountPassword"></div>
+                <form method='POST'>
+                    <label for='deconnexion'></label>
+                    <input type='submit' id='deconnexion' name='deconnexion' value='Se deconnecter' class='modification_user' />
+                </form>
+
+                <form method='POST'>
+                    <label for='supprimer'></label>
+                    <input type='submit' id='supprimer' name='supprimer' value='Supprimer mon compte' class='modification_user' />
+                </form>
             </div>
         </div>
         <button class="btnAdmin">Gestion des stocks</button>
@@ -59,6 +81,6 @@
 
     <script src="assets/JS/accountADMIN.js"></script>
 </body>
-<?php include('footer.php') ?>
+<?php include __DIR__ . '/../templates/footer.php' ?>
 
 </html>

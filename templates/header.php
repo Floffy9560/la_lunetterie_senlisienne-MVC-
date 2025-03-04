@@ -57,11 +57,16 @@
                <div class="account">
                   <div class="searchContainer">
                      <div class="searchContainerLogo">
-                        <?php if (!empty($_SESSION)) {
-                           echo  "<a href='inscription'> <i class='bi bi-person-check'></i></a>";
+                        <?php if (!empty($_SESSION['userInfos'])) {
+                           if ($_SESSION['userInfos']['id_role'] == 2) {
+                              echo  "<a href='inscription'> <i class='bi bi-person-check' style='color:green'></i></a>";
+                           } else {
+                              echo  "<a href='inscription'> <i class='bi bi-person-check' style='color:red'></i></a>";
+                           }
                         } else {
                            echo " <a href='inscription'><i class='bi bi-person'></i></a>";
                         }
+
                         ?>
                         <a href="cart"><img
                               src="/./assets/img/icons8-panier-40.png"

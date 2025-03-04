@@ -110,11 +110,37 @@ btnSubmitCustomer.addEventListener("click", (event) => {
 //------------événement click sur l'oeil afin d'afficher ou de masquer le mot de passe-------------------------//
 //------------------------------------------------------------------------------------------------------------//
 
+////////////////////
+///si déja client///
+////////////////////
+
+const eyeCustomer = document.getElementById("eyeCustomer");
+const closeEyeCustomer = document.getElementById("closeEyeCustomer");
+const passwordCustomer = document.getElementById("passwordCustomer");
+console.log(closeEyeCustomer, eyeCustomer);
+
+closeEyeCustomer.addEventListener("click", () => {
+  if (passwordCustomer.type === "password") {
+    passwordCustomer.type = "text";
+  }
+  eyeCustomer.classList.toggle("open");
+  closeEyeCustomer.classList.toggle("open");
+});
+eyeCustomer.addEventListener("click", () => {
+  if (passwordCustomer.type === "text") {
+    passwordCustomer.type = "password";
+  }
+  eyeCustomer.classList.toggle("open");
+  closeEyeCustomer.classList.toggle("open");
+});
+
+////////////////////
+///si new  client///
+////////////////////
+
 const eye = document.getElementById("eye");
 const currentPassword = document.getElementById("password");
 const closeEye = document.getElementById("closeEye");
-console.log(closeEye);
-console.log(eye);
 
 closeEye.addEventListener("click", () => {
   if (currentPassword.type === "password") {

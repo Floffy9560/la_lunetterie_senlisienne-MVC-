@@ -18,34 +18,47 @@
 
 <body>
 
-   <form action="" method="POST">
-      <label for="mailtest">entré votre mail :</label>
-      <input type="text" name="mailtest">
-      <button>récup l'id</button>
-   </form>
 
    <div class="container">
+      <?php if (!empty($_SESSION['error'])) {
+         echo "<p style='text-align:center'>" . $_SESSION['error'] . "</p>";
+      } ?>
       <h2 class="text-center">Réinitialiser votre mot de passe</h2>
       <form action="" method="POST">
-         <div class="form-group">
+
+         <!-- Champ caché pour le gestionnaire de mots de passe -->
+         <input type="hidden" name="username"
+            value="<?php echo htmlspecialchars($_POST['checkMail'] ?? ''); ?>"
+            autocomplete="username">
+
+         <div class="divPassword">
             <label for="password">Nouveau mot de passe : *</label>
-            <input type="password" class="inputForm" id="password" name="password" required>
+            <input type="password" class="inputFormPassword" id="password" name="password" autocomplete="new-password" required>
+            <span class="eye"><i class="bi bi-eye-fill"></i></span>
+            <span class="closeEye"><i class="bi bi-eye-slash-fill"></i></span>
+            <span class="checkPassword"> <i class="bi bi-check-circle-fill"></i></span>
          </div>
-         <div class="form-group">
-            <label for="confirmPassword">Confirmez le nouveau mot de passe : *</label>
-            <input type="password" class="inputForm" id="confirmPassword" name="confirmPassword" required>
+
+         <div class="divPassword">
+            <label for="confirmPassword">Confirmez le mot de passe : *</label>
+            <input type="password" class="inputFormConfirmPassword" id="confirmPassword" name="confirmPassword" autocomplete="new-password" required>
+            <span class="eye"><i class="bi bi-eye-fill"></i></span>
+            <span class="closeEye"><i class="bi bi-eye-slash-fill"></i></span>
+            <span class="checkConfirmPassword"><i class="bi bi-check-circle-fill"></i></span>
          </div>
+
          <div class="consignes">
             <p><b>Attention :</b></p>
             <p>Le mot de passe doit contenir au moins 1 majuscule 1 minuscule 1 caractère spécial (&-+!*$@%_) et 1 nombre </p>
 
          </div>
-         <button type="submit" class="btnForm">Réinitialiser le mot de passe</button>
-         <button type="submit" class="btnForm"><a href="login.php" class="btnReturn">Retour à la connexion</a></button>
+
+         <button type="submit" class="btnForm" id="sendBtn">Réinitialiser le mot de passe</button>
+         <button type="submit" class="btnForm"><a href="inscription" class="btnReturn">Retour à la connexion</a></button>
          <p class="text-center">Si vous n'avez pas encore créé de compte, vous pouvez <a href="inscription"><u>vous inscrire</u></a>.</p>
       </form>
 
    </div>
-
+   <script src="../assets/JS/reset_password.js"></script>
 </body>
 <?php include 'templates/footer.php'; ?>

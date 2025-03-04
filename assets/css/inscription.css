@@ -176,16 +176,20 @@ select {
   right: 25px;
 }
 
-#eye {
+#eye,
+#eyeCustomer {
   display: none;
 }
-#eye.open {
+#eye.open,
+#eyeCustomer.open {
   display: block;
 }
-#closeEye {
+#closeEye,
+#closeEyeCustomer {
   display: block;
 }
-#closeEye.open {
+#closeEye.open,
+#closeEyeCustomer.open {
   display: none;
 }
 .birth {

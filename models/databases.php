@@ -1,5 +1,10 @@
 <?php
-// model/user.model.php
+
+
+
+////////////////////////////////////////////////////////
+///////////// connexion BDD ///////////////////////////
+//////////////////////////////////////////////////////
 
 //////// Configuration de la connexion à la base de données qui créer un nouveau handler à chaque fois ////////
 
@@ -22,7 +27,7 @@
 
 function getConnexion()
 {
-      static $pdo = null; // Stocke la connexion pour qu’elle soit réutilisée
+      static $pdo = null; // Stock la connexion pour qu’elle soit réutilisée
       if ($pdo === null) {
             try {
                   $dsn = "mysql:host=localhost;dbname=la_lunetterie_senlisienne;charset=utf8";
@@ -37,6 +42,10 @@ function getConnexion()
       }
       return $pdo;
 }
+
+/////////////////////////////////////////////////////////////////
+///////////// fonctions utilisateurs ///////////////////////////
+///////////////////////////////////////////////////////////////
 
 // Récupérer tous les utilisateurs (id et nom uniquement)
 function getAllUsers()
@@ -53,51 +62,20 @@ function getAllUsers()
       }
 }
 
-// Récupérer un utilisateur par son ID
-function getUser($mail)  // penser a mettre password pour vérifier 
+// Récupérer un utilisateur par son Mail ( pour la réinitialisation du MDP)
+function getUserInfos($mail)  // penser a mettre password pour vérifier 
 {
       $pdo = getConnexion();
       // Utilisation de la jointure 
-      $sql = " SELECT 
-      u.id_users,
-      u.day_of_birth,
-      u.month_of_birth,
-      u.year_of_birth,
-      u.password,
-      ui.id_user_infos,
-      ui.mail,
-      ui.phone,
-      ui.lastname,
-      ui.firstname,
-      ui.address,
-      r.id_role,
-      r.name AS role_name
-  FROM kghdsi_users u
-  INNER JOIN kghdsi_user_infos ui ON u.id_user_infos = ui.id_user_infos
-  INNER JOIN kghdsi_role r ON u.id_role = r.id_role
-  WHERE ui.mail = :mail";
+      $sql = "SELECT * FROM kghdsi_users                  
+              JOIN kghdsi_user_infos  ON kghdsi_users.id_users = kghdsi_user_infos.id_user_infos
+              WHERE kghdsi_user_infos.mail = :mail";
 
       try {
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':mail', $mail, PDO::PARAM_STR);
             $stmt->execute();
-            $users = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if ($users) {
-                  // Enregistrer les informations utilisateur dans la session
-                  $_SESSION['user_id'] = $users['id_user_infos'];  // ID de l'utilisateur
-                  $_SESSION['user_role'] = $users['id_role']; // Rôle de l'utilisateur (optionnel)
-                  $_SESSION['user_mail'] = $users['mail'];    // Email de l'utilisateur (optionnel)
-                  $_SESSION['user_phone'] = $users['phone']; // Rôle de l'utilisateur (optionnel)
-                  $_SESSION['user_address'] = $users['address'];    // Email de l'utilisateur (optionnel)
-                  $_SESSION['user_firstname'] = $users['firstname']; // Rôle de l'utilisateur (optionnel)
-                  $_SESSION['user_lastname'] = $users['lastname'];    // Email de l'utilisateur (optionnel)
-
-
-                  return $users;
-            } else {
-                  return false;
-            }
+            return  $stmt->fetch(PDO::FETCH_ASSOC);
       } catch (PDOException $e) {
             echo "Erreur lors de la récupération de l'utilisateur : " . $e->getMessage();
             return false;
@@ -112,7 +90,7 @@ function getUserIdByMail($mail)
 
       try {
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':mail', $mail, PDO::PARAM_STR); // Correction du type
+            $stmt->bindParam(':mail', $mail, PDO::PARAM_STR);
             $stmt->execute();
 
             // Récupération de l'ID utilisateur
@@ -121,6 +99,32 @@ function getUserIdByMail($mail)
             return $userId ?: false; // Retourne l'ID ou false si aucun utilisateur trouvé
       } catch (PDOException $e) {
             echo "Erreur lors de la récupération de l'utilisateur : " . $e->getMessage();
+            return false;
+      }
+}
+function getUserById($id)
+{
+      $pdo = getConnexion();
+      $sql = "SELECT * FROM kghdsi_users                  
+              JOIN kghdsi_user_infos  ON kghdsi_users.id_users = kghdsi_user_infos.id_user_infos
+              
+              WHERE kghdsi_user_infos.id_user_infos = :id";
+      try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            // Récupérer une seule ligne (un utilisateur)
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Si l'utilisateur existe
+            if ($user) {
+                  return $user;
+            } else {
+                  return false;
+            }
+      } catch (PDOException $e) {
+            // Gérer l'erreur si la requête échoue
+            $_SESSION['error'] = "⚠️ Erreur lors de la récupération de l'utilisateur : " . $e->getMessage();
             return false;
       }
 }
@@ -143,6 +147,7 @@ function createUserInfos($mail, $phone, $lastname, $firstname, $address)
       if ($result_check) {
             echo "<p style='color:white'>Le mail : " . $mail . " est déjà utilisé </p>";
             return false; // Empêche l'insertion
+            die();
       }
 
       // Insérer un nouvel utilisateur
@@ -184,8 +189,10 @@ function createUserInfos($mail, $phone, $lastname, $firstname, $address)
 function createUser($day_of_birth, $month_of_birth, $year_of_birth, $password, $id_user_infos, $id_role)
 {
       $pdo = getConnexion();
+
+      $passwordHash = password_hash($password, PASSWORD_DEFAULT); // Bcrypt par défaut
       $sql = "INSERT INTO kghdsi_users (day_of_birth, month_of_birth,year_of_birth, password,id_user_infos,id_role)
-       VALUES (:day_of_birth, :month_of_birth,:year_of_birth, :password, :id_user_infos, :id_role)";
+       VALUES (:day_of_birth, :month_of_birth,:year_of_birth, :passwordHash, :id_user_infos, :id_role)";
 
 
       try {
@@ -193,19 +200,19 @@ function createUser($day_of_birth, $month_of_birth, $year_of_birth, $password, $
             $stmt->bindParam(':day_of_birth', $day_of_birth, PDO::PARAM_INT);
             $stmt->bindParam(':month_of_birth', $month_of_birth, PDO::PARAM_STR);
             $stmt->bindParam(':year_of_birth', $year_of_birth, PDO::PARAM_INT);
-            $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+            $stmt->bindParam(':passwordHash', $passwordHash, PDO::PARAM_STR);
             $stmt->bindParam(':id_user_infos', $id_user_infos, PDO::PARAM_INT);
             $stmt->bindParam(':id_role', $id_role, PDO::PARAM_INT);
+            $stmt->execute();
 
-
-            return $stmt->execute();
+            // Récupérer l'ID du nouvel utilisateur
+            $id = $pdo->lastInsertId();
+            return $id;
       } catch (PDOException $e) {
-            echo "<p style='color:white'>Erreur lors de la création de l'utilisateur (users) : " . $e->getMessage() . "</p>";
+            $_SESSION['error'] = "<p style='color:white'>Erreur lors de la création de l'utilisateur (users) : " . $e->getMessage() . "</p>";
             return false;
       }
 }
-
-
 
 // Mettre à jour un utilisateur
 function updateUser($id, $nom, $email, $password)
@@ -220,7 +227,7 @@ function updateUser($id, $nom, $email, $password)
             $stmt->bindParam(':password', $password, PDO::PARAM_STR);
             return $stmt->execute();
       } catch (PDOException $e) {
-            echo "Erreur lors de la mise à jour de l'utilisateur : " . $e->getMessage();
+            $_SESSION['error'] = "Erreur lors de la mise à jour de l'utilisateur : " . $e->getMessage();
             return false;
       }
 }
@@ -243,7 +250,7 @@ function deleteUser($idUser)
       }
 
       $idUserInfos = $userData['id_user_infos'];
-      $idRole = $userData['id_role'];
+      // $idRole = $userData['id_role'];
 
       try {
             $pdo->beginTransaction(); // 🔹 Commencer une transaction pour éviter les erreurs partielles
@@ -260,21 +267,6 @@ function deleteUser($idUser)
             $stmt->bindParam(':idUserInfos', $idUserInfos, PDO::PARAM_INT);
             $stmt->execute();
 
-            // 4️ Vérifier si le rôle est toujours utilisé par d'autres utilisateurs
-            // $sql = "SELECT COUNT(*) FROM kghdsi_users WHERE id_role = :idRole";
-            // $stmt = $pdo->prepare($sql);
-            // $stmt->bindParam(':idRole', $idRole, PDO::PARAM_INT);
-            // $stmt->execute();
-            // $roleCount = $stmt->fetchColumn();
-
-            // // Si aucun utilisateur n'utilise ce rôle, on peut le supprimer
-            // if ($roleCount == 0) {
-            //       $sql = "DELETE FROM kghdsi_role WHERE id_role = :idRole";
-            //       $stmt = $pdo->prepare($sql);
-            //       $stmt->bindParam(':idRole', $idRole, PDO::PARAM_INT);
-            //       $stmt->execute();
-            //}
-
             $pdo->commit(); // 🔹 Valider toutes les suppressions si tout s'est bien passé
             return true;
       } catch (PDOException $e) {
@@ -284,74 +276,45 @@ function deleteUser($idUser)
       }
 }
 
-// function verification($mail, $password)
-// {
-//       // Connexion à la base de données
-//       $pdo = getConnexion();
-
-//       // Requête pour récupérer le mot de passe haché associé à l'email
-//       $sql = "SELECT u.password 
-//             FROM kghdsi_users u 
-//             JOIN kghdsi_user_infos ui ON u.id_user_infos = ui.id_user_infos 
-//             WHERE ui.mail = :mail";
-
-//       try {
-//             // Préparation de la requête
-//             $stmt = $pdo->prepare($sql);
-//             $stmt->bindParam(':mail', $mail, PDO::PARAM_STR);
-//             $stmt->execute();
-
-//             // Récupération du mot de passe haché
-//             $hashedPassword = $stmt->fetchColumn();
-
-//             if ($hashedPassword) {
-//                   // Vérifier si le mot de passe correspond au hachage
-//                   if (password_verify($password, $hashedPassword)) {
-//                         return true; // Mot de passe correct
-//                   } else {
-//                         return false; // Mot de passe incorrect
-//                   }
-//             } else {
-//                   return false; // Email introuvable
-//                   die();
-//             }
-//       } catch (PDOException $e) {
-//             echo "Erreur lors de la vérification : " . $e->getMessage();
-//             return false;
-//       }
-// }
-
 function verification($mail, $password)
 {
       $pdo = getConnexion();
 
-      $sql = "SELECT u.password 
-            FROM kghdsi_users u 
-            JOIN kghdsi_user_infos ui ON u.id_user_infos = ui.id_user_infos 
-            WHERE ui.mail = :mail";
+      // Requête SQL pour récupérer le mot de passe
+      $sql = "SELECT password 
+            FROM kghdsi_users 
+            JOIN kghdsi_user_infos  ON kghdsi_users.id_users = kghdsi_user_infos.id_user_infos 
+            WHERE kghdsi_user_infos.mail = :mail";
 
       try {
+            // Préparation de la requête SQL
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':mail', $mail, PDO::PARAM_STR);
             $stmt->execute();
 
-            // Récupération de la ligne complète pour voir ce que MySQL retourne
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            // Récupération du mot de passe haché
+            $hashedPassword = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $hashedPassword = $user['password'];
-
-
-            if (password_verify($password, $hashedPassword)) {
-                  return true; // ✅ Mot de passe correct
+            // Vérification si un mot de passe a été trouvé et si le mot de passe correspond
+            if ($hashedPassword && password_verify($password, $hashedPassword['password'])) {
+                  // Détruire la variable de session de vérification si elle existe
+                  if (isset($_SESSION['verificationFalse'])) {
+                        unset($_SESSION['verificationFalse']);
+                  }
+                  return true;
             } else {
-                  header('location:inscription');
+                  // Mettre une variable de session pour indiquer une erreur de vérification
+                  $_SESSION['verificationFalse'] = true;
+                  // Retourner false si mot de passe incorrect ou aucun utilisateur trouvé
                   return false;
             }
       } catch (PDOException $e) {
+            // Gestion des erreurs en cas de problème avec la base de données
             echo "Erreur lors de la vérification : " . $e->getMessage();
             return false;
       }
 }
+
 
 // avec $id=$_SESSION['user_id'] 
 function checkPassword($mail, $password)
@@ -427,25 +390,267 @@ function checkMail($mail)
 
 // changer le mdp dans la bdd 
 
-function changePassword($id, $newPassword)
-{ // avec $id=$_SESSION['user_id'] et $newpassword= nouveau pass renseigné par le client 
-
+function changePassword($id, $hashedPassword)
+{
       $pdo = getConnexion();
 
-      $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-
-      $sql = "UPDATE kghdsi_users
-      SET password = :newPassword WHERE id_users = :id";
+      $sql = "UPDATE kghdsi_users 
+                  JOIN kghdsi_user_infos ON kghdsi_users.id_users = kghdsi_user_infos.id_user_infos
+                  SET kghdsi_users.password = :password
+                  WHERE kghdsi_users.id_users = :id";
 
       try {
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':newPassword', $hashedPassword, PDO::PARAM_STR);
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT); // Ajout de la liaison pour l'ID
-
+            $stmt->bindParam(':password', $hashedPassword, PDO::PARAM_STR);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
-            return true;
+
+            if ($stmt->rowCount() > 0) {
+                  $_SESSION['success'] = "✅ Mot de passe changé avec succès. Veuillez vous connecter.";
+                  return true;
+            } else {
+                  $_SESSION['error'] = "⚠️ Aucun utilisateur trouvé avec cet email.";
+                  return false;
+            }
       } catch (PDOException $e) {
-            echo "Erreur lors de la mise à jour du mot de passe : " . $e->getMessage();
+            $_SESSION['error'] = "⚠️ Erreur SQL : " . $e->getMessage();
+            return false;
+      }
+}
+
+
+// function getPasswordUser($mail)
+// {
+//       $pdo = getConnexion();
+
+//       $sql = "SELECT `password` FROM `kghdsi_users`
+// LEFT JOIN kghdsi_user_infos ON kghdsi_user_infos.id_user_infos = kghdsi_users.id_users
+// WHERE mail = 'auvrayflorian@aol.com'";
+// }
+
+// try {
+//       $stmt = $pdo->prepare($sql);
+//       $stmt->bindParam(':mail', $mail, PDO::PARAM_STR);
+//       $stmt->execute();
+//       $result = $stmt->fetch(PDO::FETCH_ASSOC);
+//       echo $result['password'];
+// } catch (PDOException $e) {
+//       echo "Error: " . $e->getMessage();
+// }
+
+function identity($session)
+{
+      if (!empty($_SESSION($session))) {
+            echo htmlspecialchars($_SESSION['user_lastname'], ENT_QUOTES);
+      }
+}
+
+
+/////////////////////////////////////////////////////////////
+///////////// fonctions lunettes ///////////////////////////
+///////////////////////////////////////////////////////////
+
+function addItems($name, $price, $stock)
+{
+      $pdo = getConnexion();
+      try {
+
+            $stmt = $pdo->prepare("INSERT INTO kghdsi_items (name,price,stock) VALUES (:name,:price,:stock)");
+            $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+            $stmt->bindParam(':price', $price, PDO::PARAM_INT);
+            $stmt->bindParam(':stock', $stock, PDO::PARAM_INT);
+            $stmt->execute();
+            return $pdo->lastInsertId();
+            echo "Données ITEMS insérées avec succès";
+      } catch (PDOException $e) {
+            // $_SESSION['error'] = "⚠️ Erreur insertion items SQL : " . $e->getMessage();
+            echo "⚠️ Erreur insertion items SQL : " . $e->getMessage();
+            return false;
+      }
+}
+
+function addGlasses($color, $matter, $shape, $image_path, $image_name, $id_category, $id_gender, $id_brands, $id_items)
+{
+      $pdo = getConnexion();
+      try {
+
+            $stmt = $pdo->prepare("
+    INSERT INTO kghdsi_glasses 
+    (color, matter, shape, image_path, image_name, id_category, id_gender, id_brands, id_items) 
+    VALUES 
+    (:color, :matter, :shape, :image_path, :image_name, :id_category, :id_gender, :id_brands, :id_items)
+");
+            $stmt->bindParam(':color', $color, PDO::PARAM_STR);
+            $stmt->bindParam(':matter', $matter, PDO::PARAM_STR);
+            $stmt->bindParam(':shape', $shape, PDO::PARAM_STR);
+            $stmt->bindParam(':image_path', $image_path, PDO::PARAM_STR);
+            $stmt->bindParam(':image_name', $image_name, PDO::PARAM_STR);
+            $stmt->bindParam(':id_category', $id_category, PDO::PARAM_INT);
+            $stmt->bindParam(':id_gender', $id_gender, PDO::PARAM_INT);
+            $stmt->bindParam(':id_brands', $id_brands, PDO::PARAM_INT);
+            $stmt->bindParam(':id_items', $id_items, PDO::PARAM_INT);
+            $stmt->execute();
+            echo "Données GLASSES insérées avec succès";
+      } catch (PDOException $e) {
+            // $_SESSION['error'] = "⚠️ Erreur insertion glasses SQL : " . $e->getMessage();
+            echo "⚠️ Erreur insertion glasses SQL : " . $e->getMessage();
+            return false;
+      }
+}
+
+function insertGlasseData()
+{
+
+      $pdo = getConnexion();
+      try {
+            $stmt = $pdo->prepare("SELECT * 
+FROM `kghdsi_glasses`
+INNER JOIN `kghdsi_items` ON kghdsi_glasses.id_glasses = kghdsi_items.id_items
+LEFT JOIN `kghdsi_brands` ON kghdsi_brands.id_brands = kghdsi_glasses.id_brands
+INNER JOIN `kghdsi_category` ON kghdsi_category.id_category = kghdsi_glasses.id_category
+INNER JOIN `kghdsi_gender` ON kghdsi_gender.id_gender = kghdsi_glasses.id_gender");
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
+      } catch (PDOException $e) {
+            // $_SESSION['error'] = "���️ Erreur insertion image SQL : " . $e->getMessage();
+            echo "���️ Erreur insertion image SQL : " . $e->getMessage();
+            return false;
+      }
+}
+
+
+// Recherche par marque
+function searchByBrand($brand)
+{
+
+      $pdo = getConnexion();
+      try {
+            $sql = "SELECT * FROM `kghdsi_glasses`
+                            INNER JOIN `kghdsi_items` ON kghdsi_glasses.id_glasses = kghdsi_items.id_items
+                            LEFT JOIN `kghdsi_brands` ON kghdsi_brands.id_brands = kghdsi_glasses.id_brands
+                            INNER JOIN `kghdsi_category` ON kghdsi_category.id_category = kghdsi_glasses.id_category
+                            INNER JOIN `kghdsi_gender` ON kghdsi_gender.id_gender = kghdsi_glasses.id_gender
+                            WHERE kghdsi_brands.brand LIKE :brand";
+
+            $stmt = $pdo->prepare($sql);
+            $brandSearch = "%" . $brand . "%";
+            $stmt->bindParam(':brand', $brandSearch, PDO::PARAM_STR);
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $results;
+      } catch (PDOException $e) {
+            echo "Erreur récupération des données SQL : " . $e->getMessage();
+            return false;
+      }
+}
+
+// Recherche par genre
+function searchByGender($gender)
+{
+
+      $pdo = getConnexion();
+      try {
+            $sql = "SELECT * FROM `kghdsi_glasses`
+                            INNER JOIN `kghdsi_items` ON kghdsi_glasses.id_glasses = kghdsi_items.id_items
+                            LEFT JOIN `kghdsi_brands` ON kghdsi_brands.id_brands = kghdsi_glasses.id_brands
+                            INNER JOIN `kghdsi_category` ON kghdsi_category.id_category = kghdsi_glasses.id_category
+                            INNER JOIN `kghdsi_gender` ON kghdsi_gender.id_gender = kghdsi_glasses.id_gender
+                            WHERE kghdsi_gender.gender LIKE :gender";
+
+            $stmt = $pdo->prepare($sql);
+            $genderSearch = "%" . $gender . "%";
+            $stmt->bindParam(':gender', $genderSearch, PDO::PARAM_STR);
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $results;
+      } catch (PDOException $e) {
+            echo "Erreur récupération des données SQL : " . $e->getMessage();
+            return false;
+      }
+}
+
+// Recherche par couleur
+function searchByColor($color)
+{
+
+      $pdo = getConnexion();
+      try {
+            $sql = "SELECT * FROM `kghdsi_glasses`
+                            INNER JOIN `kghdsi_items` ON kghdsi_glasses.id_glasses = kghdsi_items.id_items
+                            LEFT JOIN `kghdsi_brands` ON kghdsi_brands.id_brands = kghdsi_glasses.id_brands
+                            INNER JOIN `kghdsi_category` ON kghdsi_category.id_category = kghdsi_glasses.id_category
+                            INNER JOIN `kghdsi_gender` ON kghdsi_gender.id_gender = kghdsi_glasses.id_gender
+                            WHERE kghdsi_glasses.color LIKE :color";
+
+
+            $stmt = $pdo->prepare($sql);
+            // Ajouter les caractères % autour de la couleur pour le LIKE
+            $colorSearch = "%" . $color . "%";
+
+            // Lier le paramètre :color à la valeur
+            $stmt->bindParam(':color', $colorSearch, PDO::PARAM_STR);
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
+      } catch (PDOException $e) {
+            echo "Erreur récupération des données SQL : " . $e->getMessage();
+            return false;
+      }
+}
+
+// Recherche par matière
+function searchByMatter($matter)
+{
+
+      $pdo = getConnexion();
+      try {
+            $sql = "SELECT * FROM `kghdsi_glasses`
+                            INNER JOIN `kghdsi_items` ON kghdsi_glasses.id_glasses = kghdsi_items.id_items
+                            LEFT JOIN `kghdsi_brands` ON kghdsi_brands.id_brands = kghdsi_glasses.id_brands
+                            INNER JOIN `kghdsi_category` ON kghdsi_category.id_category = kghdsi_glasses.id_category
+                            INNER JOIN `kghdsi_gender` ON kghdsi_gender.id_gender = kghdsi_glasses.id_gender
+                            WHERE kghdsi_glasses.matter LIKE :matter";
+
+            $stmt = $pdo->prepare($sql);
+            // Ajouter les caractères % autour de la couleur pour le LIKE
+            $matterSearch = "%" . $matter . "%";
+
+            // Lier le paramètre :color à la valeur
+            $stmt->bindParam(':matter', $matterSearch, PDO::PARAM_STR);
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
+      } catch (PDOException $e) {
+            echo "Erreur récupération des données SQL : " . $e->getMessage();
+            return false;
+      }
+}
+
+// Recherche par forme
+function searchByShape($shape)
+{
+
+      $pdo = getConnexion();
+      try {
+            $sql = "SELECT * FROM `kghdsi_glasses`
+                            INNER JOIN `kghdsi_items` ON kghdsi_glasses.id_glasses = kghdsi_items.id_items
+                            LEFT JOIN `kghdsi_brands` ON kghdsi_brands.id_brands = kghdsi_glasses.id_brands
+                            INNER JOIN `kghdsi_category` ON kghdsi_category.id_category = kghdsi_glasses.id_category
+                            INNER JOIN `kghdsi_gender` ON kghdsi_gender.id_gender = kghdsi_glasses.id_gender
+                            WHERE kghdsi_glasses.shape LIKE :shape";
+
+            $stmt = $pdo->prepare($sql);
+            $shapeSearch = "%" . $shape . "%";
+            $stmt->bindParam(':shape', $shapeSearch, PDO::PARAM_STR);
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $results;
+      } catch (PDOException $e) {
+            echo "Erreur récupération des données SQL : " . $e->getMessage();
             return false;
       }
 }

@@ -9,37 +9,37 @@
 // nettoyage (sécurisation des données) mot de passe  
 // --------------------------------------------------------
 
-$error = [];
+
 
 function cleanPassword($password)
 {
       // Vérifie si le mot de passe respecte les critères de sécurité
+      $error = [];
+
       if (strlen($password) < 8) {
-            $error['$password'] = "Erreur : Le mot de passe doit contenir au moins 8 caractères.";
+            $error[] = "Le mot de passe doit contenir au moins 8 caractères.";
       }
-
       if (!preg_match('/[A-Z]/', $password)) {
-            $error['$password'] = "Erreur : Le mot de passe doit contenir au moins une lettre majuscule.";
+            $error[] = "Le mot de passe doit contenir au moins une majuscule.";
       }
-
       if (!preg_match('/[a-z]/', $password)) {
-            $error['$password'] = "Erreur : Le mot de passe doit contenir au moins une lettre minuscule.";
+            $error[] = "Le mot de passe doit contenir au moins une minuscule.";
       }
-
       if (!preg_match('/[0-9]/', $password)) {
-            $error['$password'] = "Erreur : Le mot de passe doit contenir au moins un chiffre.";
+            $error[] = "Le mot de passe doit contenir au moins un chiffre.";
+      }
+      if (!preg_match('/[\W]/', $password)) { // \W pour caractère spécial
+            $error[] = "Le mot de passe doit contenir au moins un caractère spécial.";
       }
 
-      if (!preg_match('/[\W]/', $password)) {
-            $error['$password'] = "Erreur : Le mot de passe doit contenir au moins un caractère spécial.";
-      }
-      if (strlen($password) >= 8 && preg_match('/[A-Z]/', $password) && preg_match('/[a-z]/', $password) && preg_match('/[0-9]/', $password) && preg_match('/[\W]/', $password)) {
-            // Si le mot de passe est valide ==> le crypter pour l'intégrer à la base de données
-            return   password_hash($password, PASSWORD_DEFAULT); // Bcrypt par défaut
+      // Si le mot de passe respecte les règles
+      if (empty($errors)) {
+            return ['success' => true, 'password' => password_hash($password, PASSWORD_DEFAULT)]; // Hasher le mot de passe
       } else {
-            $error['password'] = "mdp (min 8 caractères : 1 maj : 1min : 1 chiffre : 1 caractère special)";
+            return ['success' => false, 'errors' => $errors];
       }
 }
+
 
 // --------------------------------------------------------
 // nettoyage (sécurisation des données) email
@@ -117,11 +117,6 @@ if (!empty($_POST['passwordCustomer'])) {
 
       if (!preg_match('/[\W]/', $_POST['passwordCustomer'])) {
             $error['passwordCustomer'] = "Erreur : Le mot de passe doit contenir au moins un caractère spécial.";
-      }
-      if (strlen($_POST['passwordCustomer']) >= 8 && preg_match('/[A-Z]/', $_POST['passwordCustomer']) && preg_match('/[a-z]/', $_POST['passwordCustomer']) && preg_match('/[0-9]/', $_POST['passwordCustomer']) && preg_match('/[\W]/', $_POST['passwordCustomer'])) {
-            // Si le mot de passe est valide ==> le crypter pour l'intégrer à la base de données
-            // $motDePasseSecurise = password_hash($_POST['passwordCustomer'], PASSWORD_DEFAULT); // Bcrypt par défaut
-
       }
 } else {
       $error['passwordCustomer'] = "mdp (min 8 caractères : 1 maj : 1min : 1 chiffre : 1 caractère special)";
