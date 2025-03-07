@@ -44,7 +44,7 @@ function getConnexion()
 }
 
 /////////////////////////////////////////////////////////////////
-///////////// fonctions utilisateurs ///////////////////////////
+///////////// FONCTIONS UTILISATEUR ///////////////////////////
 ///////////////////////////////////////////////////////////////
 
 // Récupérer tous les utilisateurs (id et nom uniquement)
@@ -315,46 +315,44 @@ function verification($mail, $password)
       }
 }
 
+// function checkPassword($mail, $password)
+// {
+//       $pdo = getConnexion();
 
-// avec $id=$_SESSION['user_id'] 
-function checkPassword($mail, $password)
-{
-      $pdo = getConnexion();
+//       $sql = "SELECT password 
+//             FROM kghdsi_users
+//             WHERE mail = :mail";
 
-      $sql = "SELECT password 
-            FROM kghdsi_users
-            WHERE mail = :mail";
+//       try {
+//             // Préparer la requête
+//             $stmt = $pdo->prepare($sql);
+//             $stmt->bindParam(':mail', $mail, PDO::PARAM_INT);
+//             $stmt->execute();
 
-      try {
-            // Préparer la requête
-            $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':mail', $mail, PDO::PARAM_INT);
-            $stmt->execute();
+//             // Récupérer le mot de passe stocké
+//             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // Récupérer le mot de passe stocké
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+//             // Vérifier si l'utilisateur existe
+//             if (!$user) {
+//                   echo "Utilisateur non trouvé.";
+//                   return false; // Retourne false si l'utilisateur n'existe pas
+//             }
 
-            // Vérifier si l'utilisateur existe
-            if (!$user) {
-                  echo "Utilisateur non trouvé.";
-                  return false; // Retourne false si l'utilisateur n'existe pas
-            }
+//             $hashedPassword = $user['password'];
 
-            $hashedPassword = $user['password'];
-
-            // Vérification du mot de passe
-            if (password_verify($password, $hashedPassword)) {
-                  return true; // ✅ Mot de passe correct
-            } else {
-                  echo "Mot de passe incorrect.";
-                  return false; // Retourne false si le mot de passe est incorrect
-            }
-      } catch (PDOException $e) {
-            // Gestion des erreurs en cas d'échec de la requête
-            echo "Erreur lors de la vérification : " . $e->getMessage();
-            return false;
-      }
-}
+//             // Vérification du mot de passe
+//             if (password_verify($password, $hashedPassword)) {
+//                   return true; // ✅ Mot de passe correct
+//             } else {
+//                   echo "Mot de passe incorrect.";
+//                   return false; // Retourne false si le mot de passe est incorrect
+//             }
+//       } catch (PDOException $e) {
+//             // Gestion des erreurs en cas d'échec de la requête
+//             echo "Erreur lors de la vérification : " . $e->getMessage();
+//             return false;
+//       }
+// }
 
 function checkMail($mail)
 {
@@ -475,10 +473,10 @@ function addGlasses($color, $matter, $shape, $image_path, $image_name, $id_categ
       try {
 
             $stmt = $pdo->prepare("
-    INSERT INTO kghdsi_glasses 
-    (color, matter, shape, image_path, image_name, id_category, id_gender, id_brands, id_items) 
-    VALUES 
-    (:color, :matter, :shape, :image_path, :image_name, :id_category, :id_gender, :id_brands, :id_items)
+                        INSERT INTO kghdsi_glasses 
+                        (color, matter, shape, image_path, image_name, id_category, id_gender, id_brands, id_items) 
+                        VALUES 
+                        (:color, :matter, :shape, :image_path, :image_name, :id_category, :id_gender, :id_brands, :id_items)
 ");
             $stmt->bindParam(':color', $color, PDO::PARAM_STR);
             $stmt->bindParam(':matter', $matter, PDO::PARAM_STR);
@@ -504,11 +502,11 @@ function insertGlasseData()
       $pdo = getConnexion();
       try {
             $stmt = $pdo->prepare("SELECT * 
-FROM `kghdsi_glasses`
-INNER JOIN `kghdsi_items` ON kghdsi_glasses.id_glasses = kghdsi_items.id_items
-LEFT JOIN `kghdsi_brands` ON kghdsi_brands.id_brands = kghdsi_glasses.id_brands
-INNER JOIN `kghdsi_category` ON kghdsi_category.id_category = kghdsi_glasses.id_category
-INNER JOIN `kghdsi_gender` ON kghdsi_gender.id_gender = kghdsi_glasses.id_gender");
+                              FROM `kghdsi_glasses`
+                              INNER JOIN `kghdsi_items` ON kghdsi_glasses.id_glasses = kghdsi_items.id_items
+                              LEFT JOIN `kghdsi_brands` ON kghdsi_brands.id_brands = kghdsi_glasses.id_brands
+                              INNER JOIN `kghdsi_category` ON kghdsi_category.id_category = kghdsi_glasses.id_category
+                              INNER JOIN `kghdsi_gender` ON kghdsi_gender.id_gender = kghdsi_glasses.id_gender");
             $stmt->execute();
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $results;
@@ -654,3 +652,8 @@ function searchByShape($shape)
             return false;
       }
 }
+
+
+/////////////////////////////////////////////////////////////
+//////////////// fonctions ADMIN ///////////////////////////
+///////////////////////////////////////////////////////////

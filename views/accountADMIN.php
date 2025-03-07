@@ -18,65 +18,87 @@
 <body>
     <?php include __DIR__ . '/../templates/header.php' ?>
     <main>
-
-        <div class="containerIdentity">
-            <h3>Bonjour Mr le directeur : <?= $_SESSION['userInfos']['firstname'] ?></h3>
-            <div class="identity">
-                <div class="nameAccount">
-                    <div class="divName">
-                        <label for="accountLastname" id="labelLastname">Nom</label>
-                        <div class="accountIdentity">
-                            <input type="text" id="accountLastname" value="<?= $_SESSION['userInfos']['lastname'] ?>" readonly>
+        <section>
+            <div class="containerIdentity">
+                <h3>Bonjour Mr le directeur : <?= $_SESSION['userInfos']['firstname'] ?></h3>
+                <div class="identity">
+                    <div class="nameAccount">
+                        <div class="divName">
+                            <label for="accountLastname" id="labelLastname">Nom</label>
+                            <div class="accountIdentity">
+                                <input type="text" id="accountLastname" value="<?= $_SESSION['userInfos']['lastname'] ?>" readonly>
+                            </div>
+                        </div>
+                        <div class="divName">
+                            <label for="accountFirstname" id="labelFirstname">Prénom</label>
+                            <div class="accountIdentity">
+                                <input type="text" id="accountFirstname" value="<?= htmlspecialchars($_SESSION['userInfos']['firstname'], ENT_QUOTES) ?>" readonly>
+                            </div>
                         </div>
                     </div>
-                    <div class="divName">
-                        <label for="accountFirstname" id="labelFirstname">Prénom</label>
-                        <div class="accountIdentity">
-                            <input type="text" id="accountFirstname" value="<?= htmlspecialchars($_SESSION['userInfos']['firstname'], ENT_QUOTES) ?>" readonly>
-                        </div>
+
+                    <label for="accountAdress">Adresse</label>
+                    <div class="accountIdentity">
+                        <input type="text" id="accountAdress" value="<?= htmlspecialchars($_SESSION['userInfos']['address'], ENT_QUOTES) ?>" readonly>
+                    </div>
+
+                    <label for="accountEmail">Mail</label>
+                    <div class="accountIdentity">
+                        <input type="email" id="accountEmail" value="<?= htmlspecialchars($_SESSION['userInfos']['mail'], ENT_QUOTES) ?>" readonly>
+                    </div>
+
+                    <label for="accountTel">Numéro de téléphone</label>
+                    <div class="accountIdentity">
+                        <input type="tel" id="accountTel" value="<?= htmlspecialchars($_SESSION['userInfos']['phone'], ENT_QUOTES) ?>" readonly>
                     </div>
                 </div>
+                <div class="modification">
+                    <form method="POST">
+                        <label for="modify"></label>
+                        <input type="submit" id="modify" name="modify" value="Modifier vos coordonnées" class='modification_user' />
+                    </form>
 
-                <label for="accountAdress">Adresse</label>
-                <div class="accountIdentity">
-                    <input type="text" id="accountAdress" value="<?= htmlspecialchars($_SESSION['userInfos']['address'], ENT_QUOTES) ?>" readonly>
-                </div>
+                    <form method='POST'>
+                        <label for='deconnexion'></label>
+                        <input type='submit' id='deconnexion' name='deconnexion' value='Se deconnecter' class='modification_user' />
+                    </form>
 
-                <label for="accountEmail">Mail</label>
-                <div class="accountIdentity">
-                    <input type="email" id="accountEmail" value="<?= htmlspecialchars($_SESSION['userInfos']['mail'], ENT_QUOTES) ?>" readonly>
-                </div>
-
-                <label for="accountTel">Numéro de téléphone</label>
-                <div class="accountIdentity">
-                    <input type="tel" id="accountTel" value="<?= htmlspecialchars($_SESSION['userInfos']['phone'], ENT_QUOTES) ?>" readonly>
+                    <form method='POST'>
+                        <label for='supprimer'></label>
+                        <input type='submit' id='supprimer' name='supprimer' value='Supprimer mon compte' class='modification_user' />
+                    </form>
                 </div>
             </div>
-            <div class="modification">
-                <form method="POST">
-                    <label for="modify"></label>
-                    <input type="submit" id="modify" name="modify" value="Modifier vos coordonnées" class='modification_user' />
-                </form>
+
+            <div class="BDD">
 
                 <form method='POST'>
-                    <label for='deconnexion'></label>
-                    <input type='submit' id='deconnexion' name='deconnexion' value='Se deconnecter' class='modification_user' />
+                    <label for='add'></label>
+                    <button type='submit' id='add' name='add' class='modification_user'>Ajouter un produit</button>
+                </form>
+                <form method='POST'>
+                    <label for='delette'></label>
+                    <button type='submit' id='delette' name='delette' class='modification_user'>Supprimer un produit</button>
+                </form>
+                <form method='POST'>
+                    <label for='agenda'></label>
+                    <button type='submit' id='agenda' name='agenda' class='modification_user'>Modifier l'agenda</button>
+                </form>
+                <form method='POST'>
+                    <label for='hourly'></label>
+                    <button type='submit' id='hourly' name='hourly' class='modification_user'>Modifier les horaires d'ouverture</button>
                 </form>
 
-                <form method='POST'>
-                    <label for='supprimer'></label>
-                    <input type='submit' id='supprimer' name='supprimer' value='Supprimer mon compte' class='modification_user' />
-                </form>
             </div>
-        </div>
-        <button class="btnAdmin">Gestion des stocks</button>
-        <button class="btnAdmin">Gestion de l'agenda</button>
-        <button class="btnAdmin">Gestion des offres</button>
-        <button class="btnAdmin">Mailling client</button>
-        <button class="btnAdmin">Horaire d'ouverture</button>
-        <button class="btnAdmin software">Connexion avec votre logiciel</button>
-        <button class="btnAdmin">Me désinscrire</button>
-
+        </section>
+        <section>
+            <button class="btnAdmin">Gestion des stocks</button>
+            <button class="btnAdmin">Gestion de l'agenda</button>
+            <button class="btnAdmin">Gestion des offres</button>
+            <button class="btnAdmin">Mailling client</button>
+            <button class="btnAdmin">Horaire d'ouverture</button>
+            <button class="btnAdmin software">Connexion avec votre logiciel</button>
+        </section>
     </main>
 
     <script src="assets/JS/accountADMIN.js"></script>

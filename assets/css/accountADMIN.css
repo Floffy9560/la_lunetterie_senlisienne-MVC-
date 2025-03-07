@@ -11,6 +11,10 @@ main {
 /*--------------------------------------------------*/
 /*---------------------identity --------------------*/
 /*--------------------------------------------------*/
+section {
+  display: flex;
+  justify-content: space-around;
+}
 h2 {
   text-align: left;
   width: 45px;
@@ -22,7 +26,8 @@ h2 {
   margin: auto;
   width: 100%;
   max-width: 700px;
-  color: rgb(5, 220, 69);
+  background-color: rgba(48, 108, 96, 1);
+  padding: 15px;
 }
 
 .identity {
@@ -34,7 +39,6 @@ h2 {
   padding: 1rem;
   border: 1px solid;
   border-radius: 8px;
-  background-color: rgba(48, 108, 96, 1);
 }
 
 label {
@@ -72,6 +76,40 @@ textarea {
 }
 
 /*--------------------------------------------------*/
+/*------------------------BDD ----------------------*/
+/*--------------------------------------------------*/
+
+.BDD {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  gap: 10px;
+  box-shadow: 0 0 15px;
+  background: url("/assets/img/wood.jpg");
+  background-size: cover;
+  border: 10px groove #8b5a2b;
+
+  border: 10px inset #8b5a2b;
+
+  border: 10px outset #8b5a2b;
+
+  border: 10px ridge #8b5a2b;
+}
+
+.modification_user {
+  text-align: center;
+  background-color: #c89f36;
+  border: none;
+  width: 100%;
+  height: 35px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/*--------------------------------------------------*/
 /*---------------------button --------------------*/
 /*--------------------------------------------------*/
 .btnAdmin {
@@ -86,4 +124,13 @@ textarea {
 .software {
   border: 2px dashed;
   background-color: gray;
+}
+.modification {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  width: 50%;
+  min-width: 320px;
+  margin: auto;
 }
