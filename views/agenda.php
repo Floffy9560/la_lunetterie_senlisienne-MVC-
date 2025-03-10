@@ -101,6 +101,8 @@
                   echo (!empty($_GET['date'])) ?  $_GET['date'] : $today; ?></p>
          </div>
          <div class="hourOfDate">
+            <p>Horaire disponnibles</p>
+            <hr>
             <form method="GET" action="" class="hourOfDateForm">
                <?php
                // Récupérer les date déjà réservées
@@ -110,21 +112,34 @@
                if (!empty($horairesRestants)) {
                   foreach ($horairesRestants as $horaire) {
 
+                     $formattedHoraire = (new DateTime($horaire))->format('H:i');
+
                      // Afficher le champ de texte avec les horaires disponnibles
-                     echo "<input type='text' name='appointmentTime' value='$horaire' class='horaireDispo' readonly><br>";
+                     // echo "<input type='text' name='appointmentTime' value='$horaire' class='horaireDispo' readonly><br>";
+                     echo "<label class='custom-checkbox'>
+                           <input type='radio' name='horaire' value='" . htmlspecialchars($horaire, ENT_QUOTES) . "'>
+                           <span>$formattedHoraire</span> 
+                           </label>";
                   }
                } else {
                   echo "Aucun horaire disponible ce jour";
                }
                ?>
                <input type="hidden" name="appointmentDate" value="<?php echo $dateChoisie ?>">
-               <button type="submit" class="rdv">Prendre rendez-vous</button>
+               <hr>
+               <?php if (!empty($_SESSION['userInfos'])) {
+                  echo '<button type="submit" class="rdv">Prendre rendez-vous</button>';
+               } else {
+                  echo '<button type="submit" class="rdv" style="background-color:black ;color:red ; padding:15px" disabled>Veuillez vous inscrire pour prendre rendez-vous</button>';
+               }
+               ?>
+
             </form>
 
          </div>
    </section>
 
-   <!-- <?php echo $appointmentHour = date('h'); ?> -->
+
 
    <?php include __DIR__ . '/../templates/footer.php' ?>
    <script src="/assets/JS/agenda.js"></script>

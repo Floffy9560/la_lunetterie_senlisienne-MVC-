@@ -3,6 +3,19 @@ h2 {
   text-align: center;
   margin: 40px auto;
 }
+
+.gallery-videos-tutos,
+.gallery-videos-brands {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+iframe {
+  max-width: 100%;
+  width: auto;
+  height: 100%;
+}
 /*.gallery-photos {
   width: 100%;
   display: flex;

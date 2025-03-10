@@ -9,7 +9,7 @@ main {
 
 section {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   gap: 1rem;
   flex-wrap: wrap;
   width: 100%;
@@ -81,6 +81,47 @@ textarea {
   gap: 10px;
   width: 100%;
 }
+
+/*--------------------------------------------------*/
+/*------------------------ RDV ---------------------*/
+/*--------------------------------------------------*/
+
+p {
+  font-size: clamp(18px, 3vw, 25px);
+}
+.containerRdv {
+  color: gainsboro;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 0 0 15px;
+  background: url("/assets/img/wood.jpg");
+
+  background-size: cover;
+  border: 15px groove #8b5a2b;
+
+  border: 15px inset #8b5a2b;
+
+  border: 15px outset #8b5a2b;
+
+  border: 15px ridge #8b5a2b;
+}
+.rdv {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+button {
+  background-color: transparent;
+  border: none;
+}
+.bi-trash3 {
+  color: whitesmoke;
+  font-size: 21px;
+}
+
 /*------------------------------------------------------*/
 /*----------------------- crush ------------------------*/
 /*------------------------------------------------------*/
@@ -94,7 +135,6 @@ h2 {
   font-size: 30px;
   text-align: center;
   text-decoration: underline;
-
   padding: 5px;
 }
 .crush {
@@ -104,6 +144,7 @@ h2 {
   width: 90%;
   max-width: 700px;
   min-width: 300px;
+  margin: auto;
 }
 .framsChoice {
   display: flex;

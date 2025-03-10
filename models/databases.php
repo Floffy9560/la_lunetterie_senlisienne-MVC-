@@ -44,7 +44,7 @@ function getConnexion()
 }
 
 /////////////////////////////////////////////////////////////////
-///////////// FONCTIONS UTILISATEUR ///////////////////////////
+///////////// FONCTIONS UTILISATEUR /////////////////////////0///
 ///////////////////////////////////////////////////////////////
 
 // Récupérer tous les utilisateurs (id et nom uniquement)
@@ -237,7 +237,7 @@ function deleteUser($idUser)
 {
       $pdo = getConnexion();
 
-      // 1️ Récupérer id_user_infos et id_role liés à cet utilisateur
+      // Récupérer id_user_infos et id_role liés à cet utilisateur
       $sql = "SELECT id_user_infos, id_role FROM kghdsi_users WHERE id_users = :idUser";
       $stmt = $pdo->prepare($sql);
       $stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
@@ -255,13 +255,13 @@ function deleteUser($idUser)
       try {
             $pdo->beginTransaction(); // 🔹 Commencer une transaction pour éviter les erreurs partielles
 
-            // 2️ Supprimer l'utilisateur de `kghdsi_users`
+            //  Supprimer l'utilisateur de `kghdsi_users`
             $sql = "DELETE FROM kghdsi_users WHERE id_users = :idUser";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
             $stmt->execute();
 
-            // 3️ Supprimer les informations utilisateur de `kghdsi_user_infos`
+            // Supprimer les informations utilisateur de `kghdsi_user_infos`
             $sql = "DELETE FROM kghdsi_user_infos WHERE id_user_infos = :idUserInfos";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':idUserInfos', $idUserInfos, PDO::PARAM_INT);
@@ -436,16 +436,10 @@ function changePassword($id, $hashedPassword)
 //       echo "Error: " . $e->getMessage();
 // }
 
-function identity($session)
-{
-      if (!empty($_SESSION($session))) {
-            echo htmlspecialchars($_SESSION['user_lastname'], ENT_QUOTES);
-      }
-}
 
 
 /////////////////////////////////////////////////////////////
-///////////// fonctions lunettes ///////////////////////////
+///////////// FONCTIONS LUNETTES ///////////////////////////
 ///////////////////////////////////////////////////////////
 
 function addItems($name, $price, $stock)
@@ -653,7 +647,49 @@ function searchByShape($shape)
       }
 }
 
+///////////////////////////////////////////////////////////////
+//////////////// FONCTIONS ACCOUNT ///////////////////////////
+/////////////////////////////////////////////////////////////
+
+function displayRdv($id)
+{
+
+      $pdo = getConnexion();
+      try {
+            $sql = "SELECT * FROM `kghdsi_appointments` WHERE id_users = :id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
+      } catch (PDOException $e) {
+            echo "Erreur récupération des données SQL : " . $e->getMessage();
+            return false;
+      }
+}
+
+function deleteAppointment($appointmentDateStr, $appointmentTime)
+{
+      $pdo = getConnexion();
+      $sql = "DELETE FROM kghdsi_appointments WHERE appointmentDate = :appointmentDate AND appointmentTime = :appointmentTime";
+      try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':appointmentDate', $appointmentDateStr, PDO::PARAM_STR);
+            $stmt->bindParam(':appointmentTime', $appointmentTime, PDO::PARAM_STR);
+            $stmt->execute();
+            return true;
+      } catch (PDOException $e) {
+            $_SESSION['error'] = "Erreur lors de la suppression du rendez-vous : " . $e->getMessage();
+            return false;
+      }
+}
+
+
+//////////////////////////////////////////////////////////////
+//////////////// FONCTIONS AGENDA ///////////////////////////
+////////////////////////////////////////////////////////////
+
 
 /////////////////////////////////////////////////////////////
-//////////////// fonctions ADMIN ///////////////////////////
+//////////////// FONCTIONS ADMIN ///////////////////////////
 ///////////////////////////////////////////////////////////
