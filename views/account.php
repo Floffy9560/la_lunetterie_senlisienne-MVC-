@@ -69,16 +69,55 @@
                         <label for='supprimer'></label>
                         <input type='submit' id='supprimer' name='supprimer' value='Supprimer mon compte' class='modification_user' />
                     </form>
+                    <!-- <form method='POST'>
+                        <label for='deleteRdv'></label>
+                        <input type='submit' id='deleteRdv' name='deleteRdv' value='Supprimer mon/mes rendez-vous' class='modification_user' />
+                    </form> -->
                 </div>
             </div>
-            <div class="crush">
-                <h3>Coup de coeur</h3>
+            <div class="containerRdv">
+                <h2>Vos rendez-vous</h2>
+                <?php
 
-                <div class="framsChoice" id="framsChoice">
+                $id = $_SESSION['userInfos']['id_users'];
+                $rdvs = displayRdv($id);
+                if (!empty($rdvs)) {
+                    foreach ($rdvs as $rdv) {
 
-                </div>
+                        // Créer un formatage pour l'affichage avec le mois en FR
+                        $appointmentDate = new DateTime($rdv['appointmentDate']);
+                        $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+                        $formattedDate = $formatter->format($appointmentDate);
+                        // Créer un formatage pour l'affichage de l'heure avec le format HH:MM
+                        $formattedHoraire = (new DateTime($rdv['appointmentTime']))->format('H:i');
+                        echo "<div class='rdv'>
+                            <p>Vous avez rendez-vous le  : " . $formattedDate . " à : " . $formattedHoraire . "h</p>
+                            <form action='' method='GET'>
+                                <label for='rdv'></label>
+                                    <input type='hidden' id='rdv' name='dateRDV' value='" . $rdv['appointmentDate'] . "'>
+                                    <input type='hidden' id='rdv' name='timeRDV' value='" . $rdv['appointmentTime'] . "'>
+                                 <button type='submit'><i class='bi bi-trash3'></i></button>
+                                
+                            </form>
+                        </div>";
+                    }
+                } else echo "<p> Pas de rendez-vous </p>";
+                if (!empty($_SESSION['error'])) {
+                    echo $_SESSION['error'];
+                }
+                ?>
+
+
             </div>
         </section>
+
+        <div class="crush">
+            <h3>Coup de coeur</h3>
+
+            <div class="framsChoice" id="framsChoice">
+
+            </div>
+        </div>
 
         <h2>Vos commandes :</h2>
 

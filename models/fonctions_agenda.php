@@ -20,12 +20,12 @@ $today = date('Y-m-d');
 // Exemple de réservation pour le 7 mars 2025 à 15:00
 // 1. Définir les horaires disponibles
 $horairesDisponibles = [
-      '10:00',
-      '11:00',
-      '12:00',
-      '15:00',
-      '16:00',
-      '17:00'
+      '10:00:00',
+      '11:00:00',
+      '12:00:00',
+      '15:00:00',
+      '16:00:00',
+      '17:00:00'
 ];
 
 function getAppointmentDate()
@@ -59,7 +59,41 @@ function createAppointment($appointmentDate, $appointmentTime, $id_users)
             $stmt->execute();
             return true;
       } catch (PDOException $e) {
-            echo " ✖️ Erreur lors de la création du rendez-vous : " . $e->getMessage();
+
+            return false;
+      }
+}
+if (!empty($_GET["horaire"]) && !empty($_GET["appointmentDate"])) {
+      $appointmentDate = $_GET["appointmentDate"];
+      $appointmentTime = $_GET["horaire"];
+      $id_users = $_SESSION['userInfos']['id_users'];
+      if (createAppointment($appointmentDate, $appointmentTime, $id_users) == false) {
+            echo "<div class='overlay'></div>
+                  <div class='error'><p>Erreur lors de la création du rendez-vous</p>
+                  <a href='agenda'>Retour sur la page prise de rendez-vous</a>
+                  </div>";
+      } else {
+            echo "<div class='overlay'></div>
+                  <div class='succes'>Votre RDV est bien enregister pour le " . $appointmentDate . ' à ' . $appointmentTime . " 
+                  <a href='/'>Retour à l'acceuil</a></div>";
+      }
+}
+
+
+function displayAppointment($id_users)
+{
+
+      $pdo = getConnexion();
+      $sql = "SELECT appointmentDate, appointmentTime FROM kghdsi_appointments WHERE id_users = :id_users ORDER BY appointmentDate ASC, appointmentTime ASC";
+
+      try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':id_users', $id_users, PDO::PARAM_INT);
+            $stmt->execute();
+            $appointments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $appointments;
+      } catch (PDOException $e) {
+            echo "Erreur lors de la récupération des rendez-vous : " . $e->getMessage();
             return false;
       }
 }

@@ -60,6 +60,7 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
 }
 
 
+
 // Envoi de mail afin de changer le mdp( dans notre cas redirection vers la page pour changer le mdp)
 if (!empty($_POST['passwordLost'])) {
       header('location:reset_password');
@@ -79,4 +80,17 @@ if (!empty($_POST['supprimer'])) {
       session_unset();
       session_destroy();
       header('location: /');
+}
+
+//////////////////////////////////////////////////////////////////
+/////////////    SUPPRIMER UN RRENDEZ VOUS    ///////////////////
+////////////////////////////////////////////////////////////////
+
+
+if (!empty($_GET['dateRDV']) && !empty($_GET['timeRDV'])) {
+
+      $appointmentDateStr = isset($rdv['appointmentDate']) ? $rdv['appointmentDate'] : '';
+      $appointmentTime = isset($rdv['appointmentTime']) ? $rdv['appointmentTime'] : '';
+
+      deleteAppointment($appointmentDateStr, $appointmentTime);
 }

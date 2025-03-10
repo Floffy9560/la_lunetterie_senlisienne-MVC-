@@ -3,8 +3,6 @@
 // Démarrage de la session
 session_start();
 
-// var_dump(session_id()); // Vérifie si l'ID de session existe
-// var_dump($_COOKIE); // Vérifie si PHPSESSID est bien stocké
 
 // Test pour savoir comment récupérer les infos sur la session et comment elle fonctionne  !! A RETIRERE A LA FIN !!
 if (isset($_SESSION['userInfos'])) {
@@ -15,6 +13,7 @@ if (isset($_SESSION['userInfos'])) {
 	echo "Aucune session active.";
 }
 
+// Activation des erreurs et affiche des messages d'erreur
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
