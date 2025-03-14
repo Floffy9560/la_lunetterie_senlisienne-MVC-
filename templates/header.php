@@ -1,3 +1,23 @@
+<?php
+// Fonction pour rechercher un mot clef sur le site 
+function searchInPHPFiles($dir, $search)
+{
+   $results = [];
+
+   // Récupère tous les fichiers PHP dans le dossier "views"
+   $files = glob($dir . "/*.php");
+
+   foreach ($files as $file) {
+      // Lit le contenu du fichier
+      $content = file_get_contents($file);
+      // Recherche insensible à la casse
+      if (stripos($content, $search) !== false) {
+         $results[] = $file;
+      }
+   }
+   return $results;
+}
+?>
 <header>
    <div class="smartphone-header">
       <div class="header-container">
@@ -8,10 +28,32 @@
             <i class="bi bi-list" id="bi-list"></i>
          </div>
          <div class="headerDiv">
-            <a href="cart"><i class="bi bi-basket3-fill" id="kart"></i></a>
+            <div class="logoCartBurger">
+               <a href="cart"><img
+                     src="/./assets/img/icons8-panier-40.png"
+                     alt="cart"
+                     id="cart"
+                     class="logoNavCart" /></a>
+               </a>
+               <div class="nbrArticleBurger"></div>
+            </div>
          </div>
       </div>
       <div class="burger-menu">
+         <form action="searchKeyWord" method="GET">
+            <input
+               type="search"
+               id="site-search"
+               name="search"
+               placeholder="rechercher...." />
+
+            <button class="searchButton" type="submit">
+               <img
+                  src="/./assets/img/icons8-loupe-40.png"
+                  alt="search_logo"
+                  class="searchLogo" />
+            </button>
+         </form>
          <a href="agenda">
             <p> rendez-vous</p>
          </a>
@@ -24,9 +66,6 @@
          <a href="gallerie">
             <p>Gallerie</p>
          </a>
-         <!--  <a href="#">
-        <p>Recherche</p>
-      </a> -->
          <a href="frams">
             <p>Lunettes</p>
          </a>
@@ -68,29 +107,32 @@
                         }
 
                         ?>
-                        <a href="cart"><img
-                              src="/./assets/img/icons8-panier-40.png"
-                              alt="cart"
-                              id="kart"
-                              class="logoNavCart" /></a>
-                        </a>
+                        <div class="logoCart">
+                           <a href="cart"><img
+                                 src="/./assets/img/icons8-panier-40.png"
+                                 alt="cart"
+                                 id="cart"
+                                 class="logoNavCart" /></a>
+                           </a>
+                           <div class="nbrArticle"></div>
+                        </div>
 
                      </div>
                      <div class="searchContainerBtn">
+                        <form action="searchKeyWord" method="GET">
+                           <input
+                              type="search"
+                              id="site-search"
+                              name="search"
+                              placeholder="rechercher...." />
 
-                        <input
-                           type="search"
-                           id="site-search"
-                           name="rechercher"
-                           placeholder="Rechercher...." />
-
-                        <button class="searchButton">
-                           <img
-                              src="/./assets/img/icons8-loupe-40.png"
-                              alt="search_logo"
-                              class="searchLogo" />
-                        </button>
-
+                           <button class="searchButton" type="submit">
+                              <img
+                                 src="/./assets/img/icons8-loupe-40.png"
+                                 alt="search_logo"
+                                 class="searchLogo" />
+                           </button>
+                        </form>
                      </div>
                   </div>
                </div>
@@ -106,5 +148,10 @@
          biList.classList.toggle("open");
          burgerMenu.classList.toggle("open");
       });
+      // Récupérer les cartes stockées dans localStorage
+      let storedCardsCartLength = JSON.parse(localStorage.getItem("cardsDataCart")) || [];
+      // Afficher le nombre d'articles dans le panier
+      document.querySelector(".nbrArticle").textContent = storedCardsCartLength.length;
+      document.querySelector(".nbrArticleBurger").textContent = storedCardsCartLength.length;
    </script>
 </header>

@@ -20,7 +20,7 @@
     <main>
         <section>
             <div class="containerIdentity">
-                <h3>Bonjour Mr le directeur : <?= $_SESSION['userInfos']['firstname'] ?></h3>
+                <h2>Bonjour Mr le directeur : <?= $_SESSION['userInfos']['firstname'] ?></h2>
                 <div class="identity">
                     <div class="nameAccount">
                         <div class="divName">
@@ -52,6 +52,7 @@
                         <input type="tel" id="accountTel" value="<?= htmlspecialchars($_SESSION['userInfos']['phone'], ENT_QUOTES) ?>" readonly>
                     </div>
                 </div>
+
                 <div class="modification">
                     <form method="POST">
                         <label for="modify"></label>
@@ -60,7 +61,7 @@
 
                     <form method='POST'>
                         <label for='deconnexion'></label>
-                        <input type='submit' id='deconnexion' name='deconnexion' value='Se deconnecter' class='modification_user' />
+                        <input type='submit' id='deconnexion' name='deconnexion' value='Se déconnecter' class='modification_user' />
                     </form>
 
                     <form method='POST'>
@@ -72,33 +73,21 @@
 
             <div class="BDD">
 
-                <form method='POST'>
+                <!-- <form method='POST'>
                     <label for='add'></label>
                     <button type='submit' id='add' name='add' class='modification_user'>Ajouter un produit</button>
-                </form>
-                <form method='POST'>
-                    <label for='delette'></label>
-                    <button type='submit' id='delette' name='delette' class='modification_user'>Supprimer un produit</button>
-                </form>
-                <form method='POST'>
-                    <label for='agenda'></label>
-                    <button type='submit' id='agenda' name='agenda' class='modification_user'>Modifier l'agenda</button>
-                </form>
-                <form method='POST'>
-                    <label for='hourly'></label>
-                    <button type='submit' id='hourly' name='hourly' class='modification_user'>Modifier les horaires d'ouverture</button>
-                </form>
+                </form> -->
+                <button class='modification_user'>Ajouter un produit</button>
+                <button class='modification_user'>Supprimer un produit</button>
+                <button class='modification_user'>Modifier l'agenda</button>
+                <button class='modification_user'>Modifier les horaires d'ouverture</button>
+                <button class='modification_user'>Gestion des offres</button>
+                <button class='modification_user'>Mailling client</button>
+                <button class='modification_user'>Horaire d'ouverture</button>
+                <button class='modification_user software'>Connexion avec votre logiciel</button>
 
             </div>
-        </section>
-        <section>
-            <button class="btnAdmin">Gestion des stocks</button>
-            <button class="btnAdmin">Gestion de l'agenda</button>
-            <button class="btnAdmin">Gestion des offres</button>
-            <button class="btnAdmin">Mailling client</button>
-            <button class="btnAdmin">Horaire d'ouverture</button>
-            <button class="btnAdmin software">Connexion avec votre logiciel</button>
-        </section>
+
     </main>
 
     <script src="assets/JS/accountADMIN.js"></script>

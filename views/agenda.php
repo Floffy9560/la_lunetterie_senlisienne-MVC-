@@ -22,7 +22,7 @@
    <section>
       <div class="calendarContainer">
          <div class="header">
-            <form action="" method="GET" id="btnPrev">
+            <form action="" method="GET">
                <input type="hidden" name="month" value="<?= $previousMonth ?>">
                <input type="hidden" name="year" value="<?= $previousYear ?>">
                <button type="submit" class="buttonHeader"><i class="bi bi-arrow-left-square-fill arrow"></i></button>
@@ -89,7 +89,7 @@
          </div>
 
          <div class="footer">
-            <button type="button" class="buttonFooter">Réinitialisé</button>
+            <button type="button" class="buttonFooter">Réinitialiser</button>
             <button type="button" class="buttonFooter">Ok</button>
          </div>
       </div>
@@ -101,7 +101,7 @@
                   echo (!empty($_GET['date'])) ?  $_GET['date'] : $today; ?></p>
          </div>
          <div class="hourOfDate">
-            <p>Horaire disponnibles</p>
+            <p>Horaires disponibles</p>
             <hr>
             <form method="GET" action="" class="hourOfDateForm">
                <?php
@@ -128,7 +128,16 @@
                <input type="hidden" name="appointmentDate" value="<?php echo $dateChoisie ?>">
                <hr>
                <?php if (!empty($_SESSION['userInfos'])) {
-                  echo '<button type="submit" class="rdv">Prendre rendez-vous</button>';
+                  if (nbrOfRdvUser($id_users) > 0) {
+                     echo "<div class='errorMessage'>
+                     <i class='bi bi-x-circle-fill'></i>
+                     <p style='text-align: center; font-weight: bold;'> Vous ne pouvez pas avoir plusieurs RDV </p>
+                     <i class='bi bi-x-circle-fill'></i>
+                     </div>";
+                     echo "<a href='account' class='returnAccount'>Retournez sur votre compte pour modifier votre RDV</a>";
+                  } else {
+                     echo '<button type="submit" class="rdv">Prendre rendez-vous</button>';
+                  }
                } else {
                   echo '<button type="submit" class="rdv" style="background-color:black ;color:red ; padding:15px" disabled>Veuillez vous inscrire pour prendre rendez-vous</button>';
                }

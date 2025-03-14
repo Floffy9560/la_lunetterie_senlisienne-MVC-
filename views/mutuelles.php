@@ -14,17 +14,17 @@
     <link rel="stylesheet" href="assets/css/headerFooter.css" />
     <link rel="stylesheet" href="assets/css/mutuelles.css" />
 </head>
-<?php include('header.php') ?>
+<?php include __DIR__ . '/../templates/header.php' ?>
 
 <body>
     <div class="containerSection">
         <div class="section">
             <h2>Le 1/3 payant optique</h2>
             <p>Pour ce faire venez en magasin, muni de votre prescription en cours de validité , de votre carte
-                vitale ainsi que de votre carte mutuelle. Pour rappelle la validité des ordonnance :
-                De 0 à 16 l’ordonnance est valable 1 ans
-                De 16 à 42 l’ordonnance est valable 5 ans
-                Au delà de 42 ans l’ordonnance est valable 3 ans <br>
+                vitale ainsi que de votre carte mutuelle. Pour rappelle la validité des ordonnance :<br>
+                => De 0 à 16 ans l’ordonnance est valable 1 ans <br>
+                => De 16 à 42 ans l’ordonnance est valable 5 ans <br>
+                => Au delà de 42 ans l’ordonnance est valable 3 ans <br>
 
                 => Dans le cas ou le magasin n’est pas affilier à votre mutuelle un système est mis en place pour vous
                 faciliter le paiement (voir condition en magasin).
@@ -59,8 +59,9 @@
                 => dans des situations médicales particulières : glaucome, DMLA... : sans délai.</p>
         </div>
     </div>
-    <?php include('footer.php') ?>
-    <script src="assets/JS/inscription.js"></script>
+
+    <?php include __DIR__ . '/../templates/footer.php' ?>
+
 </body>
 
 </html>

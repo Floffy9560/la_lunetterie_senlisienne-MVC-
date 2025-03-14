@@ -9,12 +9,13 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 35px;
 }
-iframe {
-  max-width: 100%;
-  width: auto;
-  height: 100%;
+.gallery-videos-tutos iframe,
+.gallery-videos-tutos iframe {
+  width: 300px;
+  height: 200px;
 }
 /*.gallery-photos {
   width: 100%;
@@ -42,29 +43,34 @@ iframe {
 .gallery-photos {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   gap: 15px;
   padding: 10px;
+  margin-bottom: 50px;
 }
 
 /* Images */
 .gallery-photos img {
   width: 100%;
-  height: 300px; /* Hauteur par défaut */
-  object-fit: contain;
+  /*height: 300px;  Hauteur par défaut */
+
+  object-fit: cover;
   border-radius: 10px;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition: transform 0.5s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 /* Image spécifique pour "patron.jpg" (plus haute et moins large) */
 .gallery-photos img[alt="patron"] {
+  object-position: 50% 50%;
   grid-row: span 2; /* S'étend sur 2 lignes */
-  height: 520px; /* Plus grande hauteur */
+  height: 100%;
+  /* height: 520px;  Plus grande hauteur */
 }
 
 /* Effet au survol */
 .gallery-photos img:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+  transform: scale(1.3);
+  box-shadow: 0px 0px 30px black;
 }
 
 @media screen and (max-width: 768px) {

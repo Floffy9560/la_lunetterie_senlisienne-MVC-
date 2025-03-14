@@ -1,35 +1,42 @@
 main {
   width: 100%;
 }
-.contenairKart {
+.contenairCart {
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 95%;
-  max-width: 1200px;
-  border-radius: 10px;
+  max-width: 1000px;
   margin: 50px auto 40px auto;
 }
 
 .head {
   display: flex;
+  justify-content: space-between;
   width: 100%;
   height: 70px;
   border-radius: 30px 30px 0 0;
   padding: 10px;
   background-color: #c89f36;
 }
-
-.bodyKart {
+#body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+.bodyCart {
   display: flex;
   width: 100%;
+  min-height: 100px;
   background-color: #306c60;
   padding: 10px;
 }
-p {
-  font-size: clamp(21px, 3vw, 31px);
+p,
+span {
+  font-size: clamp(18px, 3vw, 25px);
 }
-.footerKart {
+.footerCart {
   display: flex;
   align-items: center;
   justify-content: end;
@@ -49,20 +56,21 @@ p {
 }
 
 .secondColumn {
+  width: 90%;
+  height: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
   align-items: center;
   text-align: center;
-  width: 85%;
-  min-width: 150px;
 }
 .thirdColumn {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 5px;
-  width: 15%;
-  min-width: 40px;
+  min-width: 100px;
 }
 .choiceQuantity {
   display: flex;
@@ -70,32 +78,28 @@ p {
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
-  min-width: 40px;
-}
-
-.article {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  gap: 15px;
-}
-
-.quantity {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 25px;
-}
-.produits {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: wrap;
-}
-.img {
-  width: 20%;
   min-width: 100px;
 }
+.img {
+  height: 100px;
+  width: 200px;
+  margin: auto;
+}
+.img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: white;
+}
+.article {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  width: 40%;
+  height: 100%;
+}
+
 .more,
 .less {
   display: flex;
@@ -106,6 +110,23 @@ p {
   border: none;
   background-color: #c89f36;
 }
+.less.hidden {
+  display: none;
+}
 .trash {
   font-size: clamp(21px, 3vw, 31px);
+}
+
+.pay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 320px;
+  height: 60px;
+  margin: auto;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: clamp(21px, 3vw, 31px);
+  background-color: #c89f36;
+  margin-bottom: 40px;
 }

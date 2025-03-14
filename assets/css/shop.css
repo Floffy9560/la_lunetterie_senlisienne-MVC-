@@ -32,11 +32,13 @@ main {
 }
 .slider-slide {
   min-width: 100%;
+  height: 100%;
 }
 .slider-img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  border-radius: 25px;
 }
 
 .story-speech-post-it {
@@ -111,6 +113,7 @@ p {
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
+  gap: 50px;
 }
 .containerHourly {
   display: flex;
@@ -125,13 +128,13 @@ p {
   box-shadow: 0 0 15px;
   background: url("/assets/img/wood.jpg");
   background-size: cover;
-  border: 30px groove #8b5a2b;
+  border: 20px groove #8b5a2b;
 
-  border: 30px inset #8b5a2b;
+  border: 20px inset #8b5a2b;
 
-  border: 30px outset #8b5a2b;
+  border: 20px outset #8b5a2b;
 
-  border: 30px ridge #8b5a2b;
+  border: 20px ridge #8b5a2b;
 }
 h2 {
   padding: 1rem;
@@ -186,13 +189,13 @@ button {
   border-radius: 10px;
   background: url("/assets/img/wood.jpg");
   background-size: cover;
-  border: 30px groove #8b5a2b;
+  border: 20px groove #8b5a2b;
 
-  border: 30px inset #8b5a2b;
+  border: 20px inset #8b5a2b;
 
-  border: 30px outset #8b5a2b;
+  border: 20px outset #8b5a2b;
 
-  border: 30px ridge #8b5a2b;
+  border: 20px ridge #8b5a2b;
 }
 .googleMaps {
   width: 100%;

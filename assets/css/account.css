@@ -1,6 +1,6 @@
 main {
   width: 90%;
-  margin-top: 1rem;
+  margin: 1rem auto;
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -10,7 +10,7 @@ main {
 section {
   display: flex;
   justify-content: space-around;
-  gap: 1rem;
+  gap: 40px;
   flex-wrap: wrap;
   width: 100%;
   margin: 20px auto;
@@ -21,8 +21,14 @@ section {
 /*--------------------------------------------------*/
 
 .containerIdentity {
+  width: 45%;
+  min-width: 320px;
   display: flex;
   flex-direction: column;
+  background-color: rgba(48, 108, 96, 1);
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 15px;
 }
 
 .identity {
@@ -31,18 +37,12 @@ section {
   gap: 5px;
   width: 100%;
   min-width: 310px;
-  max-width: 500px;
-  padding: 1rem;
-  border: 1px solid;
-  border-radius: 8px;
-  background-color: rgba(48, 108, 96, 1);
+  max-width: 700px;
+  padding: 15px;
 }
 
 label {
   display: block;
-}
-a {
-  color: #2c2c2c;
 }
 
 input,
@@ -50,6 +50,7 @@ textarea {
   text-align: left;
   overflow-y: hidden;
   overflow-x: auto;
+  font-size: 15px;
   line-height: 38px;
   width: 100%;
   height: 40px;
@@ -58,11 +59,24 @@ textarea {
   padding-left: 8px;
   margin-bottom: 10px;
 }
+.modification {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.modification a {
+  width: 100%;
+  font-size: 15px;
+}
 .modification_user {
   width: auto;
   background-color: transparent;
   border: none;
-  cursor: grab;
+  cursor: pointer;
+}
+#modify {
+  margin-bottom: 15px;
+  padding-left: 9px;
 }
 .nameAccount {
   display: flex;
@@ -86,19 +100,100 @@ textarea {
 /*------------------------ RDV ---------------------*/
 /*--------------------------------------------------*/
 
-p {
-  font-size: clamp(18px, 3vw, 25px);
+.containerRdv p {
+  font-size: clamp(18px, 3vw, 20px);
+}
+span {
+  color: #c89f36;
+  text-shadow: 0 0 10px black;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 .containerRdv {
+  width: 50%;
+  min-width: 320px;
+  height: auto;
   color: gainsboro;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   flex-direction: column;
+  gap: 25px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid black;
+  box-shadow: 0 0 15px black;
+  background-color: rgba(48, 108, 96, 1);
+}
+.rdv {
+  display: flex;
+  height: 110px;
+  gap: 15px;
+  align-items: center;
+}
+.rdvBtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+  border-left: 0.5px solid #c89f36;
+  border-right: 0.5px solid #c89f36;
+  gap: 20px;
+  height: 100%;
+}
+hr {
+  border: 0.5px solid #c89f36;
+}
+.hr {
+  width: 100%;
+  height: 3px;
+  border: none;
+  background-color: black;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.modify {
+  font-size: 21px;
+  color: black;
+}
+.bi-trash3 {
+  font-size: 21px;
+}
+
+/*------------------------------------------------------*/
+/*----------------------- crush ------------------------*/
+/*------------------------------------------------------*/
+h4 {
+  font-size: 25px;
+  text-align: center;
+}
+h3 {
+  font-size: 25px;
+  text-decoration: underline;
+  padding: 5px;
+}
+h2 {
+  font-size: 40px;
+  text-align: center;
+  text-decoration: underline;
+  padding: 5px;
+  color: rgb(22, 21, 21);
+}
+.crush {
+  color: gainsboro;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  width: 90%;
+  min-width: 300px;
+  margin: auto;
   padding: 20px;
   box-shadow: 0 0 15px;
   background: url("/assets/img/wood.jpg");
-
   background-size: cover;
   border: 15px groove #8b5a2b;
 
@@ -108,74 +203,47 @@ p {
 
   border: 15px ridge #8b5a2b;
 }
-.rdv {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-}
-button {
-  background-color: transparent;
-  border: none;
-}
-.bi-trash3 {
-  color: whitesmoke;
-  font-size: 21px;
-}
-
-/*------------------------------------------------------*/
-/*----------------------- crush ------------------------*/
-/*------------------------------------------------------*/
-h3 {
-  font-size: 25px;
-  text-decoration: underline;
-
-  padding: 5px;
-}
-h2 {
-  font-size: 30px;
-  text-align: center;
-  text-decoration: underline;
-  padding: 5px;
-}
-.crush {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 90%;
-  max-width: 700px;
-  min-width: 300px;
-  margin: auto;
-}
-.framsChoice {
+.framsCrush {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
-  padding: 15px;
   width: 100%;
-  min-width: 300px;
-  min-height: 300px;
   border-radius: 10px;
-  background-color: rgba(48, 108, 96, 1);
+  /* background-color: rgba(48, 108, 96, 1); */
 }
 .bi-filter-square-fill {
   font-size: 15px;
   float: right;
 }
 .cards {
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   margin: auto;
   width: 300px;
   padding: 0.5rem;
   border: 2px solid;
   background: #e0e0e0;
-  box-shadow: 10px 10px 15px;
+  box-shadow: 10px 10px 15px black;
   color: #424242;
   border-radius: 1rem;
+}
+.imgSize {
+  width: 100%;
+  height: 150px;
+}
+.cards img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: contain;
+  background-color: white;
 }
 
 .bi-heart-fill {
   float: right;
+  color: red;
 }
 
 /*-----------------------------------------------------------*/
@@ -212,6 +280,7 @@ h2 {
 }
 .img-order {
   width: 100%;
+  background-color: lavender;
 }
 
 /*-----------------------------------------------------------*/

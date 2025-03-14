@@ -2,8 +2,6 @@
 
 require_once __DIR__ . '/../models/databases.php';
 
-print_r($_SESSION);
-
 $glasses = [
   [
     "id" => 1,

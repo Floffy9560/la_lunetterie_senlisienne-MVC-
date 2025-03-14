@@ -9,15 +9,32 @@ main {
 }
 
 /*--------------------------------------------------*/
+/*---------------------section --------------------*/
+/*--------------------------------------------------*/
+
+section {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+  margin: 50px auto;
+}
+
+/*--------------------------------------------------*/
 /*---------------------identity --------------------*/
 /*--------------------------------------------------*/
-section {
+
+.one {
+  width: 100%;
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+  margin: auto;
 }
 h2 {
-  text-align: left;
-  width: 45px;
+  /* text-align: left; */
 }
 .containerIdentity {
   display: flex;
@@ -28,6 +45,7 @@ h2 {
   max-width: 700px;
   background-color: rgba(48, 108, 96, 1);
   padding: 15px;
+  border-radius: 15px;
 }
 
 .identity {
@@ -47,16 +65,12 @@ label {
 
 input,
 textarea {
-  text-align: left;
-  overflow-y: hidden;
-  overflow-x: auto;
-  line-height: 38px;
-  width: 80%;
+  width: 100%;
   height: 40px;
   border-radius: 5px;
   border: 2.5px solid #c89f36;
   padding-left: 8px;
-  margin-bottom: 10px;
+  background-color: blanchedalmond;
 }
 .nameAccount {
   display: flex;
@@ -86,7 +100,7 @@ textarea {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  gap: 10px;
+  gap: 15px;
   box-shadow: 0 0 15px;
   background: url("/assets/img/wood.jpg");
   background-size: cover;
@@ -107,6 +121,7 @@ textarea {
   height: 35px;
   border-radius: 10px;
   cursor: pointer;
+  padding: 10px;
 }
 
 /*--------------------------------------------------*/
@@ -114,7 +129,7 @@ textarea {
 /*--------------------------------------------------*/
 .btnAdmin {
   width: 90%;
-  max-width: 900px;
+  max-width: 600px;
   height: 50px;
   border-radius: 15px;
   outline: none;
@@ -130,7 +145,7 @@ textarea {
   flex-direction: column;
   justify-content: center;
   gap: 10px;
-  width: 50%;
-  min-width: 320px;
+  width: 100%;
+  width: 300px;
   margin: auto;
 }

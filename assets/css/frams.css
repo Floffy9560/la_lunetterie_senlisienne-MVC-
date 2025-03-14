@@ -8,6 +8,7 @@
 }
 
 .cards {
+  position: relative;
   display: inline-block;
   margin: auto;
   width: 300px;
@@ -16,8 +17,14 @@
   /* background: #e0e0e0; */
   background-color: #c89f36;
   box-shadow: 10px 10px 15px black;
-  color: #424242;
+  color: #2c2c2c;
   border-radius: 15px;
+}
+.cards p {
+  font-size: 18px;
+  line-height: 1.5;
+  text-wrap: nowrap;
+  overflow-x: hidden;
 }
 .img {
   margin: auto;
@@ -31,8 +38,33 @@ h3 {
   margin-bottom: 1rem;
   text-align: center;
 }
+.footerCards {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
 .bi-heart-fill {
   float: right;
+  font-size: 20px;
+  color: black;
+}
+.heart-black {
+  color: black;
+}
+
+.heart-red {
+  color: red;
+}
+
+.buttonPushCart {
+  border: none;
+  font-weight: bold;
+  background-color: #c89f36;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 25px;
+  color: #2c2c2c;
 }
 
 /*---------------------------------------------*/
@@ -102,8 +134,7 @@ h3 {
   font-size: 25px;
 }
 
-.buttonSearch,
-.buttonPushKart {
+.buttonSearch {
   border: none;
   font-weight: bold;
   margin: 20px auto;
@@ -119,7 +150,7 @@ h3 {
   font-size: 20px;
   padding: 15px;
 }
-form {
+.formSearch {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -150,8 +181,7 @@ span {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+  justify-content: center;
   flex-wrap: wrap;
 }
 .testinput {

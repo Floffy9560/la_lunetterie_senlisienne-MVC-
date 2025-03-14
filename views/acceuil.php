@@ -18,6 +18,7 @@
 <?php include 'templates/header.php'; ?>
 
 <body>
+
     <div class="name">
         <h1>La lunetterie Senlisienne</h1>
     </div>
@@ -70,7 +71,7 @@
         <!--- -------------1ere section : offer------------ --->
         <section class="container-offre">
 
-            <a href="views/offers.php">
+            <a href="offers">
                 <h2>Offre du magasin</h2>
             </a>
 
@@ -96,7 +97,7 @@
                     <a href="brands">
                         <div class="scotch"></div>
                         <img
-                            src="assets/img/marques/friendly-coquillage.jpg"
+                            src="/assets/img//marques/Friendly-frenchy/plv/visuel-plv-quatro-pm-friendly-frenchy-mai-23.jpg"
                             alt="friendly_frenchy" />
                         <p><b>Friendly_Frenchy</b></p>
                     </a>
@@ -109,73 +110,73 @@
                 </div>
                 <div class="photos-post-it2" id="brique"><a href="brands">
                         <div class="scotch"></div>
-                        <img src="assets/img/marques/brique-violette-lunette.webp" alt="brique" />
+                        <img src="/assets/img/marques/brique-et-violette/plv/brique-et-violette-plv.jpg" alt="brique" />
                         <p><b>La brique et la violette</b></p>
                     </a>
                 </div>
                 <div class="photos-post-it" id="sunday"><a href="brands">
                         <div class="scotch"></div>
-                        <img src="assets/img/marques/sunday-som-car.jpg" alt=" sunday-somewhere">
+                        <img src="/assets/img/marques/Sunday-Somewhere/plv/sunday-som-car.jpg" alt=" sunday-somewhere">
                         <p><b>Sunday somewhere</b></p>
                     </a>
                 </div>
                 <div class="photos-post-it2" id="Demetz"><a href="brands">
                         <div class="scotch"></div>
-                        <img src="###" alt="Demetz" />
+                        <img src="/assets/img/marques/Demetz/plv/demetz-plv.jpg" alt="Demetz" />
                         <p><b>Demetz</b></p>
                     </a>
                 </div>
                 <div class="photos-post-it" id="brett"><a href="brands">
                         <div class="scotch"></div>
-                        <img src="assets/img/marques/brett-porsche.jpg" alt="brett" />
+                        <img src="/assets/img/marques/brett/plv/brett-porsche.jpg" alt="brett" />
                         <p><b>Brett</b></p>
                     </a>
                 </div>
                 <div class="photos-post-it" id="Minamoto"><a href="brands">
                         <div class="scotch"></div>
-                        <img src="###" alt="Minamoto" />
+                        <img src="/assets/img/marques/Minamoto/plv/minamoto-plv.png" alt="Minamoto" />
                         <p><b>Minamoto</b></p>
                     </a>
                 </div>
                 <div class="photos-post-it2" id="Paprika"><a href="brands">
                         <div class="scotch"></div>
-                        <img src="###" alt="Paprika" />
+                        <img src="/assets/img/marques/Paprika/plv/visuel-plv-optique-panthere-pm-paprika.jpg" alt="Paprika" />
                         <p><b>Paprika</b></p>
                     </a>
                 </div>
                 <div class="photos-post-it2" id="MALT"><a href="brands">
                         <div class="scotch"></div>
-                        <img src="###" alt="MALT" />
+                        <img src="/assets/img/marques/Malt/plv/plv-optique-homme-malt-2023.jpg" alt="MALT" />
                         <p><b>MALT</b></p>
                     </a>
                 </div>
                 <div class="photos-post-it" id="Clémence-&-Margaux"><a href="brands">
                         <div class="scotch"></div>
-                        <img src="###" alt="Clémence & Margaux" />
+                        <img src="/assets/img/marques/Clémence-&-Margaux/plv/PLV-Margaux-et-Clemence.jpg" alt="Clémence & Margaux" />
                         <p><b>Clémence & Margaux</b></p>
                     </a>
                 </div>
                 <div class="photos-post-it2" id="Cazal"><a href="brands">
                         <div class="scotch"></div>
-                        <img src="###" alt="Cazal" />
+                        <img src="/assets/img/marques/Cazal/plv/cazal-plv.jpg" alt="Cazal" />
                         <p><b>Cazal</b></p>
                     </a>
                 </div>
                 <div class="photos-post-it" id="Aponem"><a href="brands">
                         <div class="scotch"></div>
-                        <img src="###" alt="Aponem" />
+                        <img src="/assets/img/marques/Aponem/plv/plv-aponem.jpeg" alt="Aponem" />
                         <p><b>Aponem</b></p>
                     </a>
                 </div>
                 <div class="photos-post-it" id="bali"><a href="brands">
                         <div class="scotch"></div>
-                        <img src="###" alt="bali" />
+                        <img src="/assets/img/marques/Bali/plv/plv2-bali.jpeg" alt="bali" />
                         <p><b>Bali</b></p>
                     </a>
                 </div>
                 <div class="photos-post-it2" id="Andy-brook"><a href="brands">
                         <div class="scotch"></div>
-                        <img src="###" alt="Andy brook" />
+                        <img src="/assets/img/marques/Andy-brook/plv/plv-andy-brook.jpg" alt="Andy brook" />
                         <p><b>Andy brook</b></p>
                     </a>
                 </div>

@@ -25,7 +25,7 @@ section {
 }
 
 .buttonHeader {
-  background-color: #c89f36;
+  background-color: #306c60;
   font-size: 35px;
   border: none;
 }
@@ -35,9 +35,6 @@ section {
   cursor: pointer;
 }
 
-.currentMonth {
-  font-size: 31px;
-}
 table {
   width: 100%;
   padding: 15px;
@@ -193,13 +190,18 @@ hr {
   color: whitesmoke;
   pointer-events: none;
 }
+
+/* --------------------------------------------------------------------------- */
+/* ------------------------------ msg prise de rdv --------------------------- */
+/* --------------------------------------------------------------------------- */
+
 .overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 100;
 }
 .error,
@@ -218,12 +220,26 @@ hr {
   padding: 15px;
   width: 320px;
   height: 200px;
-  background-color: rgb(188, 199, 189);
+  background-color: #a9afae;
   z-index: 200;
 }
-a {
-  color: #2c2c2c;
-  text-decoration: none;
+.succes {
+  color: green;
+}
+.error {
+  color: red;
+}
+.returnAccount {
+  cursor: pointer;
+  text-align: center;
+  text-decoration: underline 1px double;
+}
+.bi-x-circle-fill {
+  color: rgb(221, 60, 60);
   font-size: clamp(16px, 1.5vw, 40px);
-  text-decoration: underline;
+}
+.errorMessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

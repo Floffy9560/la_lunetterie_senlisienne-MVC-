@@ -26,8 +26,9 @@
             <h2>Tranches de vue</h2>
             <!-- Vidéos tutos  -->
             <div class="gallery-videos-tutos">
-                <iframe src="https://www.facebook.com/plugins/video.php?height=410&href=https%3A%2F%2Fwww.facebook.com%2F61566471328072%2Fvideos%2F633455655901537%2F&show_text=false&width=560&t=0" width="320" height="410" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
-                <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F61566471328072%2Fvideos%2F4111962912457057%2F&show_text=false&width=560&t=0" width="320" height="410" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+                <iframe src="https://www.facebook.com/plugins/video.php?height=450&href=https%3A%2F%2Fwww.facebook.com%2F61566471328072%2Fvideos%2F633455655901537%2F&show_text=false&width=560&t=0" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+                <iframe src="https://www.facebook.com/plugins/video.php?height=450&href=https%3A%2F%2Fwww.facebook.com%2F61566471328072%2Fvideos%2F4111962912457057%2F&show_text=false&width=560&t=0" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+
                 <!-- Ajoutez les autres vidéos ici -->
             </div>
         </div>
@@ -41,6 +42,7 @@
             <!-- Vidéos de la gallerie -->
             <div class="gallery-videos-brands">
                 <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F61566471328072%2Fvideos%2F1270182484065881%2F&show_text=false&width=560&t=0" width="320" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+
 
                 <!-- Ajoutez les autres vidéos ici -->
             </div>
@@ -67,3 +69,8 @@
             </div>
         </div>
     </section>
+
+    <?php include __DIR__ . '/../templates/footer.php' ?>
+</body>
+
+</html>

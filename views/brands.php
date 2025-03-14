@@ -163,7 +163,7 @@
 
       <div class="container_card">
         <div class="img">
-          <img src="/assets/img/marques/Woodyz/plv/WOODYS_ANIMA_JUNEE.jpg" alt="Minamoto" />
+          <img src="/assets/img/marques/Minamoto/plv/minamoto-plv.png" alt="Minamoto" />
         </div>
         <div class="toggle-btn">
           <h3>Minamoto</h3>
@@ -182,7 +182,7 @@
 
       <div class="container_card">
         <div class="img">
-          <img src="/assets/img/marques/Woodyz/plv/WOODYS_ANIMA_JUNEE.jpg" alt="Paprika" />
+          <img src="/assets/img/marques/Paprika/plv/visuel-plv-optique-panthere-pm-paprika.jpg" alt="Paprika" />
         </div>
         <div class="toggle-btn">
           <h3>Paprika</h3>
@@ -201,7 +201,7 @@
 
       <div class="container_card">
         <div class="img">
-          <img src="/assets/img/marques/Woodyz/plv/WOODYS_ANIMA_JUNEE.jpg" alt="Malt" />
+          <img src="/assets/img/marques/Malt/plv/plv-optique-homme-malt-2023.jpg" alt="Malt" />
         </div>
         <div class="toggle-btn">
           <h3>Malt</h3>
@@ -220,7 +220,7 @@
 
       <div class="container_card">
         <div class="img">
-          <img src="/assets/img/marques/Woodyz/plv/WOODYS_ANIMA_JUNEE.jpg" alt="Clémence & Margaux" />
+          <img src="/assets/img/marques/Clémence-&-Margaux/plv/PLV-Margaux-et-Clemence.jpg" alt="Clémence & Margaux" />
         </div>
         <div class="toggle-btn">
           <h3>Clémence & Margaux</h3>
@@ -239,7 +239,7 @@
 
       <div class="container_card">
         <div class="img">
-          <img src="/assets/img/marques/Woodyz/plv/WOODYS_ANIMA_JUNEE.jpg" alt="Cazal" />
+          <img src="/assets/img/marques/Cazal/plv/cazal-plv2.jpeg" alt="Cazal" />
         </div>
         <div class="toggle-btn">
           <h3>Cazal</h3>
@@ -258,7 +258,7 @@
 
       <div class="container_card">
         <div class="img">
-          <img src="/assets/img/marques/Woodyz/plv/WOODYS_ANIMA_JUNEE.jpg" alt="Aponem" />
+          <img src="/assets/img/marques/Aponem/plv/lunettes-clips.jpg" alt="Aponem" />
         </div>
         <div class="toggle-btn">
           <h3>Aponem</h3>
@@ -277,7 +277,7 @@
 
       <div class="container_card">
         <div class="img">
-          <img src="/assets/img/marques/Woodyz/plv/WOODYS_ANIMA_JUNEE.jpg" alt="Bali" />
+          <img src="/assets/img/marques/Bali/plv/plv2-bali.jpeg" alt="Bali" />
         </div>
         <div class="toggle-btn">
           <h3>Bali</h3>
@@ -296,7 +296,7 @@
 
       <div class="container_card">
         <div class="img">
-          <img src="/assets/img/marques/Woodyz/plv/WOODYS_ANIMA_JUNEE.jpg" alt="Andy brook" />
+          <img src="/assets/img/marques/Andy-brook/plv/plv-andy-brook.jpg" alt="Andy brook" />
         </div>
         <div class="toggle-btn">
           <h3>Andy brook</h3>

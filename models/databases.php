@@ -68,7 +68,8 @@ function getUserInfos($mail)  // penser a mettre password pour vérifier
       $pdo = getConnexion();
       // Utilisation de la jointure 
       $sql = "SELECT * FROM kghdsi_users                  
-              JOIN kghdsi_user_infos  ON kghdsi_users.id_users = kghdsi_user_infos.id_user_infos
+              JOIN kghdsi_user_infos ON kghdsi_users.id_users = kghdsi_user_infos.id_user_infos
+            --   LEFT JOIN kghdsi_appointments ON kghdsi_appointments.id_users = kghdsi_user_infos.id_user_infos         
               WHERE kghdsi_user_infos.mail = :mail";
 
       try {
@@ -106,8 +107,8 @@ function getUserById($id)
 {
       $pdo = getConnexion();
       $sql = "SELECT * FROM kghdsi_users                  
-              JOIN kghdsi_user_infos  ON kghdsi_users.id_users = kghdsi_user_infos.id_user_infos
-              
+              JOIN kghdsi_user_infos  ON kghdsi_users.id_users = kghdsi_user_infos.id_user_infos 
+              JOIN kghdsi_appointments ON kghdsi_appointments.id_users = kghdsi_user_infos.id_user_infos         
               WHERE kghdsi_user_infos.id_user_infos = :id";
       try {
             $stmt = $pdo->prepare($sql);
@@ -267,10 +268,19 @@ function deleteUser($idUser)
             $stmt->bindParam(':idUserInfos', $idUserInfos, PDO::PARAM_INT);
             $stmt->execute();
 
-            $pdo->commit(); // 🔹 Valider toutes les suppressions si tout s'est bien passé
+            // Supprimer les informations utilisateur de `kghdsi_appointment`
+            $sql = "DELETE FROM kghdsi_appointments WHERE id_users = :idUserInfos";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':idUserInfos', $idUserInfos, PDO::PARAM_INT);
+            $stmt->execute();
+
+            // Valider toutes les suppressions si tout s'est bien passé
+            $pdo->commit();
             return true;
       } catch (PDOException $e) {
-            $pdo->rollBack(); // 🔹 Annuler tout en cas d'erreur
+
+            //  Annuler tout en cas d'erreur
+            $pdo->rollBack();
             echo "Erreur lors de la suppression : " . $e->getMessage();
             return false;
       }
@@ -651,6 +661,46 @@ function searchByShape($shape)
 //////////////// FONCTIONS ACCOUNT ///////////////////////////
 /////////////////////////////////////////////////////////////
 
+// $id = $_SESSION['userInfos']['id_users'];
+// $rdvs = displayRdv($id);
+function showAppointment()
+{
+      $id = $_SESSION['userInfos']['id_users'];
+      $rdvs = displayRdv($id);
+      if (!empty($rdvs)) {
+            foreach ($rdvs as $rdv) {
+                  // Créer un formatage pour l'affichage avec le mois en FR
+                  $appointmentDate = new DateTime($rdv['appointmentDate']);
+                  $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+                  $formattedDate = $formatter->format($appointmentDate);
+                  // Créer un formatage pour l'affichage de l'heure avec le format HH:MM
+                  $formattedHoraire = (new DateTime($rdv['appointmentTime']))->format('H:i');
+                  echo "<div class='rdv'>
+                              <p>Vous avez rendez-vous le  :<br><span> " . $formattedDate . " à " . $formattedHoraire . "h</span></p>
+                                    <div class='rdvBtn'>
+                                          <form action='modifyRdv' method='GET'>
+                                                <label for='rdv'></label>
+                                                <input type='hidden' id='rdv' name='modifDateRDV' value='" . $rdv['appointmentDate'] . "'>
+                                                <input type='hidden' id='rdv' name='modifTimeRDV' value='" . $rdv['appointmentTime'] . "'>
+                                                <button type='submit' class='modify'>Modifier mon rendez-vous</button>
+                                          </form>
+                                          <hr>
+                                          <form action='' method='GET'>
+                                                <label for='rdv'></label>
+                                                <input type='hidden' id='rdv' name='dateRDV' value='" . $rdv['appointmentDate'] . "'>
+                                                <input type='hidden' id='rdv' name='timeRDV' value='" . $rdv['appointmentTime'] . "'>
+                                                <button type='submit'><i class='bi bi-trash3'></i></button>  
+                                          </form>
+                                    </div>          
+                              
+                        </div><hr class='hr'>";
+            }
+      } else echo "<p> Pas de rendez-vous </p>";
+      if (!empty($_SESSION['error'])) {
+            echo $_SESSION['error'];
+      }
+}
+
 function displayRdv($id)
 {
 
@@ -688,6 +738,100 @@ function deleteAppointment($appointmentDateStr, $appointmentTime)
 //////////////////////////////////////////////////////////////
 //////////////// FONCTIONS AGENDA ///////////////////////////
 ////////////////////////////////////////////////////////////
+
+function nbrOfRdvUser($id_users)
+{
+
+      //Connexion à la base de données
+      $pdo = getConnexion();
+
+      // Récupérer les réservations existantes gràce à l'id
+      try {
+            $stmt = $pdo->prepare("SELECT count(*) FROM kghdsi_appointments WHERE id_users = :id_users");
+            $stmt->execute(['id_users' => $id_users]);
+
+            // Retourne directement la valeur numérique
+            return (int) $stmt->fetchColumn();
+      } catch (PDOException $e) {
+            echo "Erreur lors de la récupération des réservations par l'id : " . $e->getMessage();
+            return false;
+      }
+}
+
+function getAppointmentDate()
+{
+      //Connexion à la base de données
+      $pdo = getConnexion();
+
+      // Récupérer les réservations existantes pour une date donnée
+      $today = date('Y-m-d');
+      $dateChoisie = (!empty($_GET['date'])) ?  $_GET['date']   : $today;
+      try {
+            $stmt = $pdo->prepare("SELECT appointmentTime FROM kghdsi_appointments WHERE appointmentDate = :date");
+            $stmt->execute(['date' => $dateChoisie]);
+            $reservations = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            return $reservations;
+      } catch (PDOException $e) {
+            echo "Erreur lors de la récupération des réservations : " . $e->getMessage();
+            return false;
+      }
+}
+
+function createAppointment($appointmentDate, $appointmentTime, $id_users)
+{
+
+      $pdo = getConnexion();
+
+      try { // Insertion du moi , de l'année , et de l'heure dans la BDD
+            $stmt = $pdo->prepare("INSERT INTO kghdsi_appointments ( appointmentDate, appointmentTime,id_users) VALUES (:appointmentDate, :appointmentTime,:id_users)");
+            $stmt->bindparam(':appointmentDate', $appointmentDate, PDO::PARAM_STR);
+            $stmt->bindparam(':appointmentTime', $appointmentTime, PDO::PARAM_STR);
+            $stmt->bindparam(':id_users', $id_users, PDO::PARAM_INT);
+            $stmt->execute();
+            return true;
+      } catch (PDOException $e) {
+
+            return false;
+      }
+}
+if (!empty($_GET["horaire"]) && !empty($_GET["appointmentDate"])) {
+      $appointmentDate = $_GET["appointmentDate"];
+      $appointmentTime = $_GET["horaire"];
+      $id_users = $_SESSION['userInfos']['id_users'];
+      // Créer un formatage pour l'affichage avec le mois en FR
+      $appointmentDateFormatted = new DateTime($appointmentDate);
+      $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+      $formattedDate = $formatter->format($appointmentDateFormatted);
+      if (createAppointment($appointmentDate, $appointmentTime, $id_users) == false) {
+            echo "<div class='overlay'></div>
+                  <div class='error'><p>Erreur lors de la création du rendez-vous</p>
+                  <a href='agenda'>Retour sur la page prise de rendez-vous</a>
+                  </div>";
+      } else {
+            echo "<div class='overlay'></div>
+                  <div class='succes'>Votre RDV est bien enregistré pour le <br> " . $formattedDate . '<br> à ' . $appointmentTime . " 
+                  <a href='/'>Retour à l'accueil</a></div>";
+      }
+}
+
+
+function displayAppointment($id_users)
+{
+
+      $pdo = getConnexion();
+      $sql = "SELECT appointmentDate, appointmentTime FROM kghdsi_appointments WHERE id_users = :id_users ORDER BY appointmentDate ASC, appointmentTime ASC";
+
+      try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':id_users', $id_users, PDO::PARAM_INT);
+            $stmt->execute();
+            $appointments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $appointments;
+      } catch (PDOException $e) {
+            echo "Erreur lors de la récupération des rendez-vous : " . $e->getMessage();
+            return false;
+      }
+}
 
 
 /////////////////////////////////////////////////////////////

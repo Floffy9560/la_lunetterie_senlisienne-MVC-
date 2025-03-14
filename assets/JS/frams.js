@@ -28,7 +28,6 @@ buttonReset.addEventListener("click", () => {
   const checkedBoxes = document.querySelectorAll(
     'input[type="checkbox"]:checked'
   );
-
   // Vérifier si des checkboxes sont cochées
   if (checkedBoxes.length > 0) {
     // Réinitialiser toutes les checkboxes cochées
@@ -37,6 +36,101 @@ buttonReset.addEventListener("click", () => {
     });
   }
 });
+
+//---------------------------------------------------------------------------------------//
+//-----------------Récupérer les données de la cards souhaitée -------------------------//
+//-------------------------------------------------------------------------------------//
+
+let cards = document.querySelectorAll(".cards");
+let glassesData = [];
+
+cards.forEach((currentGlass) => {
+  // Récupérer l'icone coeur de la carte sélectionnée
+  let heart = currentGlass.querySelector(".bi-heart-fill");
+
+  // Récupérer le boutton de la carte sélectionnée
+  const buttonPushCart = currentGlass.querySelector(".buttonPushCart");
+
+  // Récupérer l'ID unique
+  let cardId = currentGlass.getAttribute("data-id");
+
+  // Récupérer tout le HTML de la carte
+  let cardHTML = currentGlass.outerHTML;
+
+  // Vérifier si cette carte est déjà en favoris pour changer la couleur du cœur au chargement
+  let storedCards = JSON.parse(localStorage.getItem("cardsData")) || [];
+  let isFavorite = storedCards.some((storedCard) => storedCard.id === cardId);
+
+  if (isFavorite) {
+    heart.classList.add("heart-red");
+    heart.classList.remove("heart-black");
+  } else {
+    heart.classList.add("heart-black");
+    heart.classList.remove("heart-red");
+  }
+
+  heart.addEventListener("click", () => {
+    let storedCards = JSON.parse(localStorage.getItem("cardsData")) || [];
+
+    if (!heart.classList.contains("heart-red")) {
+      // Ajouter la classe rouge et enregistrer la carte
+      heart.classList.add("heart-red");
+      heart.classList.remove("heart-black");
+
+      storedCards.push({ id: cardId, html: cardHTML });
+      localStorage.setItem("cardsData", JSON.stringify(storedCards));
+
+      console.log("Ajouté :", storedCards);
+    } else {
+      // Remettre la classe noire et supprimer la carte
+      heart.classList.add("heart-black");
+      heart.classList.remove("heart-red");
+
+      storedCards = storedCards.filter(
+        (storedCard) => storedCard.id !== cardId
+      );
+      localStorage.setItem("cardsData", JSON.stringify(storedCards));
+
+      console.log("Supprimé :", storedCards);
+    }
+  });
+
+  buttonPushCart.addEventListener("click", () => {
+    let cartStoredCards =
+      JSON.parse(localStorage.getItem("cardsDataCart")) || [];
+    //   let cardsCart = cartStoredCards.some(
+    //     (cartStoredCard) => cartStoredCard.id === cardId
+    //   );
+    //   cartStoredCards.push({ id: cardId, html: cardHTML });
+    //   localStorage.setItem("cardsDataCart", JSON.stringify(cartStoredCards));
+    // });
+    // Récupère la source de l'image
+    let image = currentGlass.querySelector("img").src;
+    // Récupère le nom des lunettes
+    let name = currentGlass.querySelector("h3").textContent;
+    // Extrait le texte du prix
+    let priceText = currentGlass.querySelector("#price").textContent;
+    // Extrait uniquement le prix numérique
+    let price = parseFloat(priceText.replace(/[^0-9.]/g, ""));
+
+    cartStoredCards.push({ name, price, image });
+
+    localStorage.setItem("cardsDataCart", JSON.stringify(cartStoredCards));
+  });
+});
+// //------------------------------------------------------------------//
+// //----------------Changer la couleur du coeur----------------------//
+// //----------------------------------------------------------------//
+
+// let hearts = document.querySelectorAll(".bi-heart-fill");
+
+// hearts.forEach((heart, index) => {
+//   heart.addEventListener("click", () => {
+//     // Basculer la couleur du cœur entre rouge et noir
+//     heart.style.color = heart.style.color === "red" ? "black" : "red";
+//   });
+// });
+
 /*--------------------------------------------------------------------------------------------------*/
 /*-------------------------------------recuperation JSON--------------------------------------------*/
 /*--------------------------------------------------------------------------------------------------*/

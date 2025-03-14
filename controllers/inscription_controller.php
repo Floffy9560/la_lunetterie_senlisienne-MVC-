@@ -11,7 +11,6 @@ if (!empty($_SESSION['userInfos'])) {
       exit();
 } else {
       // Si l'utilisateur n'est pas connecté, rediriger vers la page d'inscription
-
       include_once __DIR__ . '/../views/inscription.php';
       // if (!empty($_SESSION['verificationFalse'])) {
       //       unset($_SESSION['verificationFalse']);

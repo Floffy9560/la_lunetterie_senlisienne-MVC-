@@ -26,7 +26,7 @@
     <main>
         <div class="formulaire">
             <div class="connection">
-                <h2>Déja client ?</h2>
+                <h2>Déjà client ?</h2>
 
                 <!-- ----------------------------------------------------------------------------------------->
                 <!-- ------------------ Si client : proposer de rentré ses identifiant------------------------>
@@ -82,7 +82,7 @@
                     <ul>
                         <li><b>Consignes :</b></li>
                         <li>Le mot de passe doit contenir au moins 1 majuscule 1 minuscule 1 caractère spécial (&-+!*$@%_) et 1 nombre </li>
-                        <li>Le mail doit être comme l'exemple ci contre : exemple@exemple.fr</li>
+                        <li>Le mail doit être comme l'exemple ci-contre : exemple@exemple.fr</li>
                     </ul>
                 </div>
             </div>
@@ -146,8 +146,7 @@
                                     name="firstname"
                                     placeholder="Prénom"
                                     class="inputCivilityName"
-                                    id="firstname"
-                                    pattern="^[A-ZÀÂÄÆÇÉÈÊËÎÏÔÖŒÙÛÜŸa-zàâäæçéèêëîïôöœùûüÿ' -]{2,50}$" minlength="2" required />
+                                    id="firstname" />
                             </div>
 
                         </div>
@@ -195,7 +194,7 @@
 
                         <div class="birth">
                             <select name="days" id="days" required>
-                                <option value="">Jours</option>
+                                <option value="">Jour</option>
                                 <?php
                                 for ($i = 1; $i < 32; $i++) {
                                     echo "<option value='$i'>$i</option>";
@@ -220,7 +219,7 @@
                             </select>
 
                             <select name="year" id="year" required>
-                                <option value="">Années</option>
+                                <option value="">Année</option>
                                 <?php
                                 for ($i = 2025; $i >= 1924; $i--) {
                                     echo "<option value='$i'>$i</option>";

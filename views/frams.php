@@ -27,8 +27,8 @@
                <div class="containerInputSearch">
 
 
-                  <form action="" method="GET">
-                     <p>Marque :</p>
+                  <form action="" method="GET" class="formSearch">
+                     <p>Marques :</p>
                      <div class="containerCheckbox">
                         <span>
                            <input type="checkbox" id="brett" name="brands[]" value="brett" />
@@ -55,8 +55,8 @@
 
                <div class="containerInputSearch">
 
-                  <form action="" method="GET">
-                     <p>Genre :</p>
+                  <form action="" method="GET" class="formSearch">
+                     <p>Genres :</p>
                      <div class="containerCheckbox">
                         <span>
                            <input type="checkbox" id="men" name="genders[]" value="homme" />
@@ -85,7 +85,7 @@
 
                <div class="containerInputSearch">
 
-                  <form action="" method="GET">
+                  <form action="" method="GET" class="formSearch">
                      <p>Formes :</p>
                      <div class="containerCheckbox">
                         <span>
@@ -127,7 +127,7 @@
 
                <div class="containerInputSearch">
 
-                  <form action="" method="GET">
+                  <form action="" method="GET" class="formSearch">
                      <p>Couleurs :</p>
                      <div class="containerCheckbox">
                         <span>
@@ -177,7 +177,7 @@
 
                <div class="containerInputSearch">
 
-                  <form action="" method="get">
+                  <form action="" method="GET" class="formSearch">
                      <p>Matières :</p>
                      <div class="containerCheckbox">
                         <span>
@@ -204,7 +204,7 @@
                </div>
             </div>
             <div class="test">
-               <form action="" method="GET">
+               <form action="" method="GET" class="formSearch">
 
                   <button class="buttonReset">Réinitialiser</button>
                </form>
@@ -221,6 +221,8 @@
 
    </main>
    <script src="/assets/JS/frams.js" defer></script>
+
+
 </body>
 
 <?php include 'templates/footer.php' ?>

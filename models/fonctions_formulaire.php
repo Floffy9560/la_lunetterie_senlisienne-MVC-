@@ -4,6 +4,29 @@
 /////////////    nouveau client    ///////////////////
 //////////////////////////////////////////////////////
 
+// --------------------------------------------------------
+// nettoyage (sécurisation des données) nom et prénom  
+// --------------------------------------------------------
+
+function clean($name)
+{
+      //  Supprimer les espaces inutiles au début et à la fin
+      $name = trim($name);
+
+      // Mise en forme du texte, première lettre de chaque mot en majuscule
+      $name = strtolower($name);
+
+      //  Filtrer les caractères invalides (autoriser uniquement les lettres, les espaces et les apostrophes)
+      $name = preg_replace("/[^a-zA-Zàâçéèêëîïôûùüÿœæ' -]/", "", $name);
+
+      //  Vérifier si le nom ou prénom ne contient que des caractères valides
+      if (empty($name)) {
+            return false; // Retourne false si le champ est vide ou contient des caractères invalides
+      }
+
+      return $name;
+}
+
 
 // --------------------------------------------------------
 // nettoyage (sécurisation des données) mot de passe  
@@ -73,16 +96,16 @@ if (!empty($_POST['email'])) {
 
 function nettoyerAdresse($adresse)
 {
-      // 1. Supprimer les espaces inutiles au début et à la fin
+      // Supprimer les espaces inutiles au début et à la fin
       $adresse = trim($adresse);
 
-      // 2. Remplacer plusieurs espaces consécutifs par un seul
+      // Remplacer plusieurs espaces consécutifs par un seul
       $adresse = preg_replace('/\s+/', ' ', $adresse);
 
-      // 3. Autoriser uniquement lettres, chiffres, espaces et quelques caractères utiles (- , . ')
+      // Autoriser uniquement lettres, chiffres, espaces et quelques caractères utiles (- , . ')
       $adresse = preg_replace('/[^\p{L}\p{N}\s\-,\'.]/u', '', $adresse);
 
-      // 4. Supprimer les caractères invisibles (évite des attaques avec des caractères Unicode invisibles)
+      // Supprimer les caractères invisibles (évite des attaques avec des caractères Unicode invisibles)
       $adresse = preg_replace('/[\x00-\x1F\x7F]/u', '', $adresse);
 
       return $adresse;
@@ -91,6 +114,27 @@ if (!empty($_POST['postal_adress'])) {
       $adresse_utilisateur = $_POST['postal_adress'];
       $adresse_propre = nettoyerAdresse($adresse_utilisateur);
 };
+
+// --------------------------------------------------------
+// nettoyage (sécurisation des données) téléphone
+// --------------------------------------------------------
+
+function cleanPhone($phone)
+{
+      //  Supprimer les espaces inutiles au début et à la fin
+      $phone = trim($phone);
+
+      //  Retirer tous les caractères non numériques (pour ne garder que les chiffres)
+      $phone = preg_replace("/[^0-9]/", "", $phone);
+
+      // Vérifier si le numéro a une longueur valide (par exemple, 10 chiffres pour la France)
+      if (strlen($phone) < 10 && strlen($phone) > 50) {
+            return false; // Retourne false si le numéro de téléphone n'a pas 10 chiffres
+      }
+
+      // Retourne le numéro de téléphone formaté
+      return $phone;
+}
 
 //////////////////////////////////////////////////////
 /////////////    si déjà client    ///////////////////

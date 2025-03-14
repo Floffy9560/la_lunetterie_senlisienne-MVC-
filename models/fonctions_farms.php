@@ -96,10 +96,10 @@ function displayCards()
                         echo '<p>Genre: ' . ucfirst(htmlspecialchars($lunette['gender'])) . '</p>';
                         echo '<p>Catégorie: ' . ucfirst(htmlspecialchars($lunette['category'])) . '</p>';
                         echo '<p>Marque: ' . ucfirst(htmlspecialchars($lunette['brand'])) . '</p>';
-                        echo '<p>Form: ' . ucfirst(htmlspecialchars($lunette['shape'])) . '</p>';
-                        echo '<button class="buttonPushKart">Ajouté au panier</button>';
-                        echo '<i class="bi bi-heart-fill"></i>';
-
+                        echo '<div class="footerCards">';
+                        echo "<button  class='buttonPushCart'>Ajouter au panier</i></button>";
+                        echo "<i class='bi bi-heart-fill'></i>";
+                        echo '</div>';
                         echo "</div>";
                   }
             }
@@ -122,10 +122,10 @@ function displayCards()
                         echo '<p>Genre: ' . ucfirst(htmlspecialchars($lunette['gender'])) . '</p>';
                         echo '<p>Catégorie: ' . ucfirst(htmlspecialchars($lunette['category'])) . '</p>';
                         echo '<p>Marque: ' . ucfirst(htmlspecialchars($lunette['brand'])) . '</p>';
-                        echo '<p>Form: ' . ucfirst(htmlspecialchars($lunette['shape'])) . '</p>';
-                        echo '<button class="buttonPushKart">Ajouté au panier</button>';
-                        echo '<i class="bi bi-heart-fill"></i>';
-
+                        echo '<div class="footerCards">';
+                        echo "<button  class='buttonPushCart'>Ajouter au panier</i></button>";
+                        echo "<i class='bi bi-heart-fill'></i>";
+                        echo '</div>';
                         echo "</div>";
                   }
             }
@@ -146,9 +146,10 @@ function displayCards()
                         echo '<p>Genre: ' . ucfirst(htmlspecialchars($lunette['gender'])) . '</p>';
                         echo '<p>Catégorie: ' . ucfirst(htmlspecialchars($lunette['category'])) . '</p>';
                         echo '<p>Marque: ' . ucfirst(htmlspecialchars($lunette['brand'])) . '</p>';
-                        echo '<button class="buttonPushKart">Ajouté au panier</button>';
-                        echo '<i class="bi bi-heart-fill"></i>';
-
+                        echo '<div class="footerCards">';
+                        echo "<button  class='buttonPushCart'>Ajouter au panier</i></button>";
+                        echo "<i class='bi bi-heart-fill'></i>";
+                        echo '</div>';
                         echo "</div>";
                   }
             }
@@ -168,9 +169,10 @@ function displayCards()
                         echo '<p>Genre: ' . ucfirst(htmlspecialchars($lunette['gender'])) . '</p>';
                         echo '<p>Catégorie: ' . ucfirst(htmlspecialchars($lunette['category'])) . '</p>';
                         echo '<p>Marque: ' . ucfirst(htmlspecialchars($lunette['brand'])) . '</p>';
-                        echo '<button class="buttonPushKart">Ajouté au panier</button>';
-                        echo '<i class="bi bi-heart-fill"></i>';
-
+                        echo '<div class="footerCards">';
+                        echo "<button  class='buttonPushCart'>Ajouter au panier</i></button>";
+                        echo "<i class='bi bi-heart-fill'></i>";
+                        echo '</div>';
                         echo "</div>";
                   }
             }
@@ -190,9 +192,10 @@ function displayCards()
                         echo '<p>Genre: ' . ucfirst(htmlspecialchars($lunette['gender'])) . '</p>';
                         echo '<p>Catégorie: ' . ucfirst(htmlspecialchars($lunette['category'])) . '</p>';
                         echo '<p>Marque: ' . ucfirst(htmlspecialchars($lunette['brand'])) . '</p>';
-                        echo '<button class="buttonPushKart">Ajouté au panier</button>';
-                        echo '<i class="bi bi-heart-fill"></i>';
-
+                        echo '<div class="footerCards">';
+                        echo "<button  class='buttonPushCart'>Ajouter au panier</i></button>";
+                        echo "<i class='bi bi-heart-fill'></i>";
+                        echo '</div>';
                         echo "</div>";
                   }
             }
@@ -200,6 +203,11 @@ function displayCards()
 
             $afficherLunettes = insertGlasseData();
             foreach ($afficherLunettes as $lunette) {
+
+                  // Utilisation de l'id_glasses comme identifiant unique pour chaque carte ( va être utile pour la suppression de locale storage)
+                  $idGlasses = $lunette['id_glasses'];
+
+
 
                   // echo "<pre>";
                   // print_r($lunette);
@@ -225,18 +233,19 @@ function displayCards()
                   //    [gender] => homme
                   // )
 
-                  echo "<div class='cards' id='lunette'>";
+                  echo "<div class='cards' id='lunette' data-id='" . intval($idGlasses) . "'>";
                   echo '<img src="' . htmlspecialchars($lunette['image_path']) . '" alt="lunette ' . htmlspecialchars($lunette['image_name']) . '" style="width: 100%; height: 150px;" class="img">';
                   echo '<h3>' . ucfirst(htmlspecialchars($lunette['name'])) . '</h3>';
-                  echo '<p>Prix: ' . intval($lunette['price']) . '€</p>';
+                  echo '<p id="price">Prix: ' . intval($lunette['price']) . ' €</p>';
                   echo '<p>Couleur: ' . ucfirst(htmlspecialchars($lunette['color'])) . '</p>';
                   echo '<p>Matière: ' . ucfirst(htmlspecialchars($lunette['matter'])) . '</p>';
                   echo '<p>Genre: ' . ucfirst(htmlspecialchars($lunette['gender'])) . '</p>';
                   echo '<p>Catégorie: ' . ucfirst(htmlspecialchars($lunette['category'])) . '</p>';
                   echo '<p>Marque: ' . ucfirst(htmlspecialchars($lunette['brand'])) . '</p>';
-                  echo '<button class="buttonPushKart">Ajouté au panier</button>';
-                  echo '<i class="bi bi-heart-fill"></i>';
-
+                  echo '<div class="footerCards">';
+                  echo "<button  class='buttonPushCart'>Ajouter au panier</i></button>";
+                  echo "<i class='bi bi-heart-fill'></i>";
+                  echo '</div>';
                   echo "</div>";
             }
       }
