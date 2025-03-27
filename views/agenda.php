@@ -116,6 +116,8 @@
 
                      $formattedHoraire = (new DateTime($horaire))->format('H:i');
 
+                     $formattedHoraire = (new DateTime($horaire))->format('H:i');
+
                      // Afficher le champ de texte avec les horaires disponibles
                      echo "<label class='custom-checkbox'>
                            <input type='radio' name='horaire' value='" . htmlspecialchars($horaire, ENT_QUOTES) . "' required>

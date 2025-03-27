@@ -115,6 +115,11 @@ td {
   justify-content: center;
   align-items: center;
   gap: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
   border-radius: 15px;
   padding: 10px;
   background-color: #c89f36;
@@ -124,6 +129,7 @@ td {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 25px;
   gap: 25px;
 }
 .horaireDispo {
@@ -136,6 +142,46 @@ td {
   text-align: center;
   background-color: #306c60;
   color: #c89f36;
+}
+.custom-checkbox input {
+  display: none; /* Cache la checkbox native */
+}
+
+.custom-checkbox span {
+  display: flex;
+  width: 100px;
+  min-width: 30px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  font-size: clamp(16px, 1.5vw, 40px);
+  border: 2px solid #333;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.custom-checkbox input:checked + span {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.custom-checkbox input:checked + span::after {
+  content: "✔";
+  color: white;
+  font-size: 16px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+hr {
+  width: 90%;
+  height: 5px;
+  background-color: #120d03;
+  border: none;
+  border-radius: 5px;
 }
 .custom-checkbox input {
   display: none; /* Cache la checkbox native */

@@ -77,6 +77,10 @@
                         <label for="supprimer"></label>
                         <input type='submit' id='supprimer' name='supprimer' value='Supprimer mon compte' class='modification_user' />
                     </form>
+                    <!-- <form method='POST'>
+                        <label for='deleteRdv'></label>
+                        <input type='submit' id='deleteRdv' name='deleteRdv' value='Supprimer mon/mes rendez-vous' class='modification_user' />
+                    </form> -->
                 </div>
 
             </div>

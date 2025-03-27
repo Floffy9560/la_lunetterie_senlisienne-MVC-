@@ -9,6 +9,7 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+
   flex-wrap: wrap;
   gap: 35px;
 }
@@ -16,6 +17,13 @@ h2 {
 .gallery-videos-tutos iframe {
   width: 300px;
   height: 200px;
+
+  gap: 20px;
+}
+iframe {
+  max-width: 100%;
+  width: auto;
+  height: 100%;
 }
 /*.gallery-photos {
   width: 100%;

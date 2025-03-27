@@ -80,7 +80,9 @@ if (!empty($_POST['supprimer'])) {
 }
 
 
-// SUPPRIMER UN RRENDEZ VOUS   :
+//////////////////////////////////////////////////////////////////
+/////////////    SUPPRIMER UN RRENDEZ VOUS    ///////////////////
+////////////////////////////////////////////////////////////////
 
 if (!empty($_GET['dateRDV']) && !empty($_GET['timeRDV'])) {
 
@@ -89,12 +91,15 @@ if (!empty($_GET['dateRDV']) && !empty($_GET['timeRDV'])) {
       deleteAppointment($appointmentDateStr, $appointmentTime);
 }
 
+//////////////////////////////////////////////////////////////////
+/////////////    Vérifié si l'utilisateur est déjà connecté si oui (que rôle à t'il) et le dirigé vers la page de son compte sinon le dirigé sur inscription   ///////////////////
+////////////////////////////////////////////////////////////////
 
-// Vérifié si l'utilisateur est déjà connecté si oui (que rôle à t'il) et le dirigé vers la page de son compte sinon le dirigé sur inscription
 if (!empty($_SESSION['userInfos'])) {
       if ($_SESSION['userInfos']['id_role'] == 2) {
 
             // Si l'utilisateur est connecté, rediriger vers la page de compte
+            include __DIR__ . '/../views/account.php';
             include __DIR__ . '/../views/account.php';
             exit();
       } else {
