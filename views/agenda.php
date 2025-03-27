@@ -19,6 +19,9 @@
 
 <body>
    <?php include __DIR__ . '/../templates/header.php' ?>
+
+   <h1>Agenda de prise de rendez-vous</h1>
+
    <section>
       <div class="calendarContainer">
          <div class="header">
@@ -65,9 +68,7 @@
                         }
                         if ($dayCount == 0) {
                            echo "<td class='monday'>
-                                    <form action='' method='GET' class='appointmentForm'>
-                                        <input type='hidden' name='month' value='$month'>
-                                        <input type='hidden' name='year' value='$year'>
+                                    <form action='' method='GET' class='appointmentForm'>                                     
                                         <input type='hidden' name='date' value='$currentDate'>
                                         <button type='submit' class='mondayBtn'>$i</button>
                                     </form>
@@ -98,12 +99,13 @@
 
             <p> <?php
                   $dateChoisie = !empty($_GET['date']) ? htmlspecialchars($_GET['date']) : $today;
-                  echo (!empty($_GET['date'])) ?  $_GET['date'] : $today; ?></p>
+                  echo $dateChoisie;
+                  ?></p>
          </div>
          <div class="hourOfDate">
             <p>Horaires disponibles</p>
             <hr>
-            <form method="GET" action="" class="hourOfDateForm">
+            <form action='' method="GET" class="hourOfDateForm">
                <?php
                // Récupérer les date déjà réservées
                $reservations = getAppointmentDate();
@@ -114,10 +116,9 @@
 
                      $formattedHoraire = (new DateTime($horaire))->format('H:i');
 
-                     // Afficher le champ de texte avec les horaires disponnibles
-                     // echo "<input type='text' name='appointmentTime' value='$horaire' class='horaireDispo' readonly><br>";
+                     // Afficher le champ de texte avec les horaires disponibles
                      echo "<label class='custom-checkbox'>
-                           <input type='radio' name='horaire' value='" . htmlspecialchars($horaire, ENT_QUOTES) . "'>
+                           <input type='radio' name='horaire' value='" . htmlspecialchars($horaire, ENT_QUOTES) . "' required>
                            <span>$formattedHoraire</span> 
                            </label>";
                   }
@@ -130,13 +131,13 @@
                <?php if (!empty($_SESSION['userInfos'])) {
                   if (nbrOfRdvUser($id_users) > 0) {
                      echo "<div class='errorMessage'>
-                     <i class='bi bi-x-circle-fill'></i>
-                     <p style='text-align: center; font-weight: bold;'> Vous ne pouvez pas avoir plusieurs RDV </p>
-                     <i class='bi bi-x-circle-fill'></i>
-                     </div>";
-                     echo "<a href='account' class='returnAccount'>Retournez sur votre compte pour modifier votre RDV</a>";
+                           <i class='bi bi-x-circle-fill'></i>
+                           <p style='text-align: center; font-weight: bold;'> Vous ne pouvez pas avoir plusieurs RDV </p>
+                           <i class='bi bi-x-circle-fill'></i>
+                           </div>
+                           <button type='submit' class='rdv'> Modifier mon rendez-vous </button>";
                   } else {
-                     echo '<button type="submit" class="rdv">Prendre rendez-vous</button>';
+                     echo "<button type='submit' class='rdv'>Prendre rendez-vous</button>";
                   }
                } else {
                   echo '<button type="submit" class="rdv" style="background-color:black ;color:red ; padding:15px" disabled>Veuillez vous inscrire pour prendre rendez-vous</button>';

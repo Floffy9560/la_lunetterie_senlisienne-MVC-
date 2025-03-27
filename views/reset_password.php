@@ -28,12 +28,11 @@
 
          <!-- Champ caché pour le gestionnaire de mots de passe -->
          <input type="hidden" name="username"
-            value="<?php echo htmlspecialchars($_POST['checkMail'] ?? ''); ?>"
-            autocomplete="username">
+            value="<?php echo htmlspecialchars($_POST['checkMail'] ?? ''); ?>">
 
          <div class="divPassword">
             <label for="password">Nouveau mot de passe : *</label>
-            <input type="password" class="inputFormPassword" id="password" name="password" autocomplete="new-password" required>
+            <input type="password" class="inputFormPassword" id="password" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$" required>
             <span class="eye"><i class="bi bi-eye-fill"></i></span>
             <span class="closeEye"><i class="bi bi-eye-slash-fill"></i></span>
             <span class="checkPassword"> <i class="bi bi-check-circle-fill"></i></span>
@@ -41,7 +40,7 @@
 
          <div class="divPassword">
             <label for="confirmPassword">Confirmez le mot de passe : *</label>
-            <input type="password" class="inputFormConfirmPassword" id="confirmPassword" name="confirmPassword" autocomplete="new-password" required>
+            <input type="password" class="inputFormConfirmPassword" id="confirmPassword" name="confirmPassword" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$" required>
             <span class="eye"><i class="bi bi-eye-fill"></i></span>
             <span class="closeEye"><i class="bi bi-eye-slash-fill"></i></span>
             <span class="checkConfirmPassword"><i class="bi bi-check-circle-fill"></i></span>
@@ -49,13 +48,13 @@
 
          <div class="consignes">
             <p><b>Attention :</b></p>
-            <p>Le mot de passe doit contenir au moins 1 majuscule 1 minuscule 1 caractère spécial (&-+!*$@%_) et 1 nombre </p>
+            <p>Le mot de passe doit contenir au moins 1 majuscule 1 minuscule 1 caractère spécial (!@#$%^&*()_+) et 1 nombre </p>
 
          </div>
 
          <button type="submit" class="btnForm" id="sendBtn">Réinitialiser le mot de passe</button>
-         <button type="submit" class="btnForm"><a href="inscription" class="btnReturn">Retour à la connexion</a></button>
-         <p class="text-center">Si vous n'avez pas encore créé de compte, vous pouvez <a href="inscription"><u>vous inscrire</u></a>.</p>
+         <button class="btnForm"><a href="inscription" class="btnReturn">Retour à la connexion</a></button>
+         <p class="text-center">Si vous n'avez pas encore créé de compte, vous pouvez <a href="inscription" style="color: white; text-decoration: underline; font-weight: bold;">vous inscrire</a>.</p>
       </form>
 
    </div>

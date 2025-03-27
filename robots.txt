@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /views/404.php
+Disallow: /assets/
+Disallow: /controllers/
+Disallow: /models/
+Disallow: /views/cart.php

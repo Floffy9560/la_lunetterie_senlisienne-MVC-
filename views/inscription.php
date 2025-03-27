@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Inscription</title>
+    <title>Inscription | Créez un compte chez Lunetterie Senlisienne</title>
+    <meta name="description" content="Créez votre compte pour profiter des meilleures offres de la Lunetterie Senlisienne. Commandez en ligne et suivez vos achats facilement.">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -24,6 +25,7 @@
     <!-- ------------------------------------------------------>
 
     <main>
+        <h1>Inscription à Lunetterie Senlisienne</h1>
         <div class="formulaire">
             <div class="connection">
                 <h2>Déjà client ?</h2>
@@ -67,9 +69,9 @@
                                 name="passwordCustomer"
                                 placeholder="Mot de passe"
                                 class="input"
-                                pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[&-+!*$@%_])([&-+!*$@%_\w]{8,15})$" required />
+                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$" required />
                             <i class='bi bi-eye-slash-fill' id="closeEyeCustomer"></i>
-                            <i class="bi bi-eye-fill" id="eyeCustomer"></i>
+                            <i class="bi bi-eye-fill" id="eyeCustomer" aria-label="Afficher le mot de passe"></i>
                         </div>
                     </div>
                     <a href="mail_controlle" id="passwordLost">Mot de passe oublié</a>
@@ -185,14 +187,15 @@
                                 placeholder="Mot de passe"
                                 class="input"
                                 id="password"
-                                pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[&-+!*$@%_])([&-+!*$@%_\w]{8,15})$"
+                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$"
                                 autocomplete="current-password"
                                 required />
                             <i class='bi bi-eye-slash-fill' id="closeEye"></i>
-                            <i class="bi bi-eye-fill" id="eye"></i>
+                            <i class="bi bi-eye-fill" id="eye" aria-label="Afficher le mot de passe"></i>
                         </div>
 
                         <div class="birth">
+                            <label for="days"></label>
                             <select name="days" id="days" required>
                                 <option value="">Jour</option>
                                 <?php
@@ -202,6 +205,7 @@
                                 ?>
                             </select>
 
+                            <label for="month"></label>
                             <select name="month" id="month" required>
                                 <option value="">Mois</option>
                                 <option value="janvier">janvier</option>
@@ -218,6 +222,7 @@
                                 <option value="décembre">décembre</option>
                             </select>
 
+                            <label for="year"></label>
                             <select name="year" id="year" required>
                                 <option value="">Année</option>
                                 <?php
@@ -229,7 +234,8 @@
 
                         </div>
 
-                        <h5>À quel numéro de téléphone le transporteur peut-il vous contacter ?</i></h5>
+                        <h4>À quel numéro de téléphone le transporteur peut-il vous contacter ?</h4>
+
                         <div class="tel">
                             <p id="tel-tcheck"><i class="bi bi-check-circle-fill"></i></p>
                             <label for="tel" id='labelTel'>Veuillez saisir que des chiffres</label>
@@ -246,10 +252,12 @@
                     </div>
                     <div class="confirmation_container">
                         <div class="confirmation_container_div">
+                            <label for="confidentiality"></label>
                             <input
                                 type="checkbox"
                                 name="confidentiality"
                                 value="confidentiality"
+                                id="confidentiality"
                                 class="confirmation" required />
                             <p> En cochant cette case, je confirme avoir pris connaissance de la
                                 <a href="#">politique de confidentialité</a> et accepter les

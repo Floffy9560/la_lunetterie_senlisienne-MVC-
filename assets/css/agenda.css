@@ -1,6 +1,9 @@
 p {
   font-size: clamp(16px, 1.5vw, 40px);
 }
+h1 {
+  text-align: center;
+}
 section {
   display: flex;
   flex-wrap: wrap;
@@ -179,7 +182,6 @@ hr {
 }
 .rdv {
   width: 90%;
-
   font-size: 25px;
   border-radius: 10px;
   color: #c89f36;
@@ -206,7 +208,7 @@ hr {
 }
 .error,
 .succes {
-  position: relative;
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;

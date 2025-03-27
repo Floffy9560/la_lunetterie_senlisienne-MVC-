@@ -18,6 +18,19 @@
 <body>
     <?php include __DIR__ . '/../templates/header.php' ?>
     <main>
+        <?php
+        // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        //     if (!empty($_POST['glasseData'])) {
+        //         echo "<pre>";
+        //         print_r($_POST);  // Affiche les données soumises
+        //         print_r($_FILES);
+        //         echo "</pre>";
+        //     } else {
+        //         echo "Le formulaire n'a pas été soumis";
+        //     }
+        // }
+
+        ?>
         <section>
             <div class="containerIdentity">
                 <h2>Bonjour Mr le directeur : <?= $_SESSION['userInfos']['firstname'] ?></h2>
@@ -77,7 +90,7 @@
                     <label for='add'></label>
                     <button type='submit' id='add' name='add' class='modification_user'>Ajouter un produit</button>
                 </form> -->
-                <button class='modification_user'>Ajouter un produit</button>
+
                 <button class='modification_user'>Supprimer un produit</button>
                 <button class='modification_user'>Modifier l'agenda</button>
                 <button class='modification_user'>Modifier les horaires d'ouverture</button>
@@ -87,8 +100,64 @@
                 <button class='modification_user software'>Connexion avec votre logiciel</button>
 
             </div>
+            <div class="addProduct">
 
+                <h2>Ajouter un produit</h2>
+                <form action="" method="POST" enctype="multipart/form-data" class="formGlasseData">
+                    <input type="hidden" name="glasseData" value="glasseData">
+
+                    <label for="brand">Choisir une marque :</label>
+                    <select name="brand" id="brand">
+                        <?php
+                        $marques = displayBrand();
+                        foreach ($marques as $marque) {
+                            echo "<option value=\"" . strtolower(htmlspecialchars($marque['brand'])) . "\">" . htmlspecialchars($marque['brand']) . "</option>";
+                        }
+                        ?>
+                    </select>
+
+                    <label for="category">Choisir une catégorie :</label>
+                    <select name="category" id="category">
+                        <option value="solaires">Solaire</option>
+                        <option value="optiques">Optique</option>
+                    </select>
+
+                    <label for="gender">Choisir un genre :</label>
+                    <select name="gender" id="gender">
+                        <option value="hommes">Homme</option>
+                        <option value="femmes">Femme</option>
+                        <option value="enfants">Enfant</option>
+                        <option value="mixte">Mixte</option>
+                    </select>
+
+                    <label for="name">Nom</label>
+                    <input type="text" name="name" id="name" require>
+
+                    <label for="price">Prix</label>
+                    <input type="text" name="price" id="price" require>
+
+                    <label for="color">Couleur</label>
+                    <input type="text" name="color" id="color" require>
+
+                    <label for="image">Choisissez une image :</label>
+                    <input type="file" name="image" id="image" require>
+
+                    <label for="matter">Matière</label>
+                    <input type="text" name="matter" id="matter" require>
+
+                    <label for="shape">Forme</label>
+                    <input type="text" name="shape" id="shape" require>
+
+                    <label for="stock">Stock</label>
+                    <input type="text" name="stock" id="stock" require>
+
+                    <!-- <button type="submit" class="btnAddProduct">Envoyer</button> -->
+                    <button type="submit" class="btnAdmin">Envoyer</button>
+                </form>
+                <?php ajoutLunette(); ?>
+            </div>
     </main>
+
 
     <script src="assets/JS/accountADMIN.js"></script>
 </body>

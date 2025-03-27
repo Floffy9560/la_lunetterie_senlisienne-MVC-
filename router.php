@@ -5,13 +5,15 @@ session_start();
 
 
 // Test pour savoir comment récupérer les infos sur la session et comment elle fonctionne  !! A RETIRERE A LA FIN !!
-if (isset($_SESSION)) {
-	echo "<pre>";
-	print_r($_SESSION); // Affiche les infos de l'utilisateur
-	echo "</pre>";
-} else {
-	echo "Aucune session active.";
-}
+// if (isset($_SESSION)) {
+// 	echo "<div style='background-color:gainsboro';>";
+// 	echo "<pre>";
+// 	print_r($_SESSION); // Affiche les infos de l'utilisateur
+// 	echo "</pre>";
+// 	echo "</div>";
+// } else {
+// 	echo "Aucune session active.";
+// }
 
 
 // Activation des erreurs et affiche des messages d'erreur
@@ -27,6 +29,8 @@ $path = $_SERVER['REDIRECT_URL'];
 
 if ($path == '/') {
 	require 'controllers/index_controller.php';
+} elseif ($path == '/robots.txt') {
+	require_once 'robots.txt';
 } else {
 	$path = explode('/', $path)[1];
 

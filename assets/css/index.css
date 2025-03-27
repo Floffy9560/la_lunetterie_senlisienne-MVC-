@@ -13,25 +13,81 @@ main {
   align-items: center;
   margin: auto;
 }
-.name {
+.entete {
+  background-image: url(/assets/img/magasin/vitrine.jpg);
+  background-size: cover;
+  background-position: top center;
+  position: relative;
+  padding: 20px;
+  box-shadow: 0 10px 10px black;
+}
+.overlayEntete {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
+}
+table {
+  /* border-collapse: collapse; */
+  /* line-height: 40px; */
+  text-align: left;
+  margin: auto;
+  z-index: 50;
+}
+.name {
+  display: flex;
   text-align: center;
-  width: 80%;
-  margin: 50px auto;
 }
 
 h1 {
-  font-size: clamp(60px, 8vw, 110px);
+  width: 100%;
+  font-size: clamp(50px, 8vw, 90px);
   font-family: "boecklins";
-  color: #2c2c2c;
+  color: #c89f36;
   text-shadow: 2px 2px 2px black;
   font-weight: normal;
-  line-height: 70px;
-  line-height: 130px;
+  line-height: 90px;
+  z-index: 10;
 }
-
+.container_guide p,
+.container_guide span,
+.container_guide th {
+  z-index: 10;
+  color: #c89f36;
+  font-size: clamp(15px, 3vw, 21px);
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 2px black;
+}
+span {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-left: 14px;
+}
+td {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+.informations {
+  margin: auto;
+  text-align: center;
+}
+.horaires {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px;
+  margin: auto;
+  position: relative;
+}
 /*----------------------------------------*/
 /*----------------section-----------------*/
 /*----------------------------------------*/
@@ -51,13 +107,18 @@ section {
 /*------------------------------------------------*/
 
 .container_guide {
+  width: 90%;
+  /* max-width: 500px; */
+  position: relative;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
   margin: 40px auto;
   gap: 50px;
+  padding: 20px;
+  z-index: 100;
 }
 
 .post-it {
@@ -78,6 +139,7 @@ section {
   font-size: 16px;
   color: #333;
   text-align: center;
+  opacity: 0.7;
 }
 .scotch {
   position: absolute;
@@ -152,7 +214,7 @@ section {
   justify-content: space-between;
   position: relative;
   width: 100%;
-  max-width: 900px;
+  max-width: 700px;
   /*background-color: #fff475;*/
   background-color: #c89f36;
   padding: 20px;

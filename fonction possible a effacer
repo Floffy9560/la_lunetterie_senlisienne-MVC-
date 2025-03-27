@@ -1,0 +1,67 @@
+/////////////////////////////////////////////////////////////////////////
+/////////// essaie de requetes sql pour inserer des lunnettes ///////////
+/////////////////////////////////////////////////////////////////////////
+
+// Récuperer les diff marsues
+function keepG()
+{
+$pdo = getconnexion();
+$sql = "SELECT `brand` FROM `kghdsi_brands`;";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
+return $brands;
+}
+
+//fonction générale qui prend en paramètres la table sélectionné le nbr et le nom des colonnes ainsi que le nom des valeurs
+function insertData($table, $columns, $values)
+{
+// Connexion à la base de données
+$pdo = getConnexion();
+
+// Construction de la requête SQL dynamique en fonction de la table, des colonnes et des valeurs
+$columnStr = implode(", ", $columns);
+$valueStr = ":" . implode(", :", $columns);
+
+try {
+$stmt = $pdo->prepare("INSERT INTO $table ($columnStr) VALUES ($valueStr)");
+
+// Lier les paramètres dynamiquement
+foreach ($columns as $index => $column) {
+$stmt->bindParam(":$column", $values[$index], PDO::PARAM_STR);
+}
+
+$stmt->execute();
+
+// Retourner l'ID du dernier élément inséré si nécessaire
+return $pdo->lastInsertId();
+} catch (PDOException $e) {
+echo "⚠️ Erreur insertion dans la table $table SQL : " . $e->getMessage();
+return false;
+}
+}
+
+//implenter un item
+
+function addItem($name, $price, $stock)
+{
+// Définir les colonnes et les valeurs à insérer
+$columns = ['name', 'price', 'stock'];
+$values = [$name, $price, $stock];
+
+// Appeler la fonction générique d'insertion
+return insertData('kghdsi_items', $columns, $values);
+}
+
+
+//implenter une paire de lunette
+
+function addGlasses($color, $matter, $shape, $image_path, $image_name, $id_category, $id_gender, $id_brands, $id_items)
+{
+// Définir les colonnes et les valeurs à insérer
+$columns = ['color', 'matter', 'shape', 'image_path', 'image_name', 'id_category', 'id_gender', 'id_brands', 'id_items'];
+$values = [$color, $matter, $shape, $image_path, $image_name, $id_category, $id_gender, $id_brands, $id_items];
+
+// Appeler la fonction générique d'insertion
+return insertData('kghdsi_glasses', $columns, $values);
+}

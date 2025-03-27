@@ -64,10 +64,11 @@ label {
 }
 
 input,
-textarea {
+textarea,
+select {
   width: 100%;
   height: 40px;
-  border-radius: 5px;
+  border-radius: 8px;
   border: 2.5px solid #c89f36;
   padding-left: 8px;
   background-color: blanchedalmond;
@@ -148,4 +149,29 @@ textarea {
   width: 100%;
   width: 300px;
   margin: auto;
+}
+
+.addProduct {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 90%;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+  border-radius: 15px;
+  margin: auto;
+  background-color: rgba(48, 108, 96, 1);
+}
+.formGlasseData {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 18px;
+}
+input[type="file"] {
+  padding-top: 7px;
 }

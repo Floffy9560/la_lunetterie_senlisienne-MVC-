@@ -18,6 +18,15 @@
 <body>
   <?php include __DIR__ . '/../templates/header.php' ?>
 
+  <div class="container">
+    <div class="content">
+      <h1>Page en Création</h1>
+      <p>Désolé, cette page est actuellement en cours de création. Revenez plus tard !</p>
+      <div class="spinner"></div>
+      <p>Merci de votre patience.</p>
+    </div>
+  </div>
+
   <main>
     <div class="img">
       <img

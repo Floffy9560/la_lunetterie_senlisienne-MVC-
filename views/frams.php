@@ -4,6 +4,8 @@
 <head>
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <meta name="description" content="Trouvez les lunettes parfaites parmi une large sélection de marques, formes et couleurs. Filtrez par genre, matière et bien plus encore !" />
+   <meta name="keywords" content="lunettes, optique, lunettes de vue, lunettes de soleil, marques de lunettes, formes de lunettes, couleurs de lunettes, achat lunettes en ligne" />
    <title>Recherche lunettes</title>
    <link rel="preconnect" href="https://fonts.googleapis.com" />
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,7 +20,7 @@
 <?php include 'templates/header.php' ?>
 
 <body>
-
+   <h1>Recherchez vos lunettes idéales</h1>
    <main>
       <button type="button" class="buttonFilter" id="buttonFilter">Afficher les filtres<i class="bi bi-filter-square-fill"></i></button>
       <div class="searchContainer">
@@ -28,7 +30,8 @@
 
 
                   <form action="" method="GET" class="formSearch">
-                     <p>Marques :</p>
+                     <!-- <p>Marques :</p> -->
+                     <h2>Filtrez par marque</h2>
                      <div class="containerCheckbox">
                         <span>
                            <input type="checkbox" id="brett" name="brands[]" value="brett" />
@@ -56,7 +59,8 @@
                <div class="containerInputSearch">
 
                   <form action="" method="GET" class="formSearch">
-                     <p>Genres :</p>
+                     <!-- <p>Genres :</p> -->
+                     <h2>Choisissez votre genre</h2>
                      <div class="containerCheckbox">
                         <span>
                            <input type="checkbox" id="men" name="genders[]" value="homme" />
@@ -86,7 +90,8 @@
                <div class="containerInputSearch">
 
                   <form action="" method="GET" class="formSearch">
-                     <p>Formes :</p>
+                     <!-- <p>Formes :</p> -->
+                     <h2>Sélectionnez une forme</h2>
                      <div class="containerCheckbox">
                         <span>
                            <input type="checkbox" id="carrée" name="shapes[]" value="carrée" />
@@ -128,7 +133,8 @@
                <div class="containerInputSearch">
 
                   <form action="" method="GET" class="formSearch">
-                     <p>Couleurs :</p>
+                     <!-- <p>Couleurs :</p> -->
+                     <h2>Optez pour une couleur</h2>
                      <div class="containerCheckbox">
                         <span>
                            <input type="checkbox" id="noir" name="colors[]" value="noir" />
@@ -178,7 +184,8 @@
                <div class="containerInputSearch">
 
                   <form action="" method="GET" class="formSearch">
-                     <p>Matières :</p>
+                     <!-- <p>Matières :</p> -->
+                     <h2>Préférez une matière</h2>
                      <div class="containerCheckbox">
                         <span>
                            <input type="checkbox" id="titane" name="matters[]" value="titane" />

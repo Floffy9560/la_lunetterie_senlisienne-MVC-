@@ -32,9 +32,10 @@ h4 {
 }
 /* Attention trouver les bonne size du text : 16px 21px 40px pour le p  */
 p {
+  width: 85%;
   margin: 15px auto;
   font-size: clamp(16px, 1.5vw, 40px);
-  color: whitesmoke;
+  color: gainsboro;
 }
 li {
   margin: 10px auto;
@@ -46,13 +47,14 @@ li {
   background-repeat: no-repeat;
   /* font-size: clamp(16px, 3vw, 20px); */
   font-size: clamp(16px, 1.5vw, 40px);
-  color: whitesmoke;
+  color: gainsboro;
 }
 .DMLA {
   width: 70%;
   margin: 20px auto;
   border-radius: 5px;
   background: #c89f36;
+  padding: 10px;
 }
 .DMLA p {
   color: #2c2c2c;

@@ -29,33 +29,30 @@ function searchInPHPFiles($dir, $search)
          </div>
          <div class="headerDiv">
             <div class="logoCartBurger">
-               <a href="cart"><img
-                     src="/./assets/img/icons8-panier-40.png"
-                     alt="cart"
-                     id="cart"
-                     class="logoNavCart" /></a>
-               </a>
+               <a href="cart"><i class="bi bi-basket3-fill logoNavCart"></i></a>
                <div class="nbrArticleBurger"></div>
             </div>
          </div>
       </div>
       <div class="burger-menu">
-         <form action="searchKeyWord" method="GET">
-            <input
-               type="search"
-               id="site-search"
-               name="search"
-               placeholder="rechercher...." />
+         <div class="searchContainerBtn">
+            <form action="searchKeyWord" method="GET">
+               <input
+                  type="search"
+                  id="site-search-burger"
+                  name="search"
+                  placeholder="rechercher...." />
 
-            <button class="searchButton" type="submit">
-               <img
-                  src="/./assets/img/icons8-loupe-40.png"
-                  alt="search_logo"
-                  class="searchLogo" />
-            </button>
-         </form>
+               <button class="searchButton" type="submit">
+                  <img
+                     src="/./assets/img/icons8-loupe-40.png"
+                     alt="search_logo"
+                     class="searchLogo" />
+               </button>
+            </form>
+         </div>
          <a href="agenda">
-            <p> rendez-vous</p>
+            <p>rendez-vous</p>
          </a>
          <a href="glasses">
             <p>Guide pratique</p>
@@ -80,7 +77,7 @@ function searchInPHPFiles($dir, $search)
 
    <div class="menuContainer">
       <div id="containerLogo">
-         <a href="/"><img src="/./assets/img/logo/logo-magasin.png" alt="shop logo" id="logo" /></a>
+         <a href="/"><img src="/./assets/img/logo/logo-magasin.png" alt="logo du magasin La lunneterie Senlisienne" id="logo" /></a>
       </div>
       <div class="containerMenu">
          <div class="menu">
@@ -96,7 +93,8 @@ function searchInPHPFiles($dir, $search)
                <div class="account">
                   <div class="searchContainer">
                      <div class="searchContainerLogo">
-                        <?php if (!empty($_SESSION['userInfos'])) {
+                        <?php
+                        if (!empty($_SESSION['userInfos'])) {
                            if ($_SESSION['userInfos']['id_role'] == 2) {
                               echo  "<a href='inscription'> <i class='bi bi-person-check' style='color:green'></i></a>";
                            } else {
@@ -105,15 +103,9 @@ function searchInPHPFiles($dir, $search)
                         } else {
                            echo " <a href='inscription'><i class='bi bi-person'></i></a>";
                         }
-
                         ?>
                         <div class="logoCart">
-                           <a href="cart"><img
-                                 src="/./assets/img/icons8-panier-40.png"
-                                 alt="cart"
-                                 id="cart"
-                                 class="logoNavCart" /></a>
-                           </a>
+                           <a href="cart"><i class="bi bi-basket3-fill logoNavCart"></i></a>
                            <div class="nbrArticle"></div>
                         </div>
 
@@ -140,7 +132,7 @@ function searchInPHPFiles($dir, $search)
          </div>
       </div>
    </div>
-   <script>
+   <script defer>
       const biList = document.getElementById("bi-list");
       const burgerMenu = document.querySelector(".burger-menu");
 

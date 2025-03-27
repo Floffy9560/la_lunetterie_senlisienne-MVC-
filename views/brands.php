@@ -327,6 +327,7 @@
         container_card.classList.toggle("expanded");
         button.classList.toggle("active");
 
+        // Défilement vers le container card pour afficher la définition s'il est déplié défiler jusqu'à la fin...smooth=défilement lent
         setTimeout(() => {
           container_card.scrollIntoView({
             behavior: 'smooth',

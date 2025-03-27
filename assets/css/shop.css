@@ -170,7 +170,7 @@ th {
   transform: translateX(0);
   transition: transform 0.5s ease-in-out;
 }
-button {
+.rdv {
   padding: 1rem;
   border-radius: 15px;
   font-size: clamp(16px, 4vw, 25px);

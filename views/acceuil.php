@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Découvrez La Lunetterie Senlisienne, votre opticien expert en montures tendances et sur-mesure à Senlis.">
+
     <title>La lunetterie Senlisienne</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,55 +21,117 @@
 
 <body>
 
-    <div class="name">
+    <!-- <div class="name">
         <h1>La lunetterie Senlisienne</h1>
-    </div>
+    </div> -->
 
     <!---------------------------------------- section main sous le header avec 3 photos * nom du de l'enseigne--------------------->
 
-    <main>
-        <section>
-            <div class="container_guide">
 
-                <div class="post-it">
+    <section class="entete">
+        <div class="overlayEntete"></div>
+        <div class="name">
+            <h1>Bienvenue à la : <br> lunetterie Senlisienne</h1>
+        </div>
+        <div class="container_guide">
 
-                    <div class="scotch"></div>
-                    <img
-                        src="assets/img/magasin/table-de-vente.jpg"
-                        alt="Le magasin "
-                        class="guide_img" />
-                    <a href="shop">
-                        <p class="guide-text">Le magasin</p>
-                    </a>
+            <!-- <div class="post-it">
 
-                </div>
+                <div class="scotch"></div>
+                <img
+                    src="assets/img/magasin/table-de-vente.jpg"
+                    alt="Le magasin "
+                    class="guide_img" />
+                <a href="shop">
+                    <p class="guide-text">Le magasin</p>
+                </a>
 
-                <div class="post-it">
-                    <div class="scotch"></div>
-
-                    <img
-                        src="assets/img/entretien-lunettes-en-corne-astuces-essentielles-1708421620.jpg"
-                        alt="Bien choisir ses lunettes"
-                        class="guide_img" />
-                    <a href="glasses">
-                        <p class="guide-text">Guide pratique</p>
-                    </a>
-                </div>
-
-                <div class="post-it">
-                    <div class="scotch"></div>
-
-                    <img
-                        src="assets/img/sur-mesure2.jpg"
-                        alt="examen_de_vue"
-                        class="guide_img" />
-                    <a href="custom_made">
-                        <p class="guide-text">Le sur-mesure</p>
-                    </a>
-
-                </div>
             </div>
-        </section>
+
+            <div class="post-it">
+                <div class="scotch"></div>
+
+                <img
+                    src="assets/img/entretien-lunettes-en-corne-astuces-essentielles-1708421620.jpg"
+                    alt="Bien choisir ses lunettes"
+                    class="guide_img" />
+                <a href="glasses">
+                    <p class="guide-text">Guide pratique</p>
+                </a>
+            </div> -->
+
+            <!-- <div class="post-it"> -->
+            <!-- <div class="scotch"></div>
+
+                <img
+                    src="assets/img/sur-mesure2.jpg"
+                    alt="examen_de_vue"
+                    class="guide_img" />
+                <a href="custom_made">
+                    <p class="guide-text">Le sur-mesure</p>
+                </a> 
+             </div> -->
+
+            <div class="horaires">
+
+                <p>Le magasin vous accueil dans une ambiance chaleureuse le :</p>
+                <table>
+                    <tr>
+                        <th>lundi</th>
+
+                        <td colspan="2">
+                            <span>Seulement sur rendez-vous</span>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>mardi</th>
+                        <td colspan="2">
+                            <span>09h30-13h00</span>
+                            <span> 14h00-19h00</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>mercredi</th>
+                        <td colspan="2">
+                            <span>09h30-13h00</span>
+                            <span> 14h00-19h00</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>jeudi</th>
+                        <td colspan="2">
+                            <span>09h30-13h00</span>
+                            <span> 14h00-19h00</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>vendredi</th>
+                        <td colspan="2">
+                            <span>09h30-13h00</span>
+                            <span> 14h00-19h00</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>samedi</th>
+                        <td colspan="2">
+                            <span>09h30-13h00</span>
+                            <span> 14h00-18h00</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="informations">
+
+                <p>11 Rue de l'Apport au Pain, 60300 Senlis</p>
+                <p>03 44 72 89 07</p>
+                <p>Parking 1h gratuite à proximité</p>
+
+            </div>
+
+        </div>
+    </section>
+    <main>
         <!--- -------------1ere section : offer------------ --->
         <section class="container-offre">
 

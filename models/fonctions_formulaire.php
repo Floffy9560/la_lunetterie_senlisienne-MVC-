@@ -57,6 +57,7 @@ function cleanPassword($password)
 
       // Si le mot de passe respecte les règles
       if (empty($errors)) {
+            // Hasher le mot de passe pour la sécuritée
             return ['success' => true, 'password' => password_hash($password, PASSWORD_DEFAULT)]; // Hasher le mot de passe
       } else {
             return ['success' => false, 'errors' => $errors];

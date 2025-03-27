@@ -1,6 +1,3 @@
-<?php echo "<p style='color:yellow'>" .
-   var_dump($_POST) . "</p>"; ?>
-
 <head>
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,17 +16,19 @@
 
 <body>
    <div class="containerCheckMail">
-      <form method="POST" class="formMailTcheck">
+
+      <form method="POST" action="" class="formMailTcheck">
          <div class="checkMail">
             <label for="mail"></label>
-            <input type="email" class="inputMailTcheck" name="mail" placeholder="Entrez votre E-MAIL">
-            <button type="submit" class="buttonMailTcheck"><b>Vérifier votre mail</b></button>
+            <input type="email" class="inputMailTcheck" id="mail" name="mail" placeholder="Entrez votre e-mail" required autocomplete="email">
+            <button type="submit" class="buttonMailTcheck" aria-label="Vérifier votre e-mail"><b>Vérifier votre mail</b></button>
          </div>
-
       </form>
+
       <div class="mailValide">
          <?php
-         if (!empty($_POST['mail'])) {
+         if (!empty($_POST["mail"])) {
+            $mail = $_POST["mail"];
             if (checkMail($mail) == true) {
                echo "<div class='valide'>
                         <p><i class='bi bi-envelope-check-fill'></i></p>

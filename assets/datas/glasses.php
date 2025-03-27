@@ -443,16 +443,122 @@ $glasses = [
 //     'gender' => $glasse['gender'],
 //     'shape' => $glasse['shape'],
 //     'stock' => $glasse['stock'],
-//     'category' => $glasse['optique'],
+//     'category' => $glasse['category'],
 //   ]);
 // }
 
 
 ?>
+<form action="upload.php" method="POST" enctype="multipart/form-data">
+  <label for="id">ID</label>
+  <input type="text" name="id" id="id">
+
+  <label for="brand">Marque</label>
+  <input type="text" name="brand" id="brand">
+
+  <label for="category">Catégorie</label>
+  <input type="text" name="category" id="category">
+
+  <label for="name">Nom</label>
+  <input type="text" name="name" id="name">
+
+  <label for="price">Prix</label>
+  <input type="text" name="price" id="price">
+
+  <label for="color">Couleur</label>
+  <input type="text" name="color" id="color">
+
+  <label for="image">Choisissez une image :</label>
+  <input type="file" name="image" id="image">
+
+  <label for="matter">Matière</label>
+  <input type="text" name="matter" id="matter">
+
+  <label for="gender">Genre</label>
+  <input type="text" name="gender" id="gender">
+
+  <label for="shape">Forme</label>
+  <input type="text" name="shape" id="shape">
+
+  <label for="stock">Stock</label>
+  <input type="text" name="stock" id="stock">
+
+  <button type="submit">Envoyer</button>
+</form>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // Vérifier si un fichier a été téléchargé
+  if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+    // Dossier où stocker les images
+    $upload_dir = '/assets/img/marques/' . $brand . '/lunettes/' . $category . '/' . $gender . '/';
+    $filename = basename($_FILES['image']['name']);
+    $filepath = $upload_dir . $filename;
+
+    // Déplacer le fichier téléchargé dans le répertoire des images
+    if (move_uploaded_file($_FILES['image']['tmp_name'], $filepath)) {
+      // Récupérer les autres champs du formulaire
+      $id = $_POST['id'];
+      $brand = $_POST['brand'];
+      $category = $_POST['category'];
+      $name = $_POST['name'];
+      $price = $_POST['price'];
+      $color = $_POST['color'];
+      $matter = $_POST['matter'];
+      $gender = $_POST['gender'];
+      $shape = $_POST['shape'];
+      $stock = $_POST['stock'];
+
+      // Connexion à la base de données (assurez-vous de sécuriser les données)
+      $pdo = getConnexion();
+
+      // Préparer la requête d'insertion avec le chemin de l'image
+      $sql = "INSERT INTO products (id, brand, category, name, price, color, image, matter, gender, shape, stock) 
+                    VALUES (:id, :brand, :category, :name, :price, :color, :image, :matter, :gender, :shape, :stock)";
+
+      $stmt = $pdo->prepare($sql);
+      $stmt->bindParam(':id', $id);
+      $stmt->bindParam(':brand', $brand);
+      $stmt->bindParam(':category', $category);
+      $stmt->bindParam(':name', $name);
+      $stmt->bindParam(':price', $price);
+      $stmt->bindParam(':color', $color);
+      $stmt->bindParam(':image', $filepath); // Stockage du chemin
+      $stmt->bindParam(':matter', $matter);
+      $stmt->bindParam(':gender', $gender);
+      $stmt->bindParam(':shape', $shape);
+      $stmt->bindParam(':stock', $stock);
+
+      // Exécuter la requête
+      if ($stmt->execute()) {
+        echo "Produit ajouté avec succès !";
+      } else {
+        echo "Erreur lors de l'ajout du produit.";
+      }
+    } else {
+      echo "Erreur lors du téléchargement de l'image.";
+    }
+  } else {
+    echo "Aucun fichier image téléchargé ou erreur de téléchargement.";
+  }
+}
 
 
-<!-- <form action="" method="POST">
-    <label for="BDD">insertion BDD</label>
-    <input type="text" name="BDD" id="BDD">
-    <button type="submit"> inserer </button>
-  </form> -->
+
+
+//  <form action="" method="POST">
+//     <label for="BDD">insertion BDD</label>
+//     <input type="text" name="BDD" id="BDD">
+//     <button type="submit"> inserer </button>
+//   </form> 
+
+
+
+
+
+
+
+
+
+
+?>
