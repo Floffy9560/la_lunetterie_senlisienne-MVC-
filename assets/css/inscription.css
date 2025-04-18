@@ -3,7 +3,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 1rem;
-  width: 100vw;
+  width: 100%;
   justify-content: center;
   margin: 2rem auto;
 }
@@ -16,8 +16,8 @@ h1 {
   min-width: 300px;
   max-width: 600px;
   border-radius: 15px;
-  padding: 1rem 1.5em;
-  margin-bottom: 1rem;
+  padding: 25px;
+  margin-bottom: 15px;
   background-color: rgba(48, 108, 96, 0.9);
 }
 
@@ -73,8 +73,8 @@ h6 {
 
 .inputCivilityName {
   width: 100%;
-  font-size: 1rem;
-  padding-left: 1rem;
+  font-size: 15px;
+  padding-left: 15px;
   border: 1px solid #120d03;
   border-radius: 10px;
   height: 50px;
@@ -84,6 +84,7 @@ h6 {
   display: flex;
   justify-content: space-between;
   position: relative;
+  gap: 10px;
   /* margin-bottom: 15px; */
 }
 
@@ -109,7 +110,6 @@ h6 {
 #passwordCustomerTcheck {
   display: none;
   position: absolute;
-  color: green;
   top: 50%;
   right: 10px;
 }
@@ -129,15 +129,23 @@ h6 {
 #labelEmail,
 #labelTel,
 #labelAdress,
-#labelCustomerMail {
+#labelCustomerMail,
+#labelPassword,
+#labelCustomerMail,
+#labelPasswordCustomer {
+  display: flex;
   visibility: hidden;
-  color: red;
+  color: #b30000;
   font-weight: bold;
-  font-size: clamp(9px, 3vw, 17px);
-  background-color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  /* background-color: #ffe6e6; */
+  /* background-color: #fff2f2; */
+  background-color: #fff5f5;
   text-wrap: nowrap;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 5px;
+  margin: 5px 0;
+  border: 1px solid #b30000;
 }
 
 .input {
@@ -170,12 +178,13 @@ select {
 .bi-check-circle-fill {
   position: absolute;
   right: 15px;
-  top: 0;
+  top: 8px;
+  color: green;
 }
 .bi-eye-fill,
 .bi-eye-slash-fill {
   position: absolute;
-  top: 55%;
+  top: 60%;
   right: 25px;
 }
 
@@ -198,6 +207,15 @@ select {
 .birth {
   display: flex;
   justify-content: space-between;
+}
+.error-messages {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+  background-color: #ffe6e6; /* Couleur de fond rouge clair */
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid red;
 }
 /*---------------------------------------------------------------*/
 /* On rajoute une mise en avant pour les éléments avec le focus. */

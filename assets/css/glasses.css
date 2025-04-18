@@ -13,12 +13,12 @@ main {
   margin: 2rem auto;
 }
 h2 {
-  font-size: clamp(35px, 5vw, 50px);
+  font-size: clamp(35px, 5vw, 45px);
   margin: 50px auto;
   color: #1e3a5f;
 }
 h3 {
-  font-size: clamp(30px, 4vw, 40px);
+  font-size: clamp(30px, 4vw, 35px);
   margin-bottom: 35px;
   margin-top: 35px;
   color: #ab8007;

@@ -41,81 +41,91 @@ buttonReset.addEventListener("click", () => {
 //-----------------Récupérer les données de la cards souhaitée -------------------------//
 //-------------------------------------------------------------------------------------//
 
-let cards = document.querySelectorAll(".cards");
-let glassesData = [];
+document.addEventListener("DOMContentLoaded", () => {
+  let cards = document.querySelectorAll(".cards");
 
-cards.forEach((currentGlass) => {
-  // Récupérer l'icone coeur de la carte sélectionnée
-  let heart = currentGlass.querySelector(".bi-heart-fill");
+  cards.forEach((currentGlass) => {
+    // Récupérer l'icone coeur de la carte sélectionnée
+    let heart = currentGlass.querySelector(".bi-heart-fill");
 
-  // Récupérer le boutton de la carte sélectionnée
-  const buttonPushCart = currentGlass.querySelector(".buttonPushCart");
+    // Récupérer le boutton de la carte sélectionnée
+    const buttonPushCart = currentGlass.querySelector(".buttonPushCart");
 
-  // Récupérer l'ID unique
-  let cardId = currentGlass.getAttribute("data-id");
+    // Récupérer l'ID unique
+    let cardId = currentGlass.getAttribute("data-id");
 
-  // Récupérer tout le HTML de la carte
-  let cardHTML = currentGlass.outerHTML;
+    // Récupérer tout le HTML de la carte
+    let cardHTML = currentGlass.outerHTML;
 
-  // Vérifier si cette carte est déjà en favoris pour changer la couleur du cœur au chargement
-  let storedCards = JSON.parse(localStorage.getItem("cardsData")) || [];
-  let isFavorite = storedCards.some((storedCard) => storedCard.id === cardId);
-
-  if (isFavorite) {
-    heart.classList.add("heart-red");
-    heart.classList.remove("heart-black");
-  } else {
-    heart.classList.add("heart-black");
-    heart.classList.remove("heart-red");
-  }
-
-  heart.addEventListener("click", () => {
+    // Vérifier si cette carte est déjà en favoris pour changer la couleur du cœur au chargement
     let storedCards = JSON.parse(localStorage.getItem("cardsData")) || [];
+    let isFavorite = storedCards.some((storedCard) => storedCard.id === cardId);
 
-    if (!heart.classList.contains("heart-red")) {
-      // Ajouter la classe rouge et enregistrer la carte
+    if (isFavorite) {
       heart.classList.add("heart-red");
       heart.classList.remove("heart-black");
-
-      storedCards.push({ id: cardId, html: cardHTML });
-      localStorage.setItem("cardsData", JSON.stringify(storedCards));
-
-      console.log("Ajouté :", storedCards);
     } else {
-      // Remettre la classe noire et supprimer la carte
       heart.classList.add("heart-black");
       heart.classList.remove("heart-red");
-
-      storedCards = storedCards.filter(
-        (storedCard) => storedCard.id !== cardId
-      );
-      localStorage.setItem("cardsData", JSON.stringify(storedCards));
-
-      console.log("Supprimé :", storedCards);
     }
-  });
 
-  buttonPushCart.addEventListener("click", () => {
-    let cartStoredCards =
-      JSON.parse(localStorage.getItem("cardsDataCart")) || [];
-    //   let cardsCart = cartStoredCards.some(
-    //     (cartStoredCard) => cartStoredCard.id === cardId
-    //   );
-    //   cartStoredCards.push({ id: cardId, html: cardHTML });
-    //   localStorage.setItem("cardsDataCart", JSON.stringify(cartStoredCards));
-    // });
-    // Récupère la source de l'image
-    let image = currentGlass.querySelector("img").src;
-    // Récupère le nom des lunettes
-    let name = currentGlass.querySelector("h3").textContent;
-    // Extrait le texte du prix
-    let priceText = currentGlass.querySelector("#price").textContent;
-    // Extrait uniquement le prix numérique
-    let price = parseFloat(priceText.replace(/[^0-9.]/g, ""));
+    heart.addEventListener("click", () => {
+      let storedCards = JSON.parse(localStorage.getItem("cardsData")) || [];
 
-    cartStoredCards.push({ name, price, image });
+      if (!heart.classList.contains("heart-red")) {
+        // Ajouter la classe rouge et enregistrer la carte
+        heart.classList.add("heart-red");
+        heart.classList.remove("heart-black");
 
-    localStorage.setItem("cardsDataCart", JSON.stringify(cartStoredCards));
+        storedCards.push({ id: cardId, html: cardHTML });
+        localStorage.setItem("cardsData", JSON.stringify(storedCards));
+
+        console.log("Ajouté :", storedCards);
+      } else {
+        // Remettre la classe noire et supprimer la carte
+        heart.classList.add("heart-black");
+        heart.classList.remove("heart-red");
+
+        storedCards = storedCards.filter(
+          (storedCard) => storedCard.id !== cardId
+        );
+        localStorage.setItem("cardsData", JSON.stringify(storedCards));
+
+        console.log("Supprimé :", storedCards);
+      }
+    });
+
+    buttonPushCart.addEventListener("click", () => {
+      buttonPushCart.style.backgroundColor = "green";
+      buttonPushCart.style.color = "white";
+
+      let cartStoredCards =
+        JSON.parse(localStorage.getItem("cardsDataCart")) || [];
+
+      // Récupère la source de l'image
+      let image = currentGlass.querySelector("img").src;
+      // Récupère le nom des lunettes
+      let name = currentGlass.querySelector("h3").textContent;
+      // Extrait le texte du prix
+      let priceText = currentGlass.querySelector("#price").textContent;
+      // Extrait uniquement le prix numérique
+      let price = parseFloat(priceText.replace(/[^0-9.]/g, ""));
+      console.log("le prix est de : " + priceText);
+      console.log("le prix est de : " + price);
+
+      cartStoredCards.push({ name, price, image });
+
+      localStorage.setItem("cardsDataCart", JSON.stringify(cartStoredCards));
+
+      // Récupérer les cartes stockées dans localStorage
+      let storedCardsCartLength =
+        JSON.parse(localStorage.getItem("cardsDataCart")) || [];
+      // Afficher le nbr d'article dans le logo panier
+      document.querySelector(".nbrArticle").textContent =
+        storedCardsCartLength.length;
+      document.querySelector(".nbrArticleBurger").textContent =
+        storedCardsCartLength.length;
+    });
   });
 });
 // //------------------------------------------------------------------//

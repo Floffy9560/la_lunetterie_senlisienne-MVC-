@@ -93,7 +93,7 @@ main {
 }
 
 label {
-  font-size: clamp(18px, 3vw, 31px);
+  font-size: clamp(15px, 3vw, 22px);
 }
 select {
   width: 100px;
@@ -138,7 +138,7 @@ select {
 }
 
 .content p {
-  font-size: 1.2rem;
+  font-size: clamp (15px, 3vw, 18px);
   margin-bottom: 30px;
 }
 

@@ -30,53 +30,85 @@
   <main>
     <div class="img">
       <img
-        src="/assets/img/boite-lentille.png"
+        src="/assets/img/creer_moi_une_boite_de_lentille_de_contact_générique-removebg-preview.png"
         alt="Lentilles"
         id="image" />
     </div>
-    <div class="container-contactLenses-post-it">
-      <div class="contactLenses-post-it-scotch"></div>
+    <form action="" method="GET">
+      <div class="container-contactLenses-post-it">
+        <div class="contactLenses-post-it-scotch"></div>
 
-      <label for="correctionOD">Correction de l'oeil droit</label>
-      <select name="correctionOD" id="correctionOD">
-        <option value="1">- 1</option>
-        <option value="2">- 2</option>
-        <option value="3">- 3</option>
-        <option value="4">- 4</option>
-        <option value="5">- 5</option>
-      </select>
 
-      <label for="correctionOG">Correction de l'oeil gauche</label>
-      <select name="correctionOG" id="correctionOG">
-        <option value="1">- 1</option>
-        <option value="2">- 2</option>
-        <option value="3">- 3</option>
-        <option value="4">- 4</option>
-        <option value="5">- 5</option>
-      </select>
+        <label for="correctionOD">Correction de l'œil droit</label>
+        <select name="correctionOD" id="correctionOD">
+          <option value="" disabled selected></option>
+          <?php for ($i = 5; $i > -6; $i--) {
+            if ($i == 0) {
+              echo "<option value='$i' style='color:white;'>$i</option>";
+            } else {
+              echo "<option value='$i' style='color:black;'>$i</option>";
+            }
+          } ?>
 
-      <label for="number">Combien de boîtes voulez-vous ?</label>
-      <select name="number" id="number">
-        <option value="" Nombres de boîtes></option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-      </select>
-      <button type="submit" class="button">Commander</button>
-      <button type="submit" class="button">Ajouter au panier</button>
-    </div>
+
+        </select>
+
+        <label for="correctionOG">Correction de l'œil gauche</label>
+        <select name="correctionOG" id="correctionOG">
+          <option value="" disabled selected></option>
+          <?php for ($i = 5; $i > -6; $i--) {
+            if ($i == 0) {
+              echo "<option value='$i' style='color:white;'>$i</option>";
+            } else {
+              echo "<option value='$i' style='color:black;'>$i</option>";
+            }
+          } ?>
+        </select>
+
+        <label for="quantity">Combien de boîtes voulez-vous ?</label>
+        <select name="quantity" id="quantity">
+          <option value="" disabled selected></option>
+          <?php for ($i = 0; $i < 11; $i++) {
+            echo "<option value='$i'>$i</option>";
+          } ?>
+        </select>
+
+        <button type="submit" class="button" name="action" value="order">Commander</button>
+        <button type="button" class="button" onclick="addToCart()">Ajouter au panier</button>
+      </div>
+    </form>
+
   </main>
 
   <!-- ----------------------------------------footer -------------------------------------------- -->
 
   <?php include __DIR__ . '/../templates/footer.php' ?>
+  <script>
+    function addToCart() {
+      // Récupérer les valeurs sélectionnées dans le formulaire
+      const correctionOD = document.getElementById("correctionOD").value;
+      const correctionOG = document.getElementById("correctionOG").value;
+      const quantity = document.getElementById("quantity").value;
+      console.log(correctionOD);
+      console.log(correctionOG);
+      console.log(quantity);
+
+      // Récupérer le panier existant ou créer un tableau vide
+      let storedLens = JSON.parse(localStorage.getItem("lensData")) || [];
+
+      // Ajouter la nouvelle sélection au panier
+      storedLens.push({
+        correctionOD: correctionOD,
+        correctionOG: correctionOG,
+        quantity: quantity
+      });
+
+      // Sauvegarder le panier mis à jour
+      localStorage.setItem("lensData", JSON.stringify(storedLens));
+
+      alert("Produit ajouté au panier !");
+    }
+  </script>
 </body>
 
 </html>

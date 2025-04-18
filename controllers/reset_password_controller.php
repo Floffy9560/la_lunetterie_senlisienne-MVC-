@@ -2,7 +2,7 @@
 ob_start(); // Active le tampon de sortie
 
 require_once __DIR__ . '/../models/fonctions_formulaire.php';
-
+require_once __DIR__ . '/../models/fonctions_reset_password.php';
 include __DIR__ . '/../views/reset_password.php';
 
 
@@ -30,11 +30,17 @@ if (!empty($_POST['confirmPassword'])) {
       $newPassword = $_POST['confirmPassword'];
       $result = cleanPassword($newPassword);
 
-      // Vérifie si la validation a réussi
-      if ($result['success'] == true) {
-
-            // Récupère le mot de passe hashé
-            $hashedPassword = $result['password'];
+      // Vérifie si la fonction a retourné un tableau d'erreurs
+      if (is_array($result)) {
+            // Affichage des erreurs
+            echo "<ul style='color:red;'>";
+            foreach ($result as $error) { // Parcours du tableau des erreurs
+                  echo "<li>$error</li>";
+            }
+            echo "</ul>";
+      } else {
+            // Si $result n'est PAS un tableau, alors c'est un mot de passe valide
+            $hashedPassword = $result;
 
             // Mettre à jour le mot de passe dans la BDD
             changePassword($id, $hashedPassword);

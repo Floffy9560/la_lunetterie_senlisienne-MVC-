@@ -1,0 +1,449 @@
+// en cliquant sur le boutton si les caractères sont corrects faire apparaitre le logo sinon faire apparaitre le text
+// btnSubmit.addEventListener("click", () => {
+//   const lastnameValue = inputLastname.value.trim();
+//   if (lastnameRegex.test(lastnameValue)) {
+//     lastnameTcheck.classList.add("open");
+//     labelLastname.style.visibility = "hidden";
+//   } else {
+//     labelLastname.style.visibility = "visible";
+//     lastnameTcheck.classList.remove("open");
+//   }
+
+//   const firstnameValue = inputFirstname.value.trim();
+//   if (firstnameRegex.test(firstnameValue)) {
+//     firstnameTcheck.classList.add("open");
+//     labelFirstname.style.visibility = "hidden";
+//   } else {
+//     labelFirstname.style.visibility = "visible";
+//     firstnameTcheck.classList.remove("open");
+//   }
+
+//   const telValue = inputTel.value.trim();
+//   if (telRegex.test(telValue)) {
+//     telTcheck.classList.add("open");
+//     labelTel.style.visibility = "hidden";
+//   } else {
+//     labelTel.style.visibility = "visible";
+//     telTcheck.classList.remove("open");
+//   }
+
+//   const emailValue = inputEmail.value.trim();
+//   if (emailRegex.test(emailValue)) {
+//     emailTcheck.classList.add("open");
+//     labelEmail.style.visibility = "hidden";
+//   } else {
+//     labelEmail.style.visibility = "visible";
+//     emailTcheck.classList.remove("open");
+//   }
+
+//   const passwordValue = inputPassword.value.trim();
+//   if (passwordRegex.test(passwordValue)) {
+//     passwordTcheck.classList.add("open");
+//     eye.style.visibility = "hidden";
+//     closeEye.style.visibility = "hidden";
+//     labelPassword.style.visibility = "hidden";
+//   } else {
+//     labelPassword.style.visibility = "visible";
+//     passwordTcheck.classList.remove("open");
+//   }
+
+//   const adressValue = inputAdress.value;
+//   if (adressRegex.test(adressValue)) {
+//     postalAdressTcheck.classList.add("open");
+//     labelAdress.style.visibility = "hidden";
+//   } else {
+//     labelAdress.style.visibility = "visible";
+//     postalAdressTcheck.classList.remove("open");
+//   }
+// });
+// function verificationInput(inputElement, regex, checkElement, labelElement) {
+//   const inputValue = inputElement.value.trim(); // Récupération de la valeur du champ
+
+//   if (regex.test(inputValue)) {
+//     checkElement.classList.add("open");
+//     labelElement.style.visibility = "hidden";
+//   } else {
+//     checkElement.classList.remove("open");
+//     labelElement.style.visibility = "visible";
+//   }
+// }
+
+// function displayCards()
+// {
+
+//       if (!empty($_GET['brands']) && is_array($_GET['brands'])) {
+//             $brands = $_GET['brands'];
+
+//             foreach ($brands as $brand) {
+
+
+//                   $displayBrand = searchByBrand($brand);
+
+//                   foreach ($displayBrand as $lunette) {
+//                         $idGlasses = $lunette['id_glasses'];
+//                         echo "<div class='cards' id='lunette' data-id='" . intval($idGlasses) . "'>";
+//                         echo '<img src="' . htmlspecialchars($lunette['image_path']) . '" alt="Lunette de marque ' . htmlspecialchars($lunette['image_name']) . '" style="width: 100%; height: 150px;" class="img">';
+//                         echo '<h3>' . ucfirst(htmlspecialchars($lunette['name'])) . '</h3>';
+//                         echo '<p>Prix: ' . intval($lunette['price']) . '€</p>';
+//                         echo '<p>Couleur: ' . ucfirst(htmlspecialchars($lunette['color'])) . '</p>';
+//                         echo '<p>Matière: ' . ucfirst(htmlspecialchars($lunette['matter'])) . '</p>';
+//                         echo '<p>Genre: ' . ucfirst(htmlspecialchars($lunette['gender'])) . '</p>';
+//                         echo '<p>Catégorie: ' . ucfirst(htmlspecialchars($lunette['category'])) . '</p>';
+//                         echo '<p>Marque: ' . ucfirst(htmlspecialchars($lunette['brand'])) . '</p>';
+//                         echo '<div class="footerCards">';
+//                         echo "<button  class='buttonPushCart'>Ajouter au panier</i></button>";
+//                         echo "<i class='bi bi-heart-fill'></i>";
+//                         echo '</div>';
+//                         echo "</div>";
+//                   }
+//             }
+//       } elseif (!empty($_GET['shapes']) && is_array($_GET['shapes'])) {
+//             $shapes = $_GET['shapes'];
+
+//             foreach ($shapes as $shape) {
+
+
+//                   $displayShape = searchByShape($shape);
+
+//                   foreach ($displayShape as $lunette) {
+//                         $idGlasses = $lunette['id_glasses'];
+//                         echo "<div class='cards' id='lunette' data-id='" . intval($idGlasses) . "'>";
+//                         echo '<img src="' . htmlspecialchars($lunette['image_path']) . '" alt="Lunette de marque ' . htmlspecialchars($lunette['image_name']) . '" style="width: 100%; height: 150px;" class="img">';
+//                         echo '<h3>' . ucfirst(htmlspecialchars($lunette['name'])) . '</h3>';
+//                         echo '<p>Prix: ' . intval($lunette['price']) . '€</p>';
+//                         echo '<p>Couleur: ' . ucfirst(htmlspecialchars($lunette['color'])) . '</p>';
+//                         echo '<p>Matière: ' . ucfirst(htmlspecialchars($lunette['matter'])) . '</p>';
+//                         echo '<p>Genre: ' . ucfirst(htmlspecialchars($lunette['gender'])) . '</p>';
+//                         echo '<p>Catégorie: ' . ucfirst(htmlspecialchars($lunette['category'])) . '</p>';
+//                         echo '<p>Marque: ' . ucfirst(htmlspecialchars($lunette['brand'])) . '</p>';
+//                         echo '<div class="footerCards">';
+//                         echo "<button  class='buttonPushCart'>Ajouter au panier</i></button>";
+//                         echo "<i class='bi bi-heart-fill'></i>";
+//                         echo '</div>';
+//                         echo "</div>";
+//                   }
+//             }
+//       } elseif (!empty($_GET['matters']) && is_array($_GET['matters'])) {
+//             $matters = $_GET['matters'];
+
+//             foreach ($matters as $matter) {
+
+
+//                   $displayMatter = searchByMatter($matter);
+//                   foreach ($displayMatter as $lunette) {
+//                         $idGlasses = $lunette['id_glasses'];
+//                         echo "<div class='cards' id='lunette' data-id='" . intval($idGlasses) . "'>";
+//                         echo '<img src="' . htmlspecialchars($lunette['image_path']) . '" alt="Lunette de marque ' . htmlspecialchars($lunette['image_name']) . '" style="width: 100%; height: 150px;" class="img">';
+//                         echo '<h3>' . ucfirst(htmlspecialchars($lunette['name'])) . '</h3>';
+//                         echo '<p>Prix: ' . intval($lunette['price']) . '€</p>';
+//                         echo '<p>Couleur: ' . ucfirst(htmlspecialchars($lunette['color'])) . '</p>';
+//                         echo '<p>Matière: ' . ucfirst(htmlspecialchars($lunette['matter'])) . '</p>';
+//                         echo '<p>Genre: ' . ucfirst(htmlspecialchars($lunette['gender'])) . '</p>';
+//                         echo '<p>Catégorie: ' . ucfirst(htmlspecialchars($lunette['category'])) . '</p>';
+//                         echo '<p>Marque: ' . ucfirst(htmlspecialchars($lunette['brand'])) . '</p>';
+//                         echo '<div class="footerCards">';
+//                         echo "<button  class='buttonPushCart'>Ajouter au panier</i></button>";
+//                         echo "<i class='bi bi-heart-fill'></i>";
+//                         echo '</div>';
+//                         echo "</div>";
+//                   }
+//             }
+//       } elseif (!empty($_GET['genders']) && is_array($_GET['genders'])) {
+//             $genders = $_GET['genders'];
+
+//             foreach ($genders as $gender) {
+
+//                   $displayGender = searchByGender($gender);
+//                   foreach ($displayGender as $lunette) {
+//                         $idGlasses = $lunette['id_glasses'];
+//                         echo "<div class='cards' id='lunette' data-id='" . intval($idGlasses) . "'>";
+//                         echo '<img src="' . htmlspecialchars($lunette['image_path']) . '" alt="Lunette de marque ' . htmlspecialchars($lunette['image_name']) . '" style="width: 100%; height: 150px;" class="img">';
+//                         echo '<h3>' . ucfirst(htmlspecialchars($lunette['name'])) . '</h3>';
+//                         echo '<p>Prix: ' . intval($lunette['price']) . '€</p>';
+//                         echo '<p>Couleur: ' . ucfirst(htmlspecialchars($lunette['color'])) . '</p>';
+//                         echo '<p>Matière: ' . ucfirst(htmlspecialchars($lunette['matter'])) . '</p>';
+//                         echo '<p>Genre: ' . ucfirst(htmlspecialchars($lunette['gender'])) . '</p>';
+//                         echo '<p>Catégorie: ' . ucfirst(htmlspecialchars($lunette['category'])) . '</p>';
+//                         echo '<p>Marque: ' . ucfirst(htmlspecialchars($lunette['brand'])) . '</p>';
+//                         echo '<div class="footerCards">';
+//                         echo "<button  class='buttonPushCart'>Ajouter au panier</i></button>";
+//                         echo "<i class='bi bi-heart-fill'></i>";
+//                         echo '</div>';
+//                         echo "</div>";
+//                   }
+//             }
+//       } elseif (!empty($_GET['colors']) && is_array($_GET['colors'])) {
+//             $colors = $_GET['colors'];
+
+//             foreach ($colors as $color) {
+
+//                   $displayColorGlasses = searchByColor($color);
+//                   foreach ($displayColorGlasses as $lunette) {
+//                         $idGlasses = $lunette['id_glasses'];
+//                         echo "<div class='cards' id='lunette' data-id='" . intval($idGlasses) . "'>";
+//                         echo '<img src="' . htmlspecialchars($lunette['image_path']) . '" alt="Lunette de marque ' . htmlspecialchars($lunette['image_name']) . '" style="width: 100%; height: 150px;" class="img">';
+//                         echo '<h3>' . ucfirst(htmlspecialchars($lunette['name'])) . '</h3>';
+//                         echo '<p>Prix: ' . intval($lunette['price']) . '€</p>';
+//                         echo '<p>Couleur: ' . ucfirst(htmlspecialchars($lunette['color'])) . '</p>';
+//                         echo '<p>Matière: ' . ucfirst(htmlspecialchars($lunette['matter'])) . '</p>';
+//                         echo '<p>Genre: ' . ucfirst(htmlspecialchars($lunette['gender'])) . '</p>';
+//                         echo '<p>Catégorie: ' . ucfirst(htmlspecialchars($lunette['category'])) . '</p>';
+//                         echo '<p>Marque: ' . ucfirst(htmlspecialchars($lunette['brand'])) . '</p>';
+//                         echo '<div class="footerCards">';
+//                         echo "<button  class='buttonPushCart'>Ajouter au panier</i></button>";
+//                         echo "<i class='bi bi-heart-fill'></i>";
+//                         echo '</div>';
+//                         echo "</div>";
+//                   }
+//             }
+//       } else {
+
+//             $afficherLunettes = insertGlasseData();
+//             foreach ($afficherLunettes as $lunette) {
+
+//                   // Utilisation de l'id_glasses comme identifiant unique pour chaque carte ( va être utile pour la suppression de locale storage)
+//                   $idGlasses = $lunette['id_glasses'];
+
+
+
+//                   // echo "<pre>";
+//                   // print_r($lunette);
+//                   // echo "</pre>";
+
+//                   // Cela nous donne :
+//                   // (
+//                   //    [id_glasses] => 27
+//                   //    [color] => noir-or
+//                   //    [shape] => pantos
+//                   //    [matter] => acier inoxydable
+//                   //    [image_path] => /../assets/img/marques/Cazal/lunettes/solaires/hommes/MOD 683-cazal.webp
+//                   //    [image_name] => mod 683
+//                   //    [id_category] => 2
+//                   //    [id_gender] => 1
+//                   //    [id_brands] => 13
+//                   //    [id_items] => 27
+//                   //    [name] => mod 683
+//                   //    [price] => 500.00
+//                   //    [stock] => 1
+//                   //    [brand] => Cazal
+//                   //    [category] => solaire
+//                   //    [gender] => homme
+//                   // )
+
+//                   echo "<div class='cards' id='lunette' data-id='" . intval($idGlasses) . "'>";
+//                   echo '<img src="' . htmlspecialchars($lunette['image_path']) . '" alt="Lunette de marque ' . htmlspecialchars($lunette['image_name']) . '" style="width: 100%; height: 150px;" class="img">';
+//                   echo '<h3>' . ucfirst(htmlspecialchars($lunette['name'])) . '</h3>';
+//                   echo '<p id="price">Prix: ' . intval($lunette['price']) . ' €</p>';
+//                   echo '<p>Couleur: ' . ucfirst(htmlspecialchars($lunette['color'])) . '</p>';
+//                   echo '<p>Matière: ' . ucfirst(htmlspecialchars($lunette['matter'])) . '</p>';
+//                   echo '<p>Genre: ' . ucfirst(htmlspecialchars($lunette['gender'])) . '</p>';
+//                   echo '<p>Catégorie: ' . ucfirst(htmlspecialchars($lunette['category'])) . '</p>';
+//                   echo '<p>Marque: ' . ucfirst(htmlspecialchars($lunette['brand'])) . '</p>';
+//                   echo '<div class="footerCards">';
+//                   echo "<button  class='buttonPushCart'>Ajouter au panier</i></button>";
+//                   echo "<i class='bi bi-heart-fill'></i>";
+//                   echo '</div>';
+//                   echo "</div>";
+//             }
+//       }
+// }
+
+// function addItems($name, $price, $stock)
+// {
+//       $pdo = getConnexion();
+//       try {
+
+//             $stmt = $pdo->prepare("INSERT INTO kghdsi_items (name,price,stock) VALUES (:name,:price,:stock)");
+//             $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+//             $stmt->bindParam(':price', $price, PDO::PARAM_INT);
+//             $stmt->bindParam(':stock', $stock, PDO::PARAM_INT);
+//             $stmt->execute();
+//             return $pdo->lastInsertId();
+//             echo "Données ITEMS insérées avec succès";
+//       } catch (PDOException $e) {
+//             // $_SESSION['error'] = "⚠️ Erreur insertion items SQL : " . $e->getMessage();
+//             echo "⚠️ Erreur insertion items SQL : " . $e->getMessage();
+//             return false;
+//       }
+// }
+
+// function addGlasses($color, $matter, $shape, $image_path, $image_name, $id_category, $id_gender, $id_brands, $id_items)
+// {
+//       $pdo = getConnexion();
+//       try {
+
+//             $stmt = $pdo->prepare("
+//                         INSERT INTO kghdsi_glasses 
+//                         (color, matter, shape, image_path, image_name, id_category, id_gender, id_brands, id_items) 
+//                         VALUES 
+//                         (:color, :matter, :shape, :image_path, :image_name, :id_category, :id_gender, :id_brands, :id_items)
+// ");
+//             $stmt->bindParam(':color', $color, PDO::PARAM_STR);
+//             $stmt->bindParam(':matter', $matter, PDO::PARAM_STR);
+//             $stmt->bindParam(':shape', $shape, PDO::PARAM_STR);
+//             $stmt->bindParam(':image_path', $image_path, PDO::PARAM_STR);
+//             $stmt->bindParam(':image_name', $image_name, PDO::PARAM_STR);
+//             $stmt->bindParam(':id_category', $id_category, PDO::PARAM_INT);
+//             $stmt->bindParam(':id_gender', $id_gender, PDO::PARAM_INT);
+//             $stmt->bindParam(':id_brands', $id_brands, PDO::PARAM_INT);
+//             $stmt->bindParam(':id_items', $id_items, PDO::PARAM_INT);
+//             $stmt->execute();
+//             echo "Données GLASSES insérées avec succès";
+//       } catch (PDOException $e) {
+//             // $_SESSION['error'] = "⚠️ Erreur insertion glasses SQL : " . $e->getMessage();
+//             echo "⚠️ Erreur insertion glasses SQL : " . $e->getMessage();
+//             return false;
+//       }
+// }
+
+// Recherche par marque
+// function searchByBrand($brand)
+// {
+
+//     $pdo = getConnexion();
+//     try {
+//         $sql = "SELECT * FROM `kghdsi_glasses`
+//                             INNER JOIN `kghdsi_items` ON kghdsi_glasses.id_glasses = kghdsi_items.id_items
+//                             LEFT JOIN `kghdsi_brands` ON kghdsi_brands.id_brands = kghdsi_glasses.id_brands
+//                             INNER JOIN `kghdsi_category` ON kghdsi_category.id_category = kghdsi_glasses.id_category
+//                             INNER JOIN `kghdsi_gender` ON kghdsi_gender.id_gender = kghdsi_glasses.id_gender
+//                             WHERE kghdsi_brands.brand LIKE :brand";
+
+//         $stmt = $pdo->prepare($sql);
+//         $brandSearch = "%" . $brand . "%";
+//         $stmt->bindParam(':brand', $brandSearch, PDO::PARAM_STR);
+//         $stmt->execute();
+//         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+//         return $results;
+//     } catch (PDOException $e) {
+//         echo "Erreur récupération des données SQL : " . $e->getMessage();
+//         return false;
+//     }
+// }
+
+// // Recherche par genre
+// function searchByGender($gender)
+// {
+
+//     $pdo = getConnexion();
+//     try {
+//         $sql = "SELECT * FROM `kghdsi_glasses`
+//                             INNER JOIN `kghdsi_items` ON kghdsi_glasses.id_glasses = kghdsi_items.id_items
+//                             LEFT JOIN `kghdsi_brands` ON kghdsi_brands.id_brands = kghdsi_glasses.id_brands
+//                             INNER JOIN `kghdsi_category` ON kghdsi_category.id_category = kghdsi_glasses.id_category
+//                             INNER JOIN `kghdsi_gender` ON kghdsi_gender.id_gender = kghdsi_glasses.id_gender
+//                             WHERE kghdsi_gender.gender LIKE :gender";
+
+//         $stmt = $pdo->prepare($sql);
+//         $genderSearch = "%" . $gender . "%";
+//         $stmt->bindParam(':gender', $genderSearch, PDO::PARAM_STR);
+//         $stmt->execute();
+//         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+//         return $results;
+//     } catch (PDOException $e) {
+//         echo "Erreur récupération des données SQL : " . $e->getMessage();
+//         return false;
+//     }
+// }
+
+// // Recherche par couleur
+// function searchByColor($color)
+// {
+
+//     $pdo = getConnexion();
+//     try {
+//         $sql = "SELECT * FROM `kghdsi_glasses`
+//                             INNER JOIN `kghdsi_items` ON kghdsi_glasses.id_glasses = kghdsi_items.id_items
+//                             LEFT JOIN `kghdsi_brands` ON kghdsi_brands.id_brands = kghdsi_glasses.id_brands
+//                             INNER JOIN `kghdsi_category` ON kghdsi_category.id_category = kghdsi_glasses.id_category
+//                             INNER JOIN `kghdsi_gender` ON kghdsi_gender.id_gender = kghdsi_glasses.id_gender
+//                             WHERE kghdsi_glasses.color LIKE :color";
+
+
+//         $stmt = $pdo->prepare($sql);
+//         // Ajouter les caractères % autour de la couleur pour le LIKE
+//         $colorSearch = "%" . $color . "%";
+
+//         // Lier le paramètre :color à la valeur
+//         $stmt->bindParam(':color', $colorSearch, PDO::PARAM_STR);
+//         $stmt->execute();
+//         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//         return $results;
+//     } catch (PDOException $e) {
+//         echo "Erreur récupération des données SQL : " . $e->getMessage();
+//         return false;
+//     }
+// }
+
+// // Recherche par matière
+// function searchByMatter($matter)
+// {
+
+//     $pdo = getConnexion();
+//     try {
+//         $sql = "SELECT * FROM `kghdsi_glasses`
+//                             INNER JOIN `kghdsi_items` ON kghdsi_glasses.id_glasses = kghdsi_items.id_items
+//                             INNER JOIN `kghdsi_brands` ON kghdsi_brands.id_brands = kghdsi_glasses.id_brands
+//                             INNER JOIN `kghdsi_category` ON kghdsi_category.id_category = kghdsi_glasses.id_category
+//                             INNER JOIN `kghdsi_gender` ON kghdsi_gender.id_gender = kghdsi_glasses.id_gender
+//                             WHERE kghdsi_glasses.matter LIKE :matter";
+
+//         $stmt = $pdo->prepare($sql);
+//         // Ajouter les caractères % autour de la couleur pour le LIKE
+//         $matterSearch = "%" . $matter . "%";
+
+//         // Lier le paramètre :color à la valeur
+//         $stmt->bindParam(':matter', $matterSearch, PDO::PARAM_STR);
+//         $stmt->execute();
+//         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//         return $results;
+//     } catch (PDOException $e) {
+//         echo "Erreur récupération des données SQL : " . $e->getMessage();
+//         return false;
+//     }
+// }
+
+// // Recherche par forme
+// function searchByShape($shape)
+// {
+
+//     $pdo = getConnexion();
+//     try {
+//         $sql = "SELECT * FROM `kghdsi_glasses`
+//                             INNER JOIN `kghdsi_items` ON kghdsi_glasses.id_glasses = kghdsi_items.id_items
+//                             LEFT JOIN `kghdsi_brands` ON kghdsi_brands.id_brands = kghdsi_glasses.id_brands
+//                             INNER JOIN `kghdsi_category` ON kghdsi_category.id_category = kghdsi_glasses.id_category
+//                             INNER JOIN `kghdsi_gender` ON kghdsi_gender.id_gender = kghdsi_glasses.id_gender
+//                             WHERE kghdsi_glasses.shape LIKE :shape";
+
+//         $stmt = $pdo->prepare($sql);
+//         $shapeSearch = "%" . $shape . "%";
+//         $stmt->bindParam(':shape', $shapeSearch, PDO::PARAM_STR);
+//         $stmt->execute();
+//         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+//         return $results;
+//     } catch (PDOException $e) {
+//         echo "Erreur récupération des données SQL : " . $e->getMessage();
+//         return false;
+//     }
+// }
+
+//////// Configuration de la connexion à la base de données qui créer un nouveau handler à chaque fois ////////
+
+// function getConnexion()
+// {
+//       try {
+//             $dsn = "mysql:host=localhost;dbname=la_lunetterie_senlisienne;charset=utf8";
+//             $user = "root";
+//             $pass = "";
+//             $pdo = new PDO($dsn, $user, $pass);
+//             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//             return $pdo;
+//       } catch (PDOException $e) {
+//             echo "Erreur de connexion : " . $e->getMessage();
+//             die();
+//       }
+// }

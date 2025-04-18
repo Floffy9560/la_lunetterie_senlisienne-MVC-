@@ -10,132 +10,114 @@
 
 function clean($name)
 {
-      //  Supprimer les espaces inutiles au début et à la fin
       $name = trim($name);
 
-      // Mise en forme du texte, première lettre de chaque mot en majuscule
-      $name = strtolower($name);
+      // Mise en forme du texte : première lettre de chaque mot en majuscule
+      $name = ucwords(strtolower($name));
 
-      //  Filtrer les caractères invalides (autoriser uniquement les lettres, les espaces et les apostrophes)
-      $name = preg_replace("/[^a-zA-Zàâçéèêëîïôûùüÿœæ' -]/", "", $name);
+      // Filtrer les caractères invalides (autoriser uniquement les lettres, les espaces et les apostrophes)
+      $name = preg_replace("/[^a-zA-ZÀ-ÖØ-öø-ÿ' -]/u", "", $name);
 
-      //  Vérifier si le nom ou prénom ne contient que des caractères valides
+      // Vérifier si le nom ou prénom n'est pas vide après nettoyage
       if (empty($name)) {
-            return false; // Retourne false si le champ est vide ou contient des caractères invalides
+            return ["Le nom ou prénom ne peut pas être vide."];
       }
 
       return $name;
 }
 
-
 // --------------------------------------------------------
-// nettoyage (sécurisation des données) mot de passe  
+// Nettoyage et sécurisation du mot de passe
 // --------------------------------------------------------
-
-
-
 function cleanPassword($password)
 {
-      // Vérifie si le mot de passe respecte les critères de sécurité
-      $error = [];
+      $errors = [];
 
       if (strlen($password) < 8) {
-            $error[] = "Le mot de passe doit contenir au moins 8 caractères.";
+            $errors[] = "Le mot de passe doit contenir au moins 8 caractères.";
       }
       if (!preg_match('/[A-Z]/', $password)) {
-            $error[] = "Le mot de passe doit contenir au moins une majuscule.";
+            $errors[] = "Le mot de passe doit contenir au moins une majuscule.";
       }
       if (!preg_match('/[a-z]/', $password)) {
-            $error[] = "Le mot de passe doit contenir au moins une minuscule.";
+            $errors[] = "Le mot de passe doit contenir au moins une minuscule.";
       }
       if (!preg_match('/[0-9]/', $password)) {
-            $error[] = "Le mot de passe doit contenir au moins un chiffre.";
+            $errors[] = "Le mot de passe doit contenir au moins un chiffre.";
       }
-      if (!preg_match('/[\W]/', $password)) { // \W pour caractère spécial
-            $error[] = "Le mot de passe doit contenir au moins un caractère spécial.";
+      if (!preg_match('/[\W]/', $password)) { // \W = caractère spécial
+            $errors[] = "Le mot de passe doit contenir au moins un caractère spécial.";
       }
 
-      // Si le mot de passe respecte les règles
-      if (empty($errors)) {
-            // Hasher le mot de passe pour la sécuritée
-            return ['success' => true, 'password' => password_hash($password, PASSWORD_DEFAULT)]; // Hasher le mot de passe
-      } else {
-            return ['success' => false, 'errors' => $errors];
-      }
+      // Si le mot de passe respecte les règles, on le hash
+      return empty($errors) ? password_hash($password, PASSWORD_DEFAULT) : $errors;
 }
 
-
 // --------------------------------------------------------
-// nettoyage (sécurisation des données) email
+// Nettoyage et validation de l'email
 // --------------------------------------------------------
-
-
 function nettoyerEmail($email)
 {
-      // 1. Supprimer les espaces inutiles au début et à la fin
+      $errors = [];
+
+      // Supprimer les espaces inutiles
       $email = trim($email);
 
-      // 2. Filtrer les caractères invalides pour un email
-      $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-
-      // 3. Vérifier si l'email reste valide après la sanitation
+      // Filtrer et valider l'email
       if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return false; // Retourne false si l'email est invalide
+            $errors[] = "L'email n'est pas valide.";
       }
 
-      return $email;
-}
-if (!empty($_POST['email'])) {
-      $email_utilisateur = $_POST['email']; // Récupération depuis le formulaire 
-      $email_propre = nettoyerEmail($email_utilisateur);
+      return empty($errors) ? $email : $errors;
 }
 
 // --------------------------------------------------------
-// nettoyage (sécurisation des données) adresse postale 
+// Nettoyage de l'adresse postale
 // --------------------------------------------------------
-
-
-function nettoyerAdresse($adresse)
+function nettoyerAdresse($address)
 {
-      // Supprimer les espaces inutiles au début et à la fin
-      $adresse = trim($adresse);
+      $errors = [];
+
+      // Supprimer les espaces inutiles
+      $address = trim($address);
 
       // Remplacer plusieurs espaces consécutifs par un seul
-      $adresse = preg_replace('/\s+/', ' ', $adresse);
+      $address = preg_replace('/\s+/', ' ', $address);
 
       // Autoriser uniquement lettres, chiffres, espaces et quelques caractères utiles (- , . ')
-      $adresse = preg_replace('/[^\p{L}\p{N}\s\-,\'.]/u', '', $adresse);
+      $address = preg_replace('/[^\p{L}\p{N}\s\-,\'.]/u', '', $address);
 
-      // Supprimer les caractères invisibles (évite des attaques avec des caractères Unicode invisibles)
-      $adresse = preg_replace('/[\x00-\x1F\x7F]/u', '', $adresse);
+      // Supprimer les caractères invisibles (évite des attaques Unicode)
+      $address = preg_replace('/[\x00-\x1F\x7F]/u', '', $address);
 
-      return $adresse;
-}
-if (!empty($_POST['postal_adress'])) {
-      $adresse_utilisateur = $_POST['postal_adress'];
-      $adresse_propre = nettoyerAdresse($adresse_utilisateur);
-};
-
-// --------------------------------------------------------
-// nettoyage (sécurisation des données) téléphone
-// --------------------------------------------------------
-
-function cleanPhone($phone)
-{
-      //  Supprimer les espaces inutiles au début et à la fin
-      $phone = trim($phone);
-
-      //  Retirer tous les caractères non numériques (pour ne garder que les chiffres)
-      $phone = preg_replace("/[^0-9]/", "", $phone);
-
-      // Vérifier si le numéro a une longueur valide (par exemple, 10 chiffres pour la France)
-      if (strlen($phone) < 10 && strlen($phone) > 50) {
-            return false; // Retourne false si le numéro de téléphone n'a pas 10 chiffres
+      // Si l'adresse est vide après nettoyage
+      if (empty($address)) {
+            $errors[] = "L'adresse postale est invalide ou vide.";
       }
 
-      // Retourne le numéro de téléphone formaté
+      return empty($errors) ? $address : $errors;
+}
+
+
+// --------------------------------------------------------
+// Nettoyage du numéro de téléphone
+// --------------------------------------------------------
+function cleanPhone($phone)
+{
+      // Supprimer les espaces inutiles
+      $phone = trim($phone);
+
+      // Retirer tous les caractères non numériques
+      $phone = preg_replace("/[^0-9]/", "", $phone);
+
+      // Vérifier si le numéro a une longueur valide (10-20 chiffres)
+      if (strlen($phone) < 10 || strlen($phone) > 20) {
+            return ["Le numéro de téléphone doit contenir entre 10 et 20 chiffres."];
+      }
+
       return $phone;
 }
+
 
 //////////////////////////////////////////////////////
 /////////////    si déjà client    ///////////////////

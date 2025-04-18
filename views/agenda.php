@@ -142,7 +142,9 @@
                      echo "<button type='submit' class='rdv'>Prendre rendez-vous</button>";
                   }
                } else {
-                  echo '<button type="submit" class="rdv" style="background-color:black ;color:red ; padding:15px" disabled>Veuillez vous inscrire pour prendre rendez-vous</button>';
+                  echo '<a href="inscription" class="rdv" style="display:inline-block; background-color:black; color:red; padding:15px; text-decoration:none;">
+                           Veuillez vous inscrire pour prendre rendez-vous
+                        </a>';
                }
                ?>
 

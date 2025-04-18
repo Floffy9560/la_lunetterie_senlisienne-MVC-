@@ -61,7 +61,6 @@ h3 {
 }
 
 .buttonPushCart {
-  border: none;
   font-weight: bold;
   background-color: #c89f36;
   padding: 10px;
@@ -192,4 +191,17 @@ span {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+}
+
+/* alerte si pas de produits trouvé  */
+/* ================================= */
+.swal2-custom {
+  border: 2px solid #c89f36 !important;
+  border-radius: 15px !important;
+  box-shadow: 0 0 25px rgba(200, 159, 54, 0.3) !important;
+  padding: 20px !important ;
+}
+.swal2-custom span {
+  margin: auto !important;
+  color: #c89f36 !important;
 }

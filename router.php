@@ -5,15 +5,17 @@ session_start();
 
 
 // Test pour savoir comment récupérer les infos sur la session et comment elle fonctionne  !! A RETIRERE A LA FIN !!
-// if (isset($_SESSION)) {
-// 	echo "<div style='background-color:gainsboro';>";
-// 	echo "<pre>";
-// 	print_r($_SESSION); // Affiche les infos de l'utilisateur
-// 	echo "</pre>";
-// 	echo "</div>";
-// } else {
-// 	echo "Aucune session active.";
-// }
+if (isset($_SESSION)) {
+	echo "<div style='background-color:gainsboro';>";
+	echo "<pre>";
+	print_r($_SESSION); // Affiche les infos de l'utilisateur
+	echo "</pre>";
+	echo "</div>";
+} else {
+	echo "Aucune session active.";
+}
+// echo " Donnée du post : " . var_dump($_POST);
+
 
 
 // Activation des erreurs et affiche des messages d'erreur

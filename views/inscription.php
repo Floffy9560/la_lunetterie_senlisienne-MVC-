@@ -39,10 +39,13 @@
                         <div><?php
                                 if (!empty($_SESSION['verificationFalse'])) {
                                     echo "<p style='color:red; text-align:center'>⚠️<strong>Mot de passe ou adresse mail invalide</strong>⚠️</p>";
+                                    unset($_SESSION['verificationFalse']);
+                                    unset($_SESSION['success']);
                                 }
                                 if (!empty($_SESSION['success'])) {
                                     echo "<p style='color:green'>" . $_SESSION['success'] . "</p>";
                                     unset($_SESSION['verificationFalse']);
+                                    unset($_SESSION['success']);
                                 }
 
                                 ?></div>
@@ -178,9 +181,19 @@
                                 required></textarea>
                         </div>
 
+                        <?php
+                        // Si $cleanedPassword est un tableau (c'est-à-dire qu'il y a des erreurs), afficher les erreurs
+                        if (isset($cleanedPassword) && is_array($cleanedPassword)) {
+                            $errors[] = implode('<br>', $cleanedPassword); // Afficher les erreurs de mot de passe
+                        }
+                        // Affichage des erreurs
+                        if (!empty($errors)) {
+                            echo '<div class="error-messages">' . implode('<br>', $errors) . '</div>';
+                        }
+                        ?>
                         <div class="password">
                             <p id="password-tcheck"><i class="bi bi-check-circle-fill"></i></p>
-                            <label for="password" id="labelPassword">(min 8 caractères : 1 maj : 1min : 1 chiffre : 1 caractère special)</label>
+                            <label for="password" id="labelPassword">Veuillez respectez la consigne svp</label>
                             <input
                                 type="password"
                                 name="password"
@@ -260,8 +273,8 @@
                                 id="confidentiality"
                                 class="confirmation" required />
                             <p> En cochant cette case, je confirme avoir pris connaissance de la
-                                <a href="#">politique de confidentialité</a> et accepter les
-                                <a href="#">CGV *</a>
+                                <a href="confidentialite">politique de confidentialité</a> et accepter les
+                                <a href="cgv">CGV *</a>
                             </p>
 
                         </div>

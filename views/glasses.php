@@ -24,7 +24,7 @@
 
   <div class="navigateIcon">
     <i class="bi bi-book" id="book"></i>
-    <a href="#Haut de pages"><i class="bi bi-arrow-bar-up"></i></a>
+    <a href="#haut-de-pages"><i class="bi bi-arrow-bar-up"></i></a>
   </div>
   <div class="sideNav" id="sideNav">
 
@@ -32,13 +32,13 @@
       <a href="#Verres" class="linkMenu">
         <h5>Verres</h5>
       </a>
-      <a href="#Verres unifocaux" class="linkMenu">
+      <a href="#unifocaux" class="linkMenu">
         <h6>Unifocaux</h6>
       </a>
-      <a href="#Verres Progressifs" class="linkMenu">
+      <a href="#progressif" class="linkMenu">
         <h6>Progressifs</h6>
       </a>
-      <a href="#Verres Dégressifs" class="linkMenu">
+      <a href="#degressifs" class="linkMenu">
         <h6>Dégressifs</h6>
       </a>
     </div>
@@ -46,25 +46,25 @@
       <a href="#Traitements" class="linkMenu">
         <h5>Traitements</h5>
       </a>
-      <a href="#Traitement anti-rayures" class="linkMenu">
+      <a href="#rayures" class="linkMenu">
         <h6>Anti-rayures</h6>
       </a>
-      <a href="#Traitement anti-reflets" class="linkMenu">
+      <a href="#reflet" class="linkMenu">
         <h6>Anti-reflets</h6>
       </a>
-      <a href="#Filtres anti-lumière bleue" class="linkMenu">
+      <a href="#bleu" class="linkMenu">
         <h6>Anti lumière bleu</h6>
       </a>
-      <a href="#Verres solaires" class="linkMenu">
+      <a href="#solaires" class="linkMenu">
         <h6>Solaires
         </h6>
       </a>
     </div>
     <div class="searchOnPage">
-      <a href="#amétropies" class="linkMenu">
+      <a href="#ametropies" class="linkMenu">
         <h5>Amétropie</h5>
       </a>
-      <a href="#HYPERMÉTROPE" class="linkMenu">
+      <a href="#HYPERMETROPE" class="linkMenu">
         <h6>Hypermétropie</h6>
       </a>
       <a href="#ASTIGMATE" class="linkMenu">
@@ -81,7 +81,7 @@
   <div class="overlay" id="overlay"></div>
   <main>
     <div class="main">
-      <div class="prescription" id="Haut de pages">
+      <div class="prescription" id="haut-de-pages">
         <h2>Explication d'une ordonnance</h2>
         <div class="prescriptionImg">
           <img src="/assets/img/explication-ordonnace.jpg" alt="prescription/ordonnance de verre correcteurs">
@@ -156,7 +156,7 @@
 
       <h2>Quels sont les différents types de verres correcteurs ?</h2>
 
-      <h3 id="Verres unifocaux">Verres unifocaux (ou "simple foyer")</h3>
+      <h3 id="unifocaux">Verres unifocaux (ou "simple foyer")</h3>
 
       <p>
         <u>
@@ -212,7 +212,7 @@
         permettent, ainsi, une vision nette à différentes distances. Cela est
         utile pour les patients presbytes ou les patients opérés de cataracte.
       </p>
-      <h4 id="Verres Progressifs">Verres Progressifs</h4>
+      <h4 id="progressif">Verres Progressifs</h4>
       <p><u>Un verre progressif se compose de 4 zones distinctes :</u></p>
       <ol>
         <li>La partie supérieure correspond à la vision de loin.</li>
@@ -240,7 +240,7 @@
           la vision de loin, l'autre pour la vision de près).
         </p>
       </div>
-      <h4 id="Verres Dégressifs">Verres Dégressifs ou Mi-Distance</h4>
+      <h4 id="degressifs">Verres Dégressifs ou Mi-Distance</h4>
       <p>
         Ce sont des verres multifocaux, qui corrigent la vision de près et
         offrant une profondeur de champ suffisante pour garantir le confort en
@@ -260,7 +260,7 @@
         Quels sont les traitements et filtres possibles pour les verres de
         lunettes ?
       </h2>
-      <h3 id="Traitement anti-rayures">Traitement anti-rayures (traitement durci)</h3>
+      <h3 id="rayures">Traitement anti-rayures (traitement durci)</h3>
       <p>
         La plupart des verres vendus en France sont des verres organiques, qui
         sont sensibles aux rayures. Elles sont inesthétiques et altèrent la
@@ -271,7 +271,7 @@
         Elle est durcie par cuisson ou par traitement ultra-violet, ce qui
         rend le verre beaucoup moins vulnérable aux altérations de sa surface.
       </p>
-      <h3 id="Traitement anti-reflets">Traitement anti-reflets</h3>
+      <h3 id="reflet">Traitement anti-reflets</h3>
       <p>
         Les filtres anti-reflets sont des traitements de surface compatibles
         avec tous les verres (qu'ils soient blancs, teintés, polarisés,
@@ -288,7 +288,7 @@
         température et il faut éviter de laisser vos lunettes près d’une
         source de chaleur importante.
       </p>
-      <h3 id="Filtres anti-lumière bleue">Filtres anti-lumière bleue</h3>
+      <h3 id="bleu">Filtres anti-lumière bleue</h3>
       <p>
         Il n'existe, à l'heure actuelle, aucune preuve scientifique robuste
         concernant l'intérêt de ce type de filtre dans la protection contre la
@@ -306,7 +306,7 @@
         l'ANSES, pas être considérés comme des équipements de protection
         individuelle, par rapport à des verres ophtalmiques traités.
       </p>
-      <h3 id="Verres solaires">Verres solaires</h3>
+      <h3 id="solaires">Verres solaires</h3>
       <p>
         Les verres solaires bénéficient d'un traitement qui permet de limiter
         l’éblouissement et de filtrer les rayons ultraviolets (UV) du soleil,
@@ -371,9 +371,9 @@
         indéniable pour tout type d'activité.
       </p>
 
-      <h2 id="amétropies">Explication des différentes amétropies :</h2>
+      <h2 id="ametropies">Explication des différentes amétropies :</h2>
 
-      <h3 id="HYPERMÉTROPE">Un oeil hypermétrope :</h3>
+      <h3 id="HYPERMETROPE">Un oeil hypermétrope :</h3>
 
       <p>Dans le cas d’une hypermétropie, l’image se forme en arrière de la rétine.
         Plus l’objet observé est près, plus l’œil le voit flou (car plus il est éloigné du plan de la rétine).
@@ -420,7 +420,7 @@
     </div>
   </main>
   <?php include __DIR__ . '/../templates/footer.php' ?>
-  <script>
+  <script defer>
     const burger = document.getElementById("book");
     const menu = document.getElementById("sideNav");
     const overlay = document.getElementById("overlay");

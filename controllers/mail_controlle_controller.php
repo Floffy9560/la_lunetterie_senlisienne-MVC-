@@ -1,7 +1,27 @@
 <?php
 
+require_once __DIR__ . '/../models/fonctions_mail_controlle.php';
 include_once __DIR__ . '/../views/mail_controlle.php';
 
+function displayErrorMessage()
+{
+      if (!empty($_POST["mail"])) {
+            $mail = $_POST["mail"];
+            if (checkMail($mail) == true) {
+                  echo "<div class='valide'>
+                  <p><i class='bi bi-envelope-check-fill'></i></p>
+                  <p>MAIL VÉRIFIÉ $mail!</p>
+                      <form method='POST' action='reset_password'>
+                         <label for='checkMail'></label>
+                         <input type='hidden' name='checkMail' id='checkMail' value='" . htmlspecialchars($mail, ENT_QUOTES) . "'>
+                         <button class='request'>Demande de réinitialisation</button>
+                      </form>
+                </div>";
+            } else {
+                  echo "<i class='bi bi-exclamation-triangle-fill'></i><p>Utilisateur non trouvé.<br>Veuillez ressaissir votre mail.</p><i class='bi bi-exclamation-triangle-fill'></i>";
+            }
+      }
+}
 
 // Récupération des données de la bdd gràce au mail 
 // if (!empty($_POST['mail'])) {

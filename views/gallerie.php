@@ -60,7 +60,7 @@
                 <img src="/assets/img/magasin/mur-de-lunettes.jpg" alt="mur-de-lunettes" />
                 <img src="/assets/img/magasin/vente.jpg" alt="vente" />
                 <img src="/assets/img/magasin/vitrine-magasin.jpg" alt="vitrine-magasin" />
-                <img src="/assets/img/magasin/patron.jpg" alt="patron" />
+                <img src="/assets/img/magasin/patron-png.png" alt="patron" />
                 <img src="/assets/img/magasin/table-de-vente.jpg" alt="table-de-vente" />
                 <img src="/assets/img/magasin/etagere-lunettes.jpg" alt="etagere-lunettes" />
                 <img src="/assets/img/magasin/vitrine.jpg" alt="vitrine" />

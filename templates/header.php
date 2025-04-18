@@ -1,23 +1,3 @@
-<?php
-// Fonction pour rechercher un mot clef sur le site 
-function searchInPHPFiles($dir, $search)
-{
-   $results = [];
-
-   // Récupère tous les fichiers PHP dans le dossier "views"
-   $files = glob($dir . "/*.php");
-
-   foreach ($files as $file) {
-      // Lit le contenu du fichier
-      $content = file_get_contents($file);
-      // Recherche insensible à la casse
-      if (stripos($content, $search) !== false) {
-         $results[] = $file;
-      }
-   }
-   return $results;
-}
-?>
 <header>
    <div class="smartphone-header">
       <div class="header-container">
@@ -105,7 +85,7 @@ function searchInPHPFiles($dir, $search)
                         }
                         ?>
                         <div class="logoCart">
-                           <a href="cart"><i class="bi bi-basket3-fill logoNavCart"></i></a>
+                           <a href="cart"><i class="bi bi-cart3 logoNavCart"></i></i></a>
                            <div class="nbrArticle"></div>
                         </div>
 
@@ -140,10 +120,12 @@ function searchInPHPFiles($dir, $search)
          biList.classList.toggle("open");
          burgerMenu.classList.toggle("open");
       });
-      // Récupérer les cartes stockées dans localStorage
-      let storedCardsCartLength = JSON.parse(localStorage.getItem("cardsDataCart")) || [];
-      // Afficher le nombre d'articles dans le panier
-      document.querySelector(".nbrArticle").textContent = storedCardsCartLength.length;
-      document.querySelector(".nbrArticleBurger").textContent = storedCardsCartLength.length;
+
+      // Récupérer les cartes stockées dans localStorage afin de mettre à jour l'affiche du nbr d'article ds le panier
+      let totalInCart = JSON.parse(localStorage.getItem("totalInCart")) || [];
+
+      // Afficher le nbr d'article dans le logo panier header laptop et tablette/smartphone
+      document.querySelector(".nbrArticle").innerHTML = totalInCart;
+      document.querySelector(".nbrArticleBurger").innerHTML = totalInCart;
    </script>
 </header>

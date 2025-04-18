@@ -131,14 +131,14 @@ mondays.forEach((monday) => {
 // Bouton Réinitialisé--//
 //---------------------//
 
-// document
-//   .querySelector(".buttonFooter:first-child")
-//   .addEventListener("click", () => {
-//     currentDate = new Date();
-//     updateMonthDisplay();
-//     createCalendar(currentDate.getMonth(), currentDate.getFullYear());
-//     dateChoisi.innerText = "";
-//   });
+document
+  .querySelector(".buttonFooter:first-child")
+  .addEventListener("click", () => {
+    currentDate = new Date();
+    updateMonthDisplay();
+    createCalendar(currentDate.getMonth(), currentDate.getFullYear());
+    dateChoisi.innerText = "";
+  });
 
 //---------------//
 // Bouton Ok----//

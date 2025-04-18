@@ -537,3 +537,87 @@ h2:hover:after {
   transition: 3s;
   z-index: 100;
 }
+
+/* ====================================
+------------cookie banner----------
+==================================== */
+
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #306c60;
+  color: #c89f36;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: sans-serif;
+  z-index: 1000;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out;
+}
+
+.cookie-banner button {
+  background-color: #c89f36;
+  color: #306c60;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.cookie-banner.hidden {
+  display: none;
+}
+.swal2-popup.custom-swal {
+  background-color: #306c60 !important;
+  color: #c89f36 !important;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.custom-confirm-btn {
+  background-color: #c89f36 !important;
+  color: #306c60 !important;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Icône personnalisée */
+.swal2-icon.custom-icon.swal2-info {
+  border-color: #c89f36 !important;
+  color: #c89f36 !important;
+}
+
+.swal2-icon.custom-icon.swal2-info .swal2-icon-content {
+  color: #c89f36 !important;
+}
+.swal2-popup.custom-swal {
+  background-color: #306c60 !important;
+  color: #c89f36 !important;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.custom-confirm-btn,
+.custom-cancel-btn {
+  background-color: #c89f36 !important;
+  color: black !important;
+  font-weight: bold;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Icône personnalisée */
+.swal2-icon.custom-icon.swal2-info {
+  border-color: #c89f36 !important;
+  color: #c89f36 !important;
+}
+
+.swal2-icon.custom-icon.swal2-info .swal2-icon-content {
+  color: #c89f36 !important;
+}

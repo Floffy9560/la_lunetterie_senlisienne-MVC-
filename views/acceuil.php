@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="assets/css/headerFooter.css" />
     <link rel="stylesheet" href="assets/css/index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <?php include 'templates/header.php'; ?>
@@ -271,8 +272,75 @@
         </section>
     </main>
 
+    <?php if (isset($_SESSION['flash'])): ?>
+        <script>
+            Swal.fire({
+                title: "<?= $_SESSION['flash']['type'] === 'success' ? 'Succès !' : 'Erreur' ?>",
+                text: "<?= $_SESSION['flash']['message'] ?>",
+                icon: "<?= $_SESSION['flash']['type'] ?>",
+                confirmButtonColor: "#c89f36",
+                customClass: {
+                    popup: "custom-swal",
+                    confirmButton: "custom-confirm-btn",
+                }
+            });
+            // Une fois le message affiché, on supprime le flash de la session pour éviter qu'il ne se répète
+            <?php unset($_SESSION['flash']); ?>
+        </script>
+    <?php endif; ?>
+
+    <script>
+        function hasCookieConsentExpired() {
+            const consentTimestamp = localStorage.getItem("cookiesConsentTimestamp");
+            if (!consentTimestamp) return true;
+
+            const now = Date.now();
+            const ninetyDays = 60 * 60 * 1000;
+            return now - parseInt(consentTimestamp) > ninetyDays;
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const cookiesChoice = localStorage.getItem("cookiesChoice");
+
+            if (!cookiesChoice || hasCookieConsentExpired()) {
+                Swal.fire({
+                    title: "🍪 Cookies",
+                    text: "Ce site utilise des cookies pour améliorer votre expérience. Acceptez-vous ?",
+                    icon: "info",
+                    showCancelButton: true,
+                    confirmButtonText: "J'accepte",
+                    cancelButtonText: "Je refuse",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    reverseButtons: true,
+                    customClass: {
+                        popup: "custom-swal",
+                        confirmButton: "custom-confirm-btn",
+                        cancelButton: "custom-cancel-btn",
+                        icon: "custom-icon"
+                    }
+                }).then((result) => {
+                    const timestamp = Date.now();
+                    if (result.isConfirmed) {
+                        localStorage.setItem("cookiesChoice", "accepted");
+                        localStorage.setItem("cookiesConsentTimestamp", timestamp);
+                        // Place ici les fonctions qui nécessitent des cookies
+                    } else {
+                        localStorage.setItem("cookiesChoice", "refused");
+                        localStorage.setItem("cookiesConsentTimestamp", timestamp);
+                    }
+                });
+            }
+        });
+    </script>
+
 </body>
 
 <?php include 'templates/footer.php'; ?>
+
+<div id="cookie-banner" class="cookie-banner hidden">
+    <p>Ce site utilise des cookies pour vous garantir la meilleure expérience.</p>
+    <button id="accept-cookies">Accepter</button>
+</div>
 
 </html>

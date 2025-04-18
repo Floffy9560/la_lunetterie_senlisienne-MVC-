@@ -13,6 +13,7 @@
       href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap"
       rel="stylesheet" />
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+   <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
    <link rel="stylesheet" href="/assets/css/headerFooter.css" />
    <link rel="stylesheet" href="/assets/css/frams.css" />
 </head>
@@ -49,6 +50,46 @@
                            <input type="checkbox" id="bali" name="brands[]" value="bali" />
                            <label for="bali">Bali</label>
                         </span>
+                        <span>
+                           <input type="checkbox" id="aponem" name="brands[]" value="aponem" />
+                           <label for="aponem">Aponem</label>
+                        </span>
+                        <!-- <span>
+                           <input type="checkbox" id="woodys" name="brands[]" value="woodys" />
+                           <label for="woodys">Woodys</label>
+                        </span>
+                        <span>
+                           <input type="checkbox" id="la-brique-et-la-violette" name="brands[]" value="la brique et la violette" />
+                           <label for="la-brique-et-la-violette">La brique et la violette</label>
+                        </span>
+                        <span>
+                           <input type="checkbox" id="andy-brook" name="brands[]" value="andy-brook" />
+                           <label for="andy-brook">Andy brook</label>
+                        </span>
+                        <span>
+                           <input type="checkbox" id="clemence-et-margaux" name="brands[]" value="clemence-et-margaux" />
+                           <label for="clemence-et-margaux">Clémence et margaux</label>
+                        </span>
+                        <span>
+                           <input type="checkbox" id="paprika" name="brands[]" value="paprika" />
+                           <label for="paprika">Paprika</label>
+                        </span>
+                        <span>
+                           <input type="checkbox" id="malt" name="brands[]" value="malt" />
+                           <label for="malt">Malt</label>
+                        </span>
+                        <span>
+                           <input type="checkbox" id="sunday-somewhere" name="brands[]" value="sunday-somewhere" />
+                           <label for="sunday-somewhere">Sunday somewhere</label>
+                        </span>
+                        <span>
+                           <input type="checkbox" id="demetz" name="brands[]" value="demetz" />
+                           <label for="demetz">Demetz</label>
+                        </span>
+                        <span>
+                           <input type="checkbox" id="friendly-frenchy" name="brands[]" value="friendly-frenchy" />
+                           <label for="friendly-frenchy">Friendly frenchy</label>
+                        </span> -->
                      </div>
                      <div>
                         <button type="submit" class="buttonSearch" id="buttonSearch">Filtrer par marque </button>

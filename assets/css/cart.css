@@ -32,9 +32,18 @@ main {
   background-color: #306c60;
   padding: 10px;
 }
+.emptyCart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100px;
+  background-color: #306c60;
+  padding: 10px;
+}
 p,
 span {
-  font-size: clamp(18px, 3vw, 25px);
+  font-size: clamp(18px, 3vw, 20px);
 }
 .footerCart {
   display: flex;
@@ -59,8 +68,8 @@ span {
   width: 90%;
   height: 100%;
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
+  justify-content: space-around;
+  gap: 10px;
   flex-wrap: wrap;
   align-items: center;
   text-align: center;
@@ -83,7 +92,6 @@ span {
 .img {
   height: 100px;
   width: 200px;
-  margin: auto;
 }
 .img img {
   width: 100%;
@@ -95,6 +103,8 @@ span {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
   gap: 15px;
   width: 40%;
   height: 100%;
@@ -129,4 +139,43 @@ span {
   font-size: clamp(21px, 3vw, 31px);
   background-color: #c89f36;
   margin-bottom: 40px;
+}
+
+/* Customisation de l'alerte 
+ ========================= */
+
+.swal2-popup.custom-swal {
+  background-color: #306c60 !important;
+  color: #c89f36 !important;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+.custom-confirm-btn,
+.custom-cancel-btn {
+  background-color: #c89f36 !important;
+  color: black !important;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+/* Cible l'icône */
+.swal2-icon.custom-icon.swal2-warning {
+  border-color: red !important;
+  color: red !important;
+}
+
+/* Cible le symbole à l'intérieur (le point d'exclamation) */
+.swal2-icon.custom-icon.swal2-warning .swal2-icon-content {
+  color: red !important;
+}
+.swal2-icon.custom-icon.swal2-success {
+  border-color: #2ecc71 !important;
+  color: #2ecc71 !important;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swal2-icon.custom-icon.swal2-success .swal2-icon-content {
+  color: #2ecc71 !important;
 }

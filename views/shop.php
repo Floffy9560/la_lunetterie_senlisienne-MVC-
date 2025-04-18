@@ -38,7 +38,7 @@
               <img src="/assets/img/magasin/vente.jpg" alt="image du magasin5" class="slider-img">
             </div>
             <div class="slider-slide">
-              <img src="/assets/img/magasin/patron.jpg" alt="image du magasin5" class="slider-img">
+              <img src="/assets/img/magasin/patron-png.png" alt="image du magasin5" class="slider-img">
             </div>
           </div>
         </div>

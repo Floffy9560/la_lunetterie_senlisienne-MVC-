@@ -80,29 +80,86 @@ const adressRegex =
 //------------événement click sur le btn submit pour la verification regex d'un client éxistant-----------------//
 //-------------------------------------------------------------------------------------------------------------//
 
-btnSubmitCustomer.addEventListener("click", (event) => {
-  const customerMailValue = inputCustomerMail.value;
-  if (emailRegex.test(customerMailValue)) {
-    emailCustomerTcheck.classList.add("open");
-    labelCustomerMail.style.visibility = "hidden";
+// Fonction verificationInput qui renvoi un booléen
+function verificationInput(inputElement, regex, checkElement, labelElement) {
+  const inputValue = inputElement.value.trim();
+
+  if (regex.test(inputValue)) {
+    checkElement.classList.add("open");
+    labelElement.style.visibility = "hidden";
+    return true; // Champ valide
   } else {
-    emailCustomerTcheck.classList.remove("open");
-    labelCustomerMail.style.visibility = "visible";
+    checkElement.classList.remove("open");
+    labelElement.style.visibility = "visible";
+    return false; // Champ invalide
+  }
+}
+btnSubmitCustomer.addEventListener("click", (event) => {
+  let isValid = true; // On suppose que tout est valide au départ
+
+  isValid &= verificationInput(
+    inputCustomerMail,
+    emailRegex,
+    emailCustomerTcheck,
+    labelCustomerMail
+  );
+
+  isValid &= verificationInput(
+    inputPasswordCustomer,
+    passwordRegex,
+    passwordCustomerTcheck,
+    labelPasswordCustomer
+  );
+
+  if (!isValid) {
+    event.preventDefault(); // Empêche l'envoi si un champ est invalide
+  }
+});
+
+//--------------------------------------------------------------------------------------------------------------//
+//------------événement click sur le btn submit pour la verification regex d'un nouveau client-----------------//
+//------------------------------------------------------------------------------------------------------------//
+
+btnSubmit.addEventListener("click", (event) => {
+  let isValid = true; // Vérifier si tous les champs sont valides
+
+  // Vérification des champs
+  isValid &= verificationInput(
+    inputLastname,
+    lastnameRegex,
+    lastnameTcheck,
+    labelLastname
+  );
+  isValid &= verificationInput(
+    inputFirstname,
+    firstnameRegex,
+    firstnameTcheck,
+    labelFirstname
+  );
+  isValid &= verificationInput(inputTel, telRegex, telTcheck, labelTel);
+  isValid &= verificationInput(inputEmail, emailRegex, emailTcheck, labelEmail);
+  isValid &= verificationInput(
+    inputPassword,
+    passwordRegex,
+    passwordTcheck,
+    labelPassword
+  );
+  isValid &= verificationInput(
+    inputAdress,
+    adressRegex,
+    postalAdressTcheck,
+    labelAdress
+  );
+
+  // Gestion spéciale pour le champ mot de passe
+  if (passwordRegex.test(inputPassword.value.trim())) {
+    eye.style.visibility = "hidden";
+    closeEye.style.visibility = "hidden";
   }
 
-  const customerPasswordValue = inputPasswordCustomer.value;
-  if (passwordRegex.test(customerPasswordValue)) {
-    passwordCustomerTcheck.classList.add("open");
-    labelPasswordCustomer.style.visibility = "hidden";
-  } else {
-    passwordCustomerTcheck.classList.remove("open");
-    labelPasswordCustomer.style.visibility = "visible";
-  }
-  if (
-    emailRegex.test(customerMailValue) &&
-    passwordRegex.test(customerPasswordValue)
-  ) {
-    return true;
+  // Empêcher la soumission si le formulaire n'est pas valide
+  if (!isValid) {
+    event.preventDefault();
   }
 });
 
@@ -117,7 +174,6 @@ btnSubmitCustomer.addEventListener("click", (event) => {
 const eyeCustomer = document.getElementById("eyeCustomer");
 const closeEyeCustomer = document.getElementById("closeEyeCustomer");
 const passwordCustomer = document.getElementById("passwordCustomer");
-console.log(closeEyeCustomer, eyeCustomer);
 
 closeEyeCustomer.addEventListener("click", () => {
   if (passwordCustomer.type === "password") {
@@ -156,73 +212,3 @@ eye.addEventListener("click", () => {
   eye.classList.toggle("open");
   closeEye.classList.toggle("open");
 });
-
-//--------------------------------------------------------------------------------------------------------------//
-//------------événement click sur le btn submit pour la verification regex d'un nouveau client-----------------//
-//------------------------------------------------------------------------------------------------------------//
-
-// en cliquant sur le boutton si les caractères sont corrects faire apparaitre le logo sinon faire apparaitre le text
-btnSubmit.addEventListener("click", () => {
-  const lastnameValue = inputLastname.value.trim();
-  if (lastnameRegex.test(lastnameValue)) {
-    lastnameTcheck.classList.add("open");
-    labelLastname.style.visibility = "hidden";
-  } else {
-    labelLastname.style.visibility = "visible";
-    lastnameTcheck.classList.remove("open");
-  }
-
-  const firstnameValue = inputFirstname.value.trim();
-  if (firstnameRegex.test(firstnameValue)) {
-    firstnameTcheck.classList.add("open");
-    labelFirstname.style.visibility = "hidden";
-  } else {
-    labelFirstname.style.visibility = "visible";
-    firstnameTcheck.classList.remove("open");
-  }
-
-  const telValue = inputTel.value.trim();
-  if (telRegex.test(telValue)) {
-    telTcheck.classList.add("open");
-    labelTel.style.visibility = "hidden";
-  } else {
-    labelTel.style.visibility = "visible";
-    telTcheck.classList.remove("open");
-  }
-
-  const emailValue = inputEmail.value.trim();
-  if (emailRegex.test(emailValue)) {
-    emailTcheck.classList.add("open");
-    labelEmail.style.visibility = "hidden";
-  } else {
-    labelEmail.style.visibility = "visible";
-    emailTcheck.classList.remove("open");
-  }
-
-  const passwordValue = inputfPassword.value.trim();
-  if (passwordRegex.test(passwordValue)) {
-    passwordTcheck.classList.add("open");
-    eye.style.visibility = "hidden";
-    closeEye.style.visibility = "hidden";
-    labelPassword.style.visibility = "hidden";
-  } else {
-    labelPassword.style.visibility = "visible";
-    passwordTcheck.classList.remove("open");
-  }
-
-  const adressValue = inputAdress.value;
-  if (adressRegex.test(adressValue)) {
-    postalAdressTcheck.classList.add("open");
-    labelAdress.style.visibility = "hidden";
-  } else {
-    labelAdress.style.visibility = "visible";
-    postalAdressTcheck.classList.remove("open");
-  }
-});
-/*if (
-    emailRegex.test(customerMailValue) &&
-    passwordRegex.test(currentPasswordValue)
-  ) {
-    return true;
-  }
-});*/

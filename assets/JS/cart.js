@@ -1,162 +1,310 @@
 //------------------------------------------------------------------------------//
-//--- Récupération des cards présente dans le locale storage cardsDataCart ---  //
+//--- Récupération des cards présentes dans le localStorage (cardsDataCart) ---//
 //------------------------------------------------------------------------------//
 
-// Récupérer les cartes stockées dans localStorage
-let storedCardsCart = JSON.parse(localStorage.getItem("cardsDataCart")) || [];
-console.log(storedCardsCart.length);
-
 const body = document.getElementById("body");
-console.log("body");
+let storedCardsCart = JSON.parse(localStorage.getItem("cardsDataCart")) || [];
+let storedLens = JSON.parse(localStorage.getItem("lensData")) || [];
 
-// Afficher les cartes présentes dans le localStorage
+body.innerHTML = "";
+
+// Cartes
 if (storedCardsCart.length > 0) {
   storedCardsCart.forEach((card, index) => {
-    body.innerHTML += ` <div class="bodyCart">
-                          <div class="secondColumn produits">
-                            <div class="img">
-                                <img src="${card.image}" alt="${card.name}" >  
-                            </div>
-                            <div class="article">                        
-                                <span>Modèle : ${card.name}</span>
-                            </div>
-                            <div class="choiceQuantity">
-                                    <button class="less">-</button>
-                                    <p class="quantity">1</p>
-                                    <button class="more">+</button>
-                                    <i class="bi bi-trash-fill trash"></i>
-                            </div>
-                            
-                          </div>
-                      
-                        <div class="thirdColumn">
-                            <p class="price" data-price="${card.price}">${card.price} € </p>
-                        </div>
-                     </div>`;
+    body.innerHTML += `
+      <div class="bodyCart" data-type="card" data-index="${index}">
+        <div class="secondColumn produits">
+          <div class="img">
+            <img src="${card.image}" alt="${card.name}">  
+          </div>
+          <div class="article">                        
+            <span>Modèle : ${card.name}</span>
+          </div>
+          <div class="choiceQuantity">
+            <button class="less">-</button>
+            <p class="quantity">${card.quantity || 1}</p>
+            <button class="more">+</button>
+            <i class="bi bi-trash-fill trash" data-index="${index}"></i>
+          </div>
+        </div>
+        <div class="thirdColumn">
+          <p class="price" data-price="${card.price}">${
+      card.price * (card.quantity || 1)
+    } €</p>
+        </div>
+      </div>`;
   });
-} else {
-  body.innerHTML = `<div class="bodyCart">
-    <p>Votre panier est vide, ajoutez des articles à votre panier en cliquant sur les boutons 'Ajouter au panier'.</p>
-    </div>;`;
 }
 
-const bodyCart = document.querySelectorAll("bodyCart");
+// Lentilles
+if (storedLens.length > 0) {
+  storedLens.forEach((lens, index) => {
+    const pricePerUnit = 15;
+    const totalPriceLens = pricePerUnit * lens.quantity;
 
-const btnMore = document.querySelectorAll(".more");
-
-const btnLess = document.querySelectorAll(".less");
-
-let total = document.getElementById("total");
-
-let allQuantity = document.querySelectorAll(".quantity");
-
-let allPrice = document.querySelectorAll(".price");
-
-const btnDeletes = document.querySelectorAll(".trash");
-
-//----------------------------------------------------------
-//        Evenement sur bouton + / Event on + button
-//----------------------------------------------------------
-
-//Augmenter de 1 le nbr d'article lors du click et multiplier par deux le prix
-btnMore.forEach((btn, index) => {
-  btn.addEventListener("click", () => {
-    // Récupérer le prix initiale correspondant
-    let unitPrice = parseFloat(allPrice[index].dataset.price);
-
-    // Récupérer la qtt correspondante
-    let quantity = allQuantity[index];
-    // Récupérer le prix correspondant
-    let price = allPrice[index];
-
-    // Rendre visible le bouton de diminution
-    btnLess[index].style.visibility = "visible";
-
-    quantity.textContent = parseInt(quantity.textContent) + 1;
-    price.textContent = unitPrice * quantity.textContent + " €";
-    total.innerHTML = totalPrice();
+    body.innerHTML += `
+      <div class="bodyCart" data-type="lens" data-index="${index}">
+        <div class="secondColumn produits">
+          <div class="img">
+            <img src="/assets/img/boite-lentille.png" alt="total one lens">  
+          </div>
+          <div class="article">                                                                     
+            <span>Correction OD : ${lens.correctionOD}</span>
+            <span>Correction OG : ${lens.correctionOG}</span>
+            <span>Modèle : Total one</span>                                 
+          </div>
+          <div class="choiceQuantity">
+            <button class="less">-</button>
+            <p class="quantity">${lens.quantity}</p>
+            <button class="more">+</button>
+            <i class="bi bi-trash-fill trash" data-index="${index}"></i>
+          </div>
+        </div>
+        <div class="thirdColumn">
+          <p class="price" data-price="${pricePerUnit}">${totalPriceLens} €</p>
+        </div>
+      </div>`;
   });
-});
-
-btnLess.forEach((btn, index) => {
-  btn.addEventListener("click", () => {
-    let unitPrice = parseFloat(allPrice[index].dataset.price);
-    let quantity = allQuantity[index];
-    let price = allPrice[index];
-
-    let currentQuantity = parseInt(quantity.textContent); // Convertir en nombre pour la manipulation
-
-    if (currentQuantity == 1) {
-      // Réinitialiser la quantité à 0
-      quantity.textContent = 0;
-      // Masquer le bouton si la quantité est 1
-      btnLess[index].style.visibility = "hidden";
-    } else {
-      // Décrémenter la quantité et afficher le bouton
-      quantity.textContent = currentQuantity - 1;
-      btnLess[index].style.visibility = "visible";
-    }
-
-    price.textContent = unitPrice * quantity.textContent + " €";
-    total.innerHTML = totalPrice();
-  });
-});
-
-//---------------------------------------------------------------------------------------
-//    Mise en place du prix total des articles / Setting up the total price of items
-//---------------------------------------------------------------------------------------
-
-function totalPrice() {
-  let total = 0; // Initialiser la somme à 0
-
-  allPrice.forEach((price) => {
-    // Convertir le texte en nombre
-    const currentPrice = parseFloat(price.textContent);
-
-    // Vérifier que c'est un nombre valide
-    if (!isNaN(currentPrice)) {
-      total += currentPrice; // Ajouter au total
-    }
-  });
-
-  return total; // Retourner le total en tant que nombre
 }
 
-// Appeler la fonction et stocker le total
-const sum = totalPrice();
-console.log(sum + " €");
-total.innerHTML = totalPrice() + " €";
+// Si panier vide
+if (storedLens.length === 0 && storedCardsCart.length === 0) {
+  body.innerHTML = `
+    <div class="emptyCart">
+      <p>🛒 Votre panier est vide, ajoutez des articles en cliquant sur 'Ajouter au panier'. 🛒</p>
+    </div>`;
+}
 
-function deleteArticle() {
-  btnDeletes.forEach((btnDelete) => {
-    btnDelete.addEventListener("click", (event) => {
-      // Récupérer l'index de l'élément cliqué
-      let index = event.target.getAttribute("data-index");
+//-----------------------------------------------------------------------------//
+//--------------------- GESTION INTERACTIVE DU PANIER ------------------------//
+//-----------------------------------------------------------------------------//
 
-      // Supprimer l'élément du tableau stocké dans localStorage
-      storedCardsCart.splice(index, 1);
+setTimeout(() => {
+  const btnMore = document.querySelectorAll(".more");
+  const btnLess = document.querySelectorAll(".less");
+  const btnDeletes = document.querySelectorAll(".trash");
+  const total = document.getElementById("total");
 
-      // Mettre à jour localStorage avec le nouveau tableau
-      localStorage.setItem("cardsDataCart", JSON.stringify(storedCardsCart));
+  const allQuantity = () => document.querySelectorAll(".quantity");
+  const allPrice = () => document.querySelectorAll(".price");
 
-      // Supprimer l'élément du DOM (visuellement)
-      event.target.closest(".bodyCart").remove();
-      // Rafraîchir la page pour mettre à jour le total
-      location.reload();
+  function totalPrice() {
+    let totalAmount = 0;
+    allPrice().forEach((price) => {
+      const current = parseFloat(price.textContent);
+      if (!isNaN(current)) totalAmount += current;
+    });
+    return totalAmount;
+  }
+
+  function totalItems() {
+    let totalQuantity = 0;
+    allQuantity().forEach((q) => {
+      const val = parseFloat(q.textContent);
+      if (!isNaN(val)) totalQuantity += val;
+    });
+    return totalQuantity;
+  }
+
+  function updateTotalDisplay() {
+    if (total) {
+      total.innerHTML = totalPrice() + " €";
+    }
+  }
+
+  // Fonction qui met à jour le nombre total d'articles dans le panier
+  function updateCartCountDisplay() {
+    const totalInCart = totalItems(); // On recalcul le nombre total d'articles
+    localStorage.setItem("totalInCart", JSON.stringify(totalInCart)); // Sauvegarder dans le localStorage
+
+    // Mettre à jour l'affichage du nombre d'articles dans le panier
+    const articleCountElements = document.querySelectorAll(
+      ".nbrArticle, .nbrArticleBurger"
+    );
+    articleCountElements.forEach((el) => (el.textContent = totalInCart));
+  }
+
+  function deleteArticle() {
+    btnDeletes.forEach((btnDelete) => {
+      btnDelete.addEventListener("click", (event) => {
+        const index = event.target.getAttribute("data-index");
+        const cartItem = event.target.closest(".bodyCart");
+
+        // Afficher la popup de confirmation avec SweetAlert2
+        Swal.fire({
+          title: "Voulez-vous vraiment supprimer cet article ?",
+          text: "La quantité atteindra zéro si vous continuez.",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Oui, supprimer",
+          cancelButtonText: "Annuler",
+          reverseButtons: true,
+          customClass: {
+            popup: "custom-swal", // doit correspondre à ton .swal2-popup.custom-swal
+            icon: "custom-icon", // pour appliquer couleurs à .swal2-icon
+            confirmButton: "custom-confirm-btn",
+            cancelButton: "custom-cancel-btn",
+          },
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Supprimer l'article des tableaux (selon le type)
+            if (cartItem.dataset.type === "card") {
+              storedCardsCart.splice(index, 1);
+            } else {
+              storedLens.splice(index, 1);
+            }
+
+            // Mettre à jour le localStorage
+            localStorage.setItem(
+              "cardsDataCart",
+              JSON.stringify(storedCardsCart)
+            );
+            localStorage.setItem("lensData", JSON.stringify(storedLens));
+
+            // Supprimer l'élément du DOM
+            cartItem.remove();
+
+            // Vérification si le panier est vide
+            if (storedCardsCart.length === 0 && storedLens.length === 0) {
+              body.innerHTML = `
+                <div class="emptyCart">
+                  <p>🛒 Votre panier est vide, ajoutez des articles en cliquant sur 'Ajouter au panier'. 🛒</p>
+                </div>`;
+            }
+
+            // Mettre à jour le nombre d'articles dans le panier
+            updateCartCountDisplay();
+
+            // Afficher une confirmation de suppression
+            Swal.fire({
+              title: "Supprimé !",
+              text: "L'article a été supprimé de votre panier.",
+              icon: "success",
+              confirmButtonText: "OK",
+              customClass: {
+                popup: "custom-swal",
+                icon: "custom-icon",
+                confirmButton: "custom-confirm-btn",
+              },
+            });
+          }
+        });
+      });
+    });
+  }
+
+  // Mettre à jour la quantité et gérer l'ajout/retrait de quantité
+  btnMore.forEach((btn, index) => {
+    btn.addEventListener("click", () => {
+      const cartItem = btn.closest(".bodyCart");
+      const type = cartItem.dataset.type;
+      const i = parseInt(cartItem.dataset.index);
+      const quantity = cartItem.querySelector(".quantity");
+      const price = cartItem.querySelector(".price");
+      const unitPrice = parseFloat(price.dataset.price);
+
+      let newQty = parseInt(quantity.textContent) + 1;
+      quantity.textContent = newQty;
+      price.textContent = unitPrice * newQty + " €";
+
+      updateStorage(type, i, newQty);
+      updateCartCountDisplay();
+      updateTotalDisplay();
     });
   });
-}
-deleteArticle();
-// function deleteArticle(index) {
-//   // Supprimer l'élément du tableau stocké dans localStorage
-//   storedCardsCart.splice(index, 1);
 
-//   // Mettre à jour localStorage avec le nouveau tableau
-//   localStorage.setItem("cardsDataCart", JSON.stringify(storedCardsCart));
+  // Gestion du bouton "moins"
+  btnLess.forEach((btn, index) => {
+    btn.addEventListener("click", () => {
+      const cartItem = btn.closest(".bodyCart");
+      const type = cartItem.dataset.type;
+      const i = parseInt(cartItem.dataset.index);
+      const quantity = cartItem.querySelector(".quantity");
+      const price = cartItem.querySelector(".price");
+      const unitPrice = parseFloat(price.dataset.price);
 
-//   // Supprimer l'élément du DOM (visuellement)
-//   document.querySelectorAll(".bodyCart")[index].remove();
+      let currentQty = parseInt(quantity.textContent);
+      let newQty = currentQty - 1;
 
-//   // Mise à jour du total
-//   total.innerHTML = totalPrice();
-// }
+      if (newQty <= 0) {
+        // Affichage de la confirmation avec SweetAlert2
+        Swal.fire({
+          title: "Voulez-vous vraiment supprimer cet article ?",
+          text: "La quantité atteindra zéro si vous continuez.",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Oui, supprimer",
+          cancelButtonText: "Annuler",
+          reverseButtons: true,
+          customClass: {
+            popup: "custom-swal", // doit correspondre à ton .swal2-popup.custom-swal
+            icon: "custom-icon", // pour appliquer couleurs à .swal2-icon
+            confirmButton: "custom-confirm-btn",
+            cancelButton: "custom-cancel-btn",
+          },
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Supprimer de la source de données
+            if (type === "card") storedCardsCart.splice(i, 1);
+            else storedLens.splice(i, 1);
+
+            // Mettre à jour le localStorage
+            localStorage.setItem(
+              "cardsDataCart",
+              JSON.stringify(storedCardsCart)
+            );
+            localStorage.setItem("lensData", JSON.stringify(storedLens));
+
+            // Supprimer du DOM
+            cartItem.remove();
+
+            // Vérification panier vide
+            if (storedCardsCart.length === 0 && storedLens.length === 0) {
+              body.innerHTML = `
+                <div class="emptyCart">
+                  <p>🛒 Votre panier est vide, ajoutez des articles en cliquant sur 'Ajouter au panier'. 🛒</p>
+                </div>`;
+            }
+
+            // Affichage d'une confirmation de suppression
+            Swal.fire({
+              title: "Supprimé !",
+              text: "L'article a été supprimé de votre panier.",
+              icon: "success",
+              confirmButtonText: "OK",
+              customClass: {
+                popup: "custom-swal",
+                icon: "custom-icon",
+                confirmButton: "custom-confirm-btn",
+              },
+            });
+          }
+        });
+      } else {
+        // Mise à jour de la quantité et du prix
+        quantity.textContent = newQty;
+        price.textContent = unitPrice * newQty + " €";
+        updateStorage(type, i, newQty);
+      }
+
+      updateCartCountDisplay();
+      updateTotalDisplay();
+    });
+  });
+
+  function updateStorage(type, index, quantity) {
+    if (type === "card") {
+      storedCardsCart[index].quantity = quantity;
+      localStorage.setItem("cardsDataCart", JSON.stringify(storedCardsCart));
+    } else {
+      storedLens[index].quantity = quantity;
+      localStorage.setItem("lensData", JSON.stringify(storedLens));
+    }
+  }
+
+  // Appel de la fonction deleteArticle pour gérer la suppression
+  deleteArticle();
+
+  updateTotalDisplay();
+  updateCartCountDisplay(); // Initialiser l'affichage du nombre d'articles
+}, 0);
